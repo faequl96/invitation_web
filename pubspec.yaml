@@ -1,0 +1,37 @@
+name: invitation_web
+description: "A new Flutter project."
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+  
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  intl: ^0.19.0
+  gradient_borders: ^1.0.0
+  get_it: ^7.6.7
+  get_it_mixin: ^4.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+  
+  fonts:
+    - family: BrushScriptMT
+      fonts:
+        - asset: fonts/Brush-Script-MT-Regular.ttf
+    - family: Upakarti
+      fonts:
+        - asset: fonts/Upakarti-Regular.ttf
+        - asset: fonts/Upakarti-Italic.ttf
+          style: italic
