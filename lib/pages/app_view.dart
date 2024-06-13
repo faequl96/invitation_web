@@ -256,7 +256,7 @@ class _AppViewState extends State<AppView> {
             size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
           ),
         ),
-        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
+        if (bTPositionY > 50 && bTPositionY <= 50 + 140 * 2) ...[
           Positioned(
             left: (w(wType, 68, 72, 76, 80) +
                 ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
@@ -268,7 +268,6 @@ class _AppViewState extends State<AppView> {
               size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
             ),
           ),
-        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
           Positioned(
             right: (w(wType, 68, 72, 76, 80) +
                 ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
@@ -280,7 +279,6 @@ class _AppViewState extends State<AppView> {
               size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
             ),
           ),
-        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
           Positioned(
             right: w(wType, 48, 52, 56, 60),
             bottom: bTPositionY,
@@ -291,7 +289,6 @@ class _AppViewState extends State<AppView> {
               size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
             ),
           ),
-        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
           Positioned(
             left: w(wType, 48, 52, 56, 60),
             bottom: bTPositionY,
@@ -302,6 +299,7 @@ class _AppViewState extends State<AppView> {
               size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
             ),
           ),
+        ],
         if (sV == 0)
           if (_toName.isNotEmpty)
             Positioned(
@@ -361,7 +359,7 @@ class _AppViewState extends State<AppView> {
                 ],
               ),
             ),
-            if (fTPositionY < 50 + 140 * 2)
+            if (fTPositionY < 50 + 140 * 2) ...[
               Positioned(
                 left: (w(wType, 62, 66, 70, 74) +
                     ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
@@ -373,7 +371,6 @@ class _AppViewState extends State<AppView> {
                   size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
                 ),
               ),
-            if (fTPositionY < 50 + 140 * 2)
               Positioned(
                 right: (w(wType, 62, 66, 70, 74) +
                     ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
@@ -385,7 +382,6 @@ class _AppViewState extends State<AppView> {
                   size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
                 ),
               ),
-            if (fTPositionY < 50 + 140 * 2)
               Positioned(
                 right: w(wType, 46, 50, 54, 58),
                 bottom: fTPositionY,
@@ -396,7 +392,6 @@ class _AppViewState extends State<AppView> {
                   size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
                 ),
               ),
-            if (fTPositionY < 50 + 140 * 2)
               Positioned(
                 left: w(wType, 46, 50, 54, 58),
                 bottom: fTPositionY,
@@ -407,6 +402,7 @@ class _AppViewState extends State<AppView> {
                   size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
                 ),
               ),
+            ],
             // AnimatedPositioned(
             //   duration: const Duration(milliseconds: 1000),
             //   top: isSealOpened ? -size.height : 0,
@@ -571,7 +567,7 @@ class _AppViewState extends State<AppView> {
         bTPositionY = 50 + ((sV - size.height) - 140) * 2;
         fTPositionY = 50 + 140 * 2;
       } else if (sV - size.height > 280 && sV - size.height <= 420) {
-        bTPositionY = 330;
+        bTPositionY = 331;
         fTPositionY = (50 + 140 * 2) - ((sV - size.height) - 280) * 2;
       } else if (sV - size.height > 420 && sV - size.height <= size.height) {
         fTPositionY = 50;
