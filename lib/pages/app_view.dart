@@ -35,7 +35,8 @@ class _AppViewState extends State<AppView> {
   PositionValue cdPosition1 = PositionValue(xAxis: 0, yAxis: 0);
   PositionValue cdPosition2 = PositionValue(xAxis: 0, yAxis: 0);
 
-  double timeVerticalScrollValue = 50;
+  double bTPositionY = 50;
+  double fTPositionY = 0;
 
   bool isKeyOpened = false;
   bool isSealOpened = false;
@@ -255,48 +256,52 @@ class _AppViewState extends State<AppView> {
             size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
           ),
         ),
-        Positioned(
-          left: (w(wType, 68, 72, 76, 80) +
-              ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
-          bottom: 50,
-          child: CountDown(
-            hType: hType,
-            wType: wType,
-            unitTimeType: UnitTimeType.Hour,
-            size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
+          Positioned(
+            left: (w(wType, 68, 72, 76, 80) +
+                ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
+            bottom: bTPositionY,
+            child: CountDown(
+              hType: hType,
+              wType: wType,
+              unitTimeType: UnitTimeType.Hour,
+              size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+            ),
           ),
-        ),
-        Positioned(
-          right: (w(wType, 68, 72, 76, 80) +
-              ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
-          bottom: 50,
-          child: CountDown(
-            hType: hType,
-            wType: wType,
-            unitTimeType: UnitTimeType.Minute,
-            size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
+          Positioned(
+            right: (w(wType, 68, 72, 76, 80) +
+                ((size.width - w(wType, 156, 164, 172, 180)) / 4)),
+            bottom: bTPositionY,
+            child: CountDown(
+              hType: hType,
+              wType: wType,
+              unitTimeType: UnitTimeType.Minute,
+              size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+            ),
           ),
-        ),
-        Positioned(
-          right: w(wType, 48, 52, 56, 60),
-          bottom: 50,
-          child: CountDown(
-            hType: hType,
-            wType: wType,
-            unitTimeType: UnitTimeType.Second,
-            size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
+          Positioned(
+            right: w(wType, 48, 52, 56, 60),
+            bottom: bTPositionY,
+            child: CountDown(
+              hType: hType,
+              wType: wType,
+              unitTimeType: UnitTimeType.Second,
+              size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+            ),
           ),
-        ),
-        Positioned(
-          left: w(wType, 48, 52, 56, 60),
-          bottom: 50,
-          child: CountDown(
-            hType: hType,
-            wType: wType,
-            unitTimeType: UnitTimeType.Day,
-            size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+        if (bTPositionY > 50 && bTPositionY < 50 + 140 * 2)
+          Positioned(
+            left: w(wType, 48, 52, 56, 60),
+            bottom: bTPositionY,
+            child: CountDown(
+              hType: hType,
+              wType: wType,
+              unitTimeType: UnitTimeType.Day,
+              size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
+            ),
           ),
-        ),
         if (sV == 0)
           if (_toName.isNotEmpty)
             Positioned(
@@ -356,6 +361,52 @@ class _AppViewState extends State<AppView> {
                 ],
               ),
             ),
+            if (fTPositionY < 50 + 140 * 2)
+              Positioned(
+                left: (w(wType, 62, 66, 70, 74) +
+                    ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
+                bottom: fTPositionY,
+                child: CountDown(
+                  hType: hType,
+                  wType: wType,
+                  unitTimeType: UnitTimeType.Hour,
+                  size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
+                ),
+              ),
+            if (fTPositionY < 50 + 140 * 2)
+              Positioned(
+                right: (w(wType, 62, 66, 70, 74) +
+                    ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
+                bottom: fTPositionY,
+                child: CountDown(
+                  hType: hType,
+                  wType: wType,
+                  unitTimeType: UnitTimeType.Minute,
+                  size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
+                ),
+              ),
+            if (fTPositionY < 50 + 140 * 2)
+              Positioned(
+                right: w(wType, 46, 50, 54, 58),
+                bottom: fTPositionY,
+                child: CountDown(
+                  hType: hType,
+                  wType: wType,
+                  unitTimeType: UnitTimeType.Second,
+                  size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
+                ),
+              ),
+            if (fTPositionY < 50 + 140 * 2)
+              Positioned(
+                left: w(wType, 46, 50, 54, 58),
+                bottom: fTPositionY,
+                child: CountDown(
+                  hType: hType,
+                  wType: wType,
+                  unitTimeType: UnitTimeType.Day,
+                  size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
+                ),
+              ),
             // AnimatedPositioned(
             //   duration: const Duration(milliseconds: 1000),
             //   top: isSealOpened ? -size.height : 0,
@@ -407,6 +458,8 @@ class _AppViewState extends State<AppView> {
           ((size.width - w(wType, 156, 164, 172, 180)) / 4),
       yAxis: h(hType, 202, 218, 234, 250),
     );
+
+    fTPositionY = 50 + 140 * 2;
   }
 
   _scrollListener() {
@@ -512,8 +565,17 @@ class _AppViewState extends State<AppView> {
     }
 
     if (sV > size.height && sV <= size.height * 2) {
-      opacityValue = 0;
-      flashValue = 0;
+      if (sV - size.height <= 140) {
+        bTPositionY = 50;
+      } else if (sV - size.height > 140 && sV - size.height <= 280) {
+        bTPositionY = 50 + ((sV - size.height) - 140) * 2;
+        fTPositionY = 50 + 140 * 2;
+      } else if (sV - size.height > 280 && sV - size.height <= 420) {
+        bTPositionY = 330;
+        fTPositionY = (50 + 140 * 2) - ((sV - size.height) - 280) * 2;
+      } else if (sV - size.height > 420 && sV - size.height <= size.height) {
+        fTPositionY = 50;
+      }
     }
 
     if (sV > size.height * 2 && sV <= size.height * 3) {}

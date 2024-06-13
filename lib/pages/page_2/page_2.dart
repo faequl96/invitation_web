@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
-import 'package:invitation_web/pages/cover_page/countdown.dart';
 
 class Page2 extends StatelessWidget {
   const Page2({super.key, required this.hType, required this.wType});
@@ -147,48 +146,6 @@ class Page2 extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-          Positioned(
-            left: (w(wType, 62, 66, 70, 74) +
-                ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
-            bottom: 48,
-            child: CountDown(
-              hType: hType,
-              wType: wType,
-              unitTimeType: UnitTimeType.Hour,
-              size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
-            ),
-          ),
-          Positioned(
-            right: (w(wType, 62, 66, 70, 74) +
-                ((size.width - w(wType, 140, 148, 156, 164)) / 4)),
-            bottom: 48,
-            child: CountDown(
-              hType: hType,
-              wType: wType,
-              unitTimeType: UnitTimeType.Minute,
-              size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
-            ),
-          ),
-          Positioned(
-            right: w(wType, 46, 50, 54, 58),
-            bottom: 48,
-            child: CountDown(
-              hType: hType,
-              wType: wType,
-              unitTimeType: UnitTimeType.Second,
-              size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
-            ),
-          ),
-          Positioned(
-            left: w(wType, 46, 50, 54, 58),
-            bottom: 48,
-            child: CountDown(
-              hType: hType,
-              wType: wType,
-              unitTimeType: UnitTimeType.Day,
-              size: (size.width - w(wType, 140, 148, 156, 164)) / 4,
             ),
           ),
           Positioned(
