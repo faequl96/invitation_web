@@ -24,11 +24,12 @@ class _AppViewState extends State<AppView> {
   H hType = H.Sm;
   W wType = W.Sm;
 
-  double scrollValue = 0;
+  double fraction = 0;
+
+  double sV = 0;
 
   double moveValue = 0;
   double opacityValue = 1;
-  double opacityMemory = 0;
   double flashValue = 1;
 
   PositionValue cdPosition1 = PositionValue(xAxis: 0, yAxis: 0);
@@ -45,6 +46,11 @@ class _AppViewState extends State<AppView> {
 
   @override
   void initState() {
+    _pageController.addListener(_scrollListener);
+
+    _toName = Uri.base.queryParameters["to"] ?? "";
+    _instance = Uri.base.queryParameters["instance"] ?? "";
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final Size size = MediaQuery.of(context).size;
 
@@ -68,13 +74,11 @@ class _AppViewState extends State<AppView> {
         wType = W.Xl;
       }
 
+      fraction = size.height / 20;
       _initCountdownPosition();
+
+      setState(() {});
     });
-
-    _pageController.addListener(_scrollListener);
-
-    _toName = Uri.base.queryParameters["to"] ?? "";
-    _instance = Uri.base.queryParameters["instance"] ?? "";
 
     super.initState();
   }
@@ -86,30 +90,26 @@ class _AppViewState extends State<AppView> {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        if (scrollValue < size.height * 2)
-          Page1(
-            scrollValue: scrollValue,
-            hType: hType,
-            wType: wType,
-          ),
+        if (sV < size.height * 2)
+          Page1(scrollValue: sV, hType: hType, wType: wType),
         Container(
           height: size.height,
           width: size.width,
           color: Colors.white.withOpacity(opacityValue),
         ),
-        scrollValue > size.height + 110
+        sV > size.height + 110
             ? const SizedBox.shrink()
             : Positioned(
                 right: -moveValue,
                 child: LightEffect(opacityValue: opacityValue, isRight: true),
               ),
-        scrollValue > size.height + 110
+        sV > size.height + 110
             ? const SizedBox.shrink()
             : Positioned(
                 left: -moveValue,
                 child: LightEffect(opacityValue: opacityValue, isRight: false),
               ),
-        scrollValue > size.height + 110
+        sV > size.height + 110
             ? const SizedBox.shrink()
             : Positioned(
                 right: -moveValue,
@@ -120,7 +120,7 @@ class _AppViewState extends State<AppView> {
                   flashValue: flashValue,
                 ),
               ),
-        scrollValue > size.height + 110
+        sV > size.height + 110
             ? const SizedBox.shrink()
             : Positioned(
                 left: -moveValue,
@@ -131,7 +131,7 @@ class _AppViewState extends State<AppView> {
                   flashValue: flashValue,
                 ),
               ),
-        scrollValue > size.height + 110
+        sV > size.height + 110
             ? const SizedBox.shrink()
             : Positioned(
                 right: -moveValue,
@@ -142,12 +142,12 @@ class _AppViewState extends State<AppView> {
                 ),
               ),
         Positioned(
-          top: h(hType, 6, 12, 30, 60) - (scrollValue / 14),
+          top: h(hType, 6, 12, 30, 60) - (sV / 14),
           left: w(wType, 45, 48, 51, 54),
           child: TitleInvitation(wType: wType, flashValue: flashValue),
         ),
         Positioned(
-          top: h(hType, 50, 56, 74, 104) - (scrollValue / 14),
+          top: h(hType, 50, 56, 74, 104) - (sV / 14),
           right: w(wType, 45, 48, 51, 54),
           child: TitleInvitation(
             wType: wType,
@@ -299,7 +299,7 @@ class _AppViewState extends State<AppView> {
             size: (size.width - w(wType, 156, 164, 172, 180)) / 4,
           ),
         ),
-        if (scrollValue == 0)
+        if (sV == 0)
           if (_toName.isNotEmpty)
             Positioned(
               bottom: h(hType, 136, 146, 156, 166),
@@ -311,7 +311,7 @@ class _AppViewState extends State<AppView> {
                 ),
               ),
             ),
-        if (scrollValue == 0)
+        if (sV == 0)
           if (_instance.isNotEmpty)
             Positioned(
               bottom: h(hType, 108, 116, 124, 132),
@@ -364,7 +364,7 @@ class _AppViewState extends State<AppView> {
             //   child: SealInvitation(isSealOpened: isSealOpened),
             // ),
             // if (isOpenCompleted)
-            if (scrollValue < 10)
+            if (sV < 10)
               Positioned(
                 bottom: 0,
                 child: SwipeUp(
@@ -409,7 +409,6 @@ class _AppViewState extends State<AppView> {
           ((size.width - w(wType, 156, 164, 172, 180)) / 4),
       yAxis: h(hType, 202, 218, 234, 250),
     );
-    setState(() {});
   }
 
   _scrollListener() {
@@ -417,8 +416,7 @@ class _AppViewState extends State<AppView> {
 
     final double dividedSize = size.height / size.width;
 
-    scrollValue = _pageController.offset.ceil().toDouble();
-    final double sV = scrollValue;
+    sV = _pageController.offset.ceil().toDouble();
     moveValue = (_pageController.offset / dividedSize) / 2;
 
     if (sV > 0 && sV <= size.height / 3) {
@@ -458,189 +456,147 @@ class _AppViewState extends State<AppView> {
       );
     }
 
-    final double fraction = size.height / 20;
-
-    if (scrollValue <= size.height) {
-      if (scrollValue <= fraction) {
+    if (sV <= size.height) {
+      if (sV <= fraction) {
         opacityValue = 1;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 1;
-      } else if (scrollValue > fraction && scrollValue <= fraction * 2) {
+      } else if (sV > fraction && sV <= fraction * 2) {
         opacityValue = 0.95;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.85;
-      } else if (scrollValue > fraction * 2 && scrollValue <= fraction * 3) {
+      } else if (sV > fraction * 2 && sV <= fraction * 3) {
         opacityValue = 0.9;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.7;
-      } else if (scrollValue > fraction * 3 && scrollValue <= fraction * 4) {
+      } else if (sV > fraction * 3 && sV <= fraction * 4) {
         opacityValue = 0.85;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.55;
-      } else if (scrollValue > fraction * 4 && scrollValue <= fraction * 5) {
+      } else if (sV > fraction * 4 && sV <= fraction * 5) {
         opacityValue = 0.8;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.4;
-      } else if (scrollValue > fraction * 5 && scrollValue <= fraction * 6) {
+      } else if (sV > fraction * 5 && sV <= fraction * 6) {
         opacityValue = 0.75;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.25;
-      } else if (scrollValue > fraction * 6 && scrollValue <= fraction * 7) {
+      } else if (sV > fraction * 6 && sV <= fraction * 7) {
         opacityValue = 0.7;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0.1;
-      } else if (scrollValue > fraction * 7 && scrollValue <= fraction * 8) {
+      } else if (sV > fraction * 7 && sV <= fraction * 8) {
         opacityValue = 0.65;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0;
-      } else if (scrollValue > fraction * 8 && scrollValue <= fraction * 9) {
+      } else if (sV > fraction * 8 && sV <= fraction * 9) {
         opacityValue = 0.6;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0;
-      } else if (scrollValue > fraction * 9 && scrollValue <= fraction * 10) {
+      } else if (sV > fraction * 9 && sV <= fraction * 10) {
         opacityValue = 0.55;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 10 && scrollValue <= fraction * 11) {
+      } else if (sV > fraction * 10 && sV <= fraction * 11) {
         opacityValue = 0.5;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 11 && scrollValue <= fraction * 12) {
+      } else if (sV > fraction * 11 && sV <= fraction * 12) {
         opacityValue = 0.45;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 12 && scrollValue <= fraction * 13) {
+      } else if (sV > fraction * 12 && sV <= fraction * 13) {
         opacityValue = 0.4;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 13 && scrollValue <= fraction * 14) {
+      } else if (sV > fraction * 13 && sV <= fraction * 14) {
         opacityValue = 0.35;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 14 && scrollValue <= fraction * 15) {
+      } else if (sV > fraction * 14 && sV <= fraction * 15) {
         opacityValue = 0.3;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 15 && scrollValue <= fraction * 16) {
+      } else if (sV > fraction * 15 && sV <= fraction * 16) {
         opacityValue = 0.25;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 16 && scrollValue <= fraction * 17) {
+      } else if (sV > fraction * 16 && sV <= fraction * 17) {
         opacityValue = 0.2;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 17 && scrollValue <= fraction * 18) {
+      } else if (sV > fraction * 17 && sV <= fraction * 18) {
         opacityValue = 0.15;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 18 && scrollValue <= fraction * 19) {
+      } else if (sV > fraction * 18 && sV <= fraction * 19) {
         opacityValue = 0.1;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
-      } else if (scrollValue > fraction * 19 && scrollValue <= fraction * 20) {
+      } else if (sV > fraction * 19 && sV <= fraction * 20) {
         opacityValue = 0.05;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0;
-      } else if (scrollValue > fraction * 20 && scrollValue <= fraction * 21) {
+      } else if (sV > fraction * 20 && sV <= fraction * 21) {
         opacityValue = 0;
-        if (opacityValue != opacityMemory) setState(() {});
-        opacityMemory = opacityValue;
         flashValue = 0;
-      }
-
-      if (opacityValue == opacityMemory) {
-        if (sV.ceil() % 2 == 0) setState(() {});
       }
     }
 
-    if (scrollValue == 0) setState(() {});
-    if (scrollValue == size.height) setState(() {});
-
-    if (scrollValue > size.height * 2) {
-      if (scrollValue - (size.height * 2) <= fraction) {
-        opacityValue = 1;
-        flashValue = 1;
-      } else if (scrollValue - (size.height * 2) > fraction &&
-          scrollValue - (size.height * 2) <= fraction * 2) {
-        opacityValue = 0.95;
-        flashValue = 0.85;
-      } else if (scrollValue - (size.height * 2) > fraction * 2 &&
-          scrollValue - (size.height * 2) <= fraction * 3) {
-        opacityValue = 0.9;
-        flashValue = 0.7;
-      } else if (scrollValue - (size.height * 2) > fraction * 3 &&
-          scrollValue - (size.height * 2) <= fraction * 4) {
-        opacityValue = 0.85;
-        flashValue = 0.55;
-      } else if (scrollValue - (size.height * 2) > fraction * 4 &&
-          scrollValue - (size.height * 2) <= fraction * 5) {
-        opacityValue = 0.8;
-        flashValue = 0.4;
-      } else if (scrollValue - (size.height * 2) > fraction * 5 &&
-          scrollValue - (size.height * 2) <= fraction * 6) {
-        opacityValue = 0.75;
-        flashValue = 0.25;
-      } else if (scrollValue - (size.height * 2) > fraction * 6 &&
-          scrollValue - (size.height * 2) <= fraction * 7) {
-        opacityValue = 0.7;
-        flashValue = 0.1;
-      } else if (scrollValue - (size.height * 2) > fraction * 7 &&
-          scrollValue - (size.height * 2) <= fraction * 8) {
-        opacityValue = 0.65;
-        flashValue = 0;
-      } else if (scrollValue - (size.height * 2) > fraction * 8 &&
-          scrollValue - (size.height * 2) <= fraction * 9) {
-        opacityValue = 0.6;
-        flashValue = 0;
-      } else if (scrollValue - (size.height * 2) > fraction * 9 &&
-          scrollValue - (size.height * 2) <= fraction * 10) {
-        opacityValue = 0.55;
-        flashValue = 0;
-      } else if (scrollValue - (size.height * 2) > fraction * 10 &&
-          scrollValue - (size.height * 2) <= fraction * 11) {
-        opacityValue = 0.5;
-        flashValue = 0;
-      } else if (scrollValue - (size.height * 2) > fraction * 11 &&
-          scrollValue - (size.height * 2) <= fraction * 12) {
-        opacityValue = 0.45;
-      } else if (scrollValue - (size.height * 2) > fraction * 12 &&
-          scrollValue - (size.height * 2) <= fraction * 13) {
-        opacityValue = 0.4;
-      } else if (scrollValue - (size.height * 2) > fraction * 13 &&
-          scrollValue - (size.height * 2) <= fraction * 14) {
-        opacityValue = 0.35;
-      } else if (scrollValue - (size.height * 2) > fraction * 14 &&
-          scrollValue - (size.height * 2) <= fraction * 15) {
-        opacityValue = 0.3;
-      } else if (scrollValue - (size.height * 2) > fraction * 15 &&
-          scrollValue - (size.height * 2) <= fraction * 16) {
-        opacityValue = 0.25;
-      } else if (scrollValue - (size.height * 2) > fraction * 16 &&
-          scrollValue - (size.height * 2) <= fraction * 17) {
-        opacityValue = 0.2;
-      } else if (scrollValue - (size.height * 2) > fraction * 17 &&
-          scrollValue - (size.height * 2) <= fraction * 18) {
-        opacityValue = 0.15;
-      } else if (scrollValue - (size.height * 2) > fraction * 18 &&
-          scrollValue - (size.height * 2) <= fraction * 19) {
-        opacityValue = 0.1;
-      } else if (scrollValue - (size.height * 2) > fraction * 19 &&
-          scrollValue - (size.height * 2) <= fraction * 20) {
-        opacityValue = 0.05;
-      } else if (scrollValue - (size.height * 2) > fraction * 20 &&
-          scrollValue - (size.height * 2) <= fraction * 21) {
-        opacityValue = 0;
-      }
+    if (sV > size.height && sV <= size.height * 2) {
+      opacityValue = 0;
+      flashValue = 0;
     }
+
+    if (sV > size.height * 2 && sV <= size.height * 3) {}
+
+    // if (sV > size.height * 2 && sV <= size.height * 3) {
+    //   if (sV - (size.height * 2) <= fraction) {
+    //     opacityValue = 1;
+    //     flashValue = 1;
+    //   } else if (sV - (size.height * 2) > fraction &&
+    //       sV - (size.height * 2) <= fraction * 2) {
+    //     opacityValue = 0.95;
+    //     flashValue = 0.85;
+    //   } else if (sV - (size.height * 2) > fraction * 2 &&
+    //       sV - (size.height * 2) <= fraction * 3) {
+    //     opacityValue = 0.9;
+    //     flashValue = 0.7;
+    //   } else if (sV - (size.height * 2) > fraction * 3 &&
+    //       sV - (size.height * 2) <= fraction * 4) {
+    //     opacityValue = 0.85;
+    //     flashValue = 0.55;
+    //   } else if (sV - (size.height * 2) > fraction * 4 &&
+    //       sV - (size.height * 2) <= fraction * 5) {
+    //     opacityValue = 0.8;
+    //     flashValue = 0.4;
+    //   } else if (sV - (size.height * 2) > fraction * 5 &&
+    //       sV - (size.height * 2) <= fraction * 6) {
+    //     opacityValue = 0.75;
+    //     flashValue = 0.25;
+    //   } else if (sV - (size.height * 2) > fraction * 6 &&
+    //       sV - (size.height * 2) <= fraction * 7) {
+    //     opacityValue = 0.7;
+    //     flashValue = 0.1;
+    //   } else if (sV - (size.height * 2) > fraction * 7 &&
+    //       sV - (size.height * 2) <= fraction * 8) {
+    //     opacityValue = 0.65;
+    //     flashValue = 0;
+    //   } else if (sV - (size.height * 2) > fraction * 8 &&
+    //       sV - (size.height * 2) <= fraction * 9) {
+    //     opacityValue = 0.6;
+    //     flashValue = 0;
+    //   } else if (sV - (size.height * 2) > fraction * 9 &&
+    //       sV - (size.height * 2) <= fraction * 10) {
+    //     opacityValue = 0.55;
+    //     flashValue = 0;
+    //   } else if (sV - (size.height * 2) > fraction * 10 &&
+    //       sV - (size.height * 2) <= fraction * 11) {
+    //     opacityValue = 0.5;
+    //     flashValue = 0;
+    //   } else if (sV - (size.height * 2) > fraction * 11 &&
+    //       sV - (size.height * 2) <= fraction * 12) {
+    //     opacityValue = 0.45;
+    //   } else if (sV - (size.height * 2) > fraction * 12 &&
+    //       sV - (size.height * 2) <= fraction * 13) {
+    //     opacityValue = 0.4;
+    //   } else if (sV - (size.height * 2) > fraction * 13 &&
+    //       sV - (size.height * 2) <= fraction * 14) {
+    //     opacityValue = 0.35;
+    //   } else if (sV - (size.height * 2) > fraction * 14 &&
+    //       sV - (size.height * 2) <= fraction * 15) {
+    //     opacityValue = 0.3;
+    //   } else if (sV - (size.height * 2) > fraction * 15 &&
+    //       sV - (size.height * 2) <= fraction * 16) {
+    //     opacityValue = 0.25;
+    //   } else if (sV - (size.height * 2) > fraction * 16 &&
+    //       sV - (size.height * 2) <= fraction * 17) {
+    //     opacityValue = 0.2;
+    //   } else if (sV - (size.height * 2) > fraction * 17 &&
+    //       sV - (size.height * 2) <= fraction * 18) {
+    //     opacityValue = 0.15;
+    //   } else if (sV - (size.height * 2) > fraction * 18 &&
+    //       sV - (size.height * 2) <= fraction * 19) {
+    //     opacityValue = 0.1;
+    //   } else if (sV - (size.height * 2) > fraction * 19 &&
+    //       sV - (size.height * 2) <= fraction * 20) {
+    //     opacityValue = 0.05;
+    //   } else if (sV - (size.height * 2) > fraction * 20 &&
+    //       sV - (size.height * 2) <= fraction * 21) {
+    //     opacityValue = 0;
+    //   }
+    // }
+
+    setState(() {});
   }
 }
