@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
@@ -30,6 +31,34 @@ double s(Enum type, double sm, double md, double lg, double xl) {
     W.Xl: xl
   };
   return mapOfSize[type] ?? 0;
+}
+
+void initViewModel(BuildContext context, ViewModel vM) {
+  vM.s = MediaQuery.of(context).size;
+
+  if (vM.s.height <= 660) {
+    vM.h = H.Sm;
+  } else if (vM.s.height > 660 && vM.s.height <= 720) {
+    vM.h = H.Md;
+  } else if (vM.s.height > 720 && vM.s.height <= 780) {
+    vM.h = H.Lg;
+  } else if (vM.s.height > 780) {
+    vM.h = H.Xl;
+  }
+
+  if (vM.s.width <= 360) {
+    vM.w = W.Sm;
+  } else if (vM.s.width > 360 && vM.s.width <= 376) {
+    vM.w = W.Md;
+  } else if (vM.s.width > 376 && vM.s.width <= 392) {
+    vM.w = W.Lg;
+  } else if (vM.s.width > 392) {
+    vM.w = W.Xl;
+  }
+
+  vM.fract = vM.s.height / 20;
+
+  initCountdownPosition(vM);
 }
 
 void initCountdownPosition(ViewModel vM) {

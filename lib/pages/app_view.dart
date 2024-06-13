@@ -29,34 +29,10 @@ class _AppViewState extends State<AppView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final ViewModel vM = locator<ViewModel>();
-
-      if (vM.s.height <= 660) {
-        vM.h = H.Sm;
-      } else if (vM.s.height > 660 && vM.s.height <= 720) {
-        vM.h = H.Md;
-      } else if (vM.s.height > 720 && vM.s.height <= 780) {
-        vM.h = H.Lg;
-      } else if (vM.s.height > 780) {
-        vM.h = H.Xl;
-      }
-
-      if (vM.s.width <= 360) {
-        vM.w = W.Sm;
-      } else if (vM.s.width > 360 && vM.s.width <= 376) {
-        vM.w = W.Md;
-      } else if (vM.s.width > 376 && vM.s.width <= 392) {
-        vM.w = W.Lg;
-      } else if (vM.s.width > 392) {
-        vM.w = W.Xl;
-      }
-
-      vM.fract = vM.s.height / 20;
-
-      initCountdownPosition(vM);
-
       _toName = Uri.base.queryParameters["to"] ?? "";
       _instance = Uri.base.queryParameters["instance"] ?? "";
+
+      final ViewModel vM = locator<ViewModel>();
 
       vM.pageController.addListener(() {
         superLogic(vM);
@@ -285,7 +261,7 @@ class _AppViewState extends State<AppView> {
                 children: [
                   SizedBox(height: vM.s.height, width: double.maxFinite),
                   SizedBox(height: vM.s.height, width: double.maxFinite),
-                  Page2(),
+                  const Page2(),
                   SizedBox(height: vM.s.height, width: double.maxFinite),
                 ],
               ),

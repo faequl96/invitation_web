@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class Page2 extends StatelessWidget with GetItMixin {
-  Page2({super.key});
+class Page2 extends StatelessWidget {
+  const Page2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = locator<ViewModel>();
 
     return Container(
       height: vM.s.height,
