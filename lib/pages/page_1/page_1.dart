@@ -5,9 +5,7 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
 class Page1 extends StatelessWidget with GetItMixin {
-  Page1({super.key, required this.scrollValue});
-
-  final double scrollValue;
+  Page1({super.key});
 
   final DateTime _dateTime = DateTime(2024, 8, 10, 9);
 
@@ -69,12 +67,10 @@ class Page1 extends StatelessWidget with GetItMixin {
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
             bottom: s(vM.w, 374, 384, 390, 392),
-            right: scrollValue > vM.s.height - 50
-                ? s(vM.w, 110, 120, 130, 140)
-                : 40,
+            right: vM.sV > vM.s.height - 50 ? s(vM.w, 110, 120, 130, 140) : 40,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
+              opacity: vM.sV > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 "Rahma",
                 style: TextStyle(
@@ -90,7 +86,7 @@ class Page1 extends StatelessWidget with GetItMixin {
             bottom: s(vM.w, 314, 324, 330, 332),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > vM.s.height - 1 ? 1 : 0,
+              opacity: vM.sV > vM.s.height - 1 ? 1 : 0,
               child: const Text(
                 "&",
                 style: TextStyle(
@@ -105,12 +101,10 @@ class Page1 extends StatelessWidget with GetItMixin {
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
             bottom: s(vM.w, 274, 284, 290, 292),
-            left: scrollValue > vM.s.height - 50
-                ? s(vM.w, 130, 140, 150, 160)
-                : 40,
+            left: vM.sV > vM.s.height - 50 ? s(vM.w, 130, 140, 150, 160) : 40,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
+              opacity: vM.sV > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 "Faiq",
                 style: TextStyle(
@@ -124,10 +118,10 @@ class Page1 extends StatelessWidget with GetItMixin {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
-            bottom: scrollValue > vM.s.height - 50 ? 120 : 50,
+            bottom: vM.sV > vM.s.height - 50 ? 120 : 50,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
+              opacity: vM.sV > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 dateFormater.format(_dateTime),
                 style: const TextStyle(

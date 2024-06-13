@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:invitation_web/view_model.dart';
 
-class LightEffect extends StatelessWidget {
-  const LightEffect({super.key, this.opacityValue = 0, required this.isRight});
+class LightEffect extends StatelessWidget with GetItMixin {
+  LightEffect({super.key, required this.isRight});
 
-  final double opacityValue;
   final bool isRight;
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final ViewModel vM = locator<ViewModel>();
 
     return SizedBox(
-      height: size.height,
-      width: size.width / 2,
+      height: vM.s.height,
+      width: vM.s.width / 2,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -20,9 +21,9 @@ class LightEffect extends StatelessWidget {
             right: isRight ? null : -2,
             left: isRight ? -2 : null,
             child: Container(
-              height: size.height,
-              width: size.width / 2,
-              color: Colors.white.withOpacity(opacityValue),
+              height: vM.s.height,
+              width: vM.s.width / 2,
+              color: Colors.white.withOpacity(vM.opacity),
             ),
           ),
         ],

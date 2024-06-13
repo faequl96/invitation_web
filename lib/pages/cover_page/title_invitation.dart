@@ -4,10 +4,9 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
 class TitleInvitation extends StatelessWidget with GetItMixin {
-  TitleInvitation({super.key, this.isBottomTitle, required this.flashValue});
+  TitleInvitation({super.key, this.isBottomTitle = false});
 
-  final bool? isBottomTitle;
-  final double flashValue;
+  final bool isBottomTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class TitleInvitation extends StatelessWidget with GetItMixin {
 
     return isBottomTitle == true
         ? Opacity(
-            opacity: flashValue,
+            opacity: vM.flash,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -50,7 +49,7 @@ class TitleInvitation extends StatelessWidget with GetItMixin {
             ),
           )
         : Opacity(
-            opacity: flashValue,
+            opacity: vM.flash,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [

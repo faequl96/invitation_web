@@ -4,16 +4,9 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
 class RightBackground extends StatelessWidget with GetItMixin {
-  RightBackground({
-    super.key,
-    this.isTransparent,
-    this.moveValue = 0,
-    this.flashValue = 0,
-  });
+  RightBackground({super.key, this.isTransparent});
 
   final bool? isTransparent;
-  final double moveValue;
-  final double flashValue;
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +75,11 @@ class RightBackground extends StatelessWidget with GetItMixin {
                   child: Container(
                     height: vM.s.height,
                     width: vM.s.width / 2,
-                    decoration: moveValue > 1
+                    decoration: vM.bgPositionX > 1
                         ? BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.white.withOpacity(flashValue),
+                                Colors.white.withOpacity(vM.flash),
                                 Colors.transparent,
                               ],
                             ),

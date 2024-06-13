@@ -4,10 +4,7 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
 class LeftBackground extends StatelessWidget with GetItMixin {
-  LeftBackground({super.key, this.moveValue = 0, this.flashValue = 0});
-
-  final double moveValue;
-  final double flashValue;
+  LeftBackground({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,13 +67,13 @@ class LeftBackground extends StatelessWidget with GetItMixin {
             child: Container(
               height: vM.s.height,
               width: vM.s.width / 2,
-              decoration: moveValue > 1
+              decoration: vM.bgPositionX > 1
                   ? BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.centerRight,
                         end: Alignment.centerLeft,
                         colors: [
-                          Colors.white.withOpacity(flashValue),
+                          Colors.white.withOpacity(vM.flash),
                           Colors.transparent,
                         ],
                       ),
