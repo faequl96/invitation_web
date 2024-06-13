@@ -92,69 +92,67 @@ class _AppViewState extends State<AppView> {
       children: [
         if (sV < size.height * 2)
           Page1(scrollValue: sV, hType: hType, wType: wType),
-        Container(
-          height: size.height,
-          width: size.width,
-          color: Colors.white.withOpacity(opacityValue),
-        ),
-        sV > size.height + 110
-            ? const SizedBox.shrink()
-            : Positioned(
-                right: -moveValue,
-                child: LightEffect(opacityValue: opacityValue, isRight: true),
-              ),
-        sV > size.height + 110
-            ? const SizedBox.shrink()
-            : Positioned(
-                left: -moveValue,
-                child: LightEffect(opacityValue: opacityValue, isRight: false),
-              ),
-        sV > size.height + 110
-            ? const SizedBox.shrink()
-            : Positioned(
-                right: -moveValue,
-                child: RightBackground(
-                  hType: hType,
-                  wType: wType,
-                  moveValue: moveValue,
-                  flashValue: flashValue,
-                ),
-              ),
-        sV > size.height + 110
-            ? const SizedBox.shrink()
-            : Positioned(
-                left: -moveValue,
-                child: LeftBackground(
-                  hType: hType,
-                  wType: wType,
-                  moveValue: moveValue,
-                  flashValue: flashValue,
-                ),
-              ),
-        sV > size.height + 110
-            ? const SizedBox.shrink()
-            : Positioned(
-                right: -moveValue,
-                child: RightBackground(
-                  hType: hType,
-                  wType: wType,
-                  isTransparent: true,
-                ),
-              ),
-        Positioned(
-          top: h(hType, 6, 12, 30, 60) - (sV / 14),
-          left: w(wType, 45, 48, 51, 54),
-          child: TitleInvitation(wType: wType, flashValue: flashValue),
-        ),
-        Positioned(
-          top: h(hType, 50, 56, 74, 104) - (sV / 14),
-          right: w(wType, 45, 48, 51, 54),
-          child: TitleInvitation(
-            wType: wType,
-            isBottomTitle: true,
-            flashValue: flashValue,
+        if (sV < size.height)
+          Container(
+            height: size.height,
+            width: size.width,
+            color: Colors.white.withOpacity(opacityValue),
           ),
-        ),
+        if (sV < size.height + 110)
+          Positioned(
+            right: -moveValue,
+            child: LightEffect(opacityValue: opacityValue, isRight: true),
+          ),
+        if (sV < size.height + 110)
+          Positioned(
+            left: -moveValue,
+            child: LightEffect(opacityValue: opacityValue, isRight: false),
+          ),
+        if (sV < size.height + 110)
+          Positioned(
+            right: -moveValue,
+            child: RightBackground(
+              hType: hType,
+              wType: wType,
+              moveValue: moveValue,
+              flashValue: flashValue,
+            ),
+          ),
+        if (sV < size.height + 110)
+          Positioned(
+            left: -moveValue,
+            child: LeftBackground(
+              hType: hType,
+              wType: wType,
+              moveValue: moveValue,
+              flashValue: flashValue,
+            ),
+          ),
+        if (sV < size.height + 110)
+          Positioned(
+            right: -moveValue,
+            child: RightBackground(
+              hType: hType,
+              wType: wType,
+              isTransparent: true,
+            ),
+          ),
+        if (sV < size.height)
+          Positioned(
+            top: h(hType, 6, 12, 30, 60) - (sV / 14),
+            left: w(wType, 45, 48, 51, 54),
+            child: TitleInvitation(wType: wType, flashValue: flashValue),
+          ),
+        if (sV < size.height)
+          Positioned(
+            top: h(hType, 50, 56, 74, 104) - (sV / 14),
+            right: w(wType, 45, 48, 51, 54),
+            child: TitleInvitation(
+              wType: wType,
+              isBottomTitle: true,
+              flashValue: flashValue,
+            ),
+          ),
         Positioned(
           left: cdPosition2.xAxis >=
                       (w(wType, 68, 72, 76, 80) +
