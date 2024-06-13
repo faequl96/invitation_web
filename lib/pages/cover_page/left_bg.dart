@@ -20,7 +20,7 @@ class LeftBackground extends StatelessWidget with GetItMixin {
         clipBehavior: Clip.none,
         children: [
           Positioned(
-            right: -0.2,
+            right: 0,
             child: Image(
               fit: BoxFit.cover,
               height: vM.s.height,
@@ -29,7 +29,7 @@ class LeftBackground extends StatelessWidget with GetItMixin {
             ),
           ),
           Positioned(
-            right: -1,
+            right: 0,
             bottom: s(vM.h, 76, 84, 92, 100),
             child: Container(
               height: s(vM.h, 112, 118, 124, 130),
@@ -66,7 +66,7 @@ class LeftBackground extends StatelessWidget with GetItMixin {
             ),
           ),
           Positioned(
-            right: -2,
+            right: 0,
             child: Container(
               height: vM.s.height,
               width: vM.s.width / 2,

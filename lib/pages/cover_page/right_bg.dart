@@ -28,7 +28,7 @@ class RightBackground extends StatelessWidget with GetItMixin {
           isTransparent == true
               ? const SizedBox.shrink()
               : Positioned(
-                  left: -0.2,
+                  left: 0,
                   child: Image(
                     fit: BoxFit.cover,
                     height: vM.s.height,
@@ -39,7 +39,7 @@ class RightBackground extends StatelessWidget with GetItMixin {
           isTransparent == true
               ? const SizedBox.shrink()
               : Positioned(
-                  left: -1,
+                  left: 0,
                   bottom: s(vM.h, 76, 84, 92, 100),
                   child: Container(
                     height: s(vM.h, 112, 118, 124, 130),
@@ -78,7 +78,7 @@ class RightBackground extends StatelessWidget with GetItMixin {
           isTransparent == true
               ? const SizedBox.shrink()
               : Positioned(
-                  left: -2,
+                  left: 0,
                   child: Container(
                     height: vM.s.height,
                     width: vM.s.width / 2,

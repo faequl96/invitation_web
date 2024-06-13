@@ -70,12 +70,12 @@ class _AppViewState extends State<AppView> {
 
       fraction = vM.s.height / 20;
 
-      _pageController.addListener(_scrollListener);
+      _initCountdownPosition(vM);
 
       _toName = Uri.base.queryParameters["to"] ?? "";
       _instance = Uri.base.queryParameters["instance"] ?? "";
 
-      _initCountdownPosition(vM);
+      _pageController.addListener(_scrollListener);
 
       setState(() {});
     });

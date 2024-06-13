@@ -6,8 +6,12 @@ final GetIt locator = GetIt.instance;
 void setupLocator() => locator.registerSingleton<ViewModel>(ViewModel());
 
 class ViewModel extends ChangeNotifier {
+  // hType
   H h = H.Sm;
+
+  // wType
   W w = W.Sm;
 
+  // size
   Size s = const Size(0, 0);
 }
