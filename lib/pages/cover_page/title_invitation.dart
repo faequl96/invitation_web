@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:invitation_web/enum/enums.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/view_model.dart';
 
-class TitleInvitation extends StatelessWidget {
-  const TitleInvitation({
-    super.key,
-    required this.wType,
-    this.isBottomTitle,
-    required this.flashValue,
-  });
+class TitleInvitation extends StatelessWidget with GetItMixin {
+  TitleInvitation({super.key, this.isBottomTitle, required this.flashValue});
 
-  final W wType;
   final bool? isBottomTitle;
   final double flashValue;
 
   @override
   Widget build(BuildContext context) {
+    final ViewModel vM = get<ViewModel>();
+
     return isBottomTitle == true
         ? Opacity(
             opacity: flashValue,
@@ -27,7 +24,7 @@ class TitleInvitation extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "Upakarti",
                     fontStyle: FontStyle.italic,
-                    fontSize: w(wType, 51, 56, 61, 66),
+                    fontSize: s(vM.w, 51, 56, 61, 66),
                     color: const Color.fromARGB(255, 230, 211, 164),
                     height: 1.2,
                     letterSpacing: 1,
@@ -35,13 +32,13 @@ class TitleInvitation extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    SizedBox(height: w(wType, 16.2, 16.8, 17.4, 18)),
+                    SizedBox(height: s(vM.w, 16.2, 16.8, 17.4, 18)),
                     Text(
                       "ernikahan",
                       style: TextStyle(
                         fontFamily: "Upakarti",
                         fontStyle: FontStyle.italic,
-                        fontSize: w(wType, 41, 46, 51, 56),
+                        fontSize: s(vM.w, 41, 46, 51, 56),
                         color: const Color.fromARGB(255, 230, 211, 164),
                         height: 1.2,
                         letterSpacing: 1,
@@ -62,7 +59,7 @@ class TitleInvitation extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "Upakarti",
                     fontStyle: FontStyle.italic,
-                    fontSize: w(wType, 61, 66, 71, 76),
+                    fontSize: s(vM.w, 61, 66, 71, 76),
                     color: const Color.fromARGB(255, 230, 211, 164),
                     height: 1.2,
                     letterSpacing: 1,
@@ -75,13 +72,13 @@ class TitleInvitation extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: "Upakarti",
                         fontStyle: FontStyle.italic,
-                        fontSize: w(wType, 41, 46, 51, 56),
+                        fontSize: s(vM.w, 41, 46, 51, 56),
                         color: const Color.fromARGB(255, 230, 211, 164),
                         height: 1.2,
                         letterSpacing: 1,
                       ),
                     ),
-                    SizedBox(height: w(wType, 6, 6.6, 7.2, 7.8)),
+                    SizedBox(height: s(vM.w, 6, 6.6, 7.2, 7.8)),
                   ],
                 ),
               ],

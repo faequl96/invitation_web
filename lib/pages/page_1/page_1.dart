@@ -1,31 +1,25 @@
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/view_model.dart';
 
-class Page1 extends StatelessWidget {
-  Page1({
-    super.key,
-    required this.scrollValue,
-    required this.hType,
-    required this.wType,
-  });
+class Page1 extends StatelessWidget with GetItMixin {
+  Page1({super.key, required this.scrollValue});
 
   final double scrollValue;
-  final H hType;
-  final W wType;
 
   final DateTime _dateTime = DateTime(2024, 8, 10, 9);
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final ViewModel vM = locator<ViewModel>();
 
     final DateFormat dateFormater = DateFormat("EEEE, dd MMMM yyyy", "id_ID");
 
     return Container(
-      height: size.height,
-      width: size.width,
+      height: vM.s.height,
+      width: vM.s.width,
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -36,7 +30,7 @@ class Page1 extends StatelessWidget {
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           Positioned(
-            top: h(hType, 12, 18, 36, 66),
+            top: s(vM.h, 12, 18, 36, 66),
             child: const Text(
               "Pernikahan",
               style: TextStyle(
@@ -48,7 +42,7 @@ class Page1 extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: h(hType, 76, 82, 100, 130),
+            top: s(vM.h, 76, 82, 100, 130),
             child: const Text(
               "Dari",
               style: TextStyle(
@@ -61,8 +55,8 @@ class Page1 extends StatelessWidget {
           Positioned(
             bottom: 200,
             child: Container(
-              width: size.width - 60,
-              height: size.width - 60,
+              width: vM.s.width - 60,
+              height: vM.s.width - 60,
               margin: const EdgeInsets.symmetric(horizontal: 30),
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -74,18 +68,18 @@ class Page1 extends StatelessWidget {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
-            bottom: w(wType, 374, 384, 390, 392),
-            right: scrollValue > size.height - 50
-                ? w(wType, 110, 120, 130, 140)
+            bottom: s(vM.w, 374, 384, 390, 392),
+            right: scrollValue > vM.s.height - 50
+                ? s(vM.w, 110, 120, 130, 140)
                 : 40,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > size.height - 50 ? 1 : 0,
+              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 "Rahma",
                 style: TextStyle(
                   fontFamily: "BrushScriptMT",
-                  fontSize: w(wType, 46, 48, 50, 52),
+                  fontSize: s(vM.w, 46, 48, 50, 52),
                   fontWeight: FontWeight.w600,
                   color: const Color.fromARGB(255, 230, 211, 164),
                 ),
@@ -93,10 +87,10 @@ class Page1 extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: w(wType, 314, 324, 330, 332),
+            bottom: s(vM.w, 314, 324, 330, 332),
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > size.height - 1 ? 1 : 0,
+              opacity: scrollValue > vM.s.height - 1 ? 1 : 0,
               child: const Text(
                 "&",
                 style: TextStyle(
@@ -110,18 +104,18 @@ class Page1 extends StatelessWidget {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
-            bottom: w(wType, 274, 284, 290, 292),
-            left: scrollValue > size.height - 50
-                ? w(wType, 130, 140, 150, 160)
+            bottom: s(vM.w, 274, 284, 290, 292),
+            left: scrollValue > vM.s.height - 50
+                ? s(vM.w, 130, 140, 150, 160)
                 : 40,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > size.height - 50 ? 1 : 0,
+              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 "Faiq",
                 style: TextStyle(
                   fontFamily: "BrushScriptMT",
-                  fontSize: w(wType, 46, 48, 50, 52),
+                  fontSize: s(vM.w, 46, 48, 50, 52),
                   fontWeight: FontWeight.w600,
                   color: const Color.fromARGB(255, 230, 211, 164),
                 ),
@@ -130,10 +124,10 @@ class Page1 extends StatelessWidget {
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 400),
-            bottom: scrollValue > size.height - 50 ? 120 : 50,
+            bottom: scrollValue > vM.s.height - 50 ? 120 : 50,
             child: AnimatedOpacity(
               duration: const Duration(milliseconds: 400),
-              opacity: scrollValue > size.height - 50 ? 1 : 0,
+              opacity: scrollValue > vM.s.height - 50 ? 1 : 0,
               child: Text(
                 dateFormater.format(_dateTime),
                 style: const TextStyle(

@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/view_model.dart';
 
-class Page2 extends StatelessWidget {
-  const Page2({super.key, required this.hType, required this.wType});
-
-  final H hType;
-  final W wType;
+class Page2 extends StatelessWidget with GetItMixin {
+  Page2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final ViewModel vM = get<ViewModel>();
 
     return Container(
-      height: size.height,
-      width: size.width,
+      height: vM.s.height,
+      width: vM.s.width,
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.cover,
@@ -26,8 +24,8 @@ class Page2 extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(
-              horizontal: w(wType, 20, 22, 24, 26),
-              vertical: w(wType, 16, 18, 20, 22),
+              horizontal: s(vM.w, 20, 22, 24, 26),
+              vertical: s(vM.w, 16, 18, 20, 22),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
@@ -64,8 +62,8 @@ class Page2 extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(
-              horizontal: w(wType, 14, 16, 18, 20),
-              vertical: w(wType, 30, 32, 34, 36),
+              horizontal: s(vM.w, 14, 16, 18, 20),
+              vertical: s(vM.w, 30, 32, 34, 36),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
@@ -101,18 +99,18 @@ class Page2 extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: size.height,
-            width: size.width,
+            height: vM.s.height,
+            width: vM.s.width,
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: w(wType, 36, 38, 40, 42),
+                horizontal: s(vM.w, 36, 38, 40, 42),
               ),
               child: Column(
                 children: [
-                  SizedBox(height: h(hType, 72, 88, 104, 120)),
+                  SizedBox(height: s(vM.h, 72, 88, 104, 120)),
                   Image.asset(
                     "assets/bismillah.png",
-                    width: w(wType, 120, 132, 144, 156),
+                    width: s(vM.w, 120, 132, 144, 156),
                   ),
                   const SizedBox(height: 24),
                   const Text(
@@ -153,7 +151,7 @@ class Page2 extends StatelessWidget {
             left: -4,
             child: Image.asset(
               "assets/frame_top_left.png",
-              width: w(wType, 150, 160, 170, 180),
+              width: s(vM.w, 150, 160, 170, 180),
             ),
           ),
           // Positioned(
@@ -161,7 +159,7 @@ class Page2 extends StatelessWidget {
           //   right: -4,
           //   child: Image.asset(
           //     "assets/frame_bottom_right.png",
-          //     width: w(wType, 120, 130, 140, 150),
+          //     width: w(vM.w, 120, 130, 140, 150),
           //   ),
           // ),
         ],

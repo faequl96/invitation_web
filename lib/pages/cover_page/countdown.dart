@@ -1,20 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/view_model.dart';
 
-class CountDown extends StatefulWidget {
-  const CountDown({
-    super.key,
-    required this.hType,
-    required this.wType,
-    required this.unitTimeType,
-    required this.size,
-  });
+class CountDown extends StatefulWidget with GetItStatefulWidgetMixin {
+  CountDown({super.key, required this.unitTimeType, required this.size});
 
-  final H hType;
-  final W wType;
   final UnitTimeType unitTimeType;
   final double size;
 
@@ -22,7 +16,7 @@ class CountDown extends StatefulWidget {
   State<CountDown> createState() => _CountDownState();
 }
 
-class _CountDownState extends State<CountDown> {
+class _CountDownState extends State<CountDown> with GetItStateMixin {
   late Timer _timer;
 
   final DateTime dateTime = DateTime(2024, 8, 10, 9);
@@ -92,6 +86,8 @@ class _CountDownState extends State<CountDown> {
 
   @override
   Widget build(BuildContext context) {
+    final ViewModel vM = get<ViewModel>();
+
     return Container(
       height: widget.size,
       width: widget.size,
@@ -112,16 +108,13 @@ class _CountDownState extends State<CountDown> {
               getUnitTimeValue(),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: w(widget.wType, 13, 14, 15, 16),
+                fontSize: s(vM.w, 13, 14, 15, 16),
                 height: 1.2,
               ),
             ),
             Text(
               getUnitTime(),
-              style: TextStyle(
-                fontSize: w(widget.wType, 10, 11, 12, 13),
-                height: 1,
-              ),
+              style: TextStyle(fontSize: s(vM.w, 10, 11, 12, 13), height: 1),
             ),
           ],
         ),

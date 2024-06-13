@@ -1,26 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:invitation_web/enum/enums.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/view_model.dart';
 
-class SwipeUp extends StatefulWidget {
-  const SwipeUp({
-    super.key,
-    required this.hType,
-    required this.wType,
-    required this.isOpenCompleted,
-  });
+class SwipeUp extends StatefulWidget with GetItStatefulWidgetMixin {
+  SwipeUp({super.key, required this.isOpenCompleted});
 
-  final H hType;
-  final W wType;
   final bool isOpenCompleted;
 
   @override
   State<SwipeUp> createState() => _SwipeUpState();
 }
 
-class _SwipeUpState extends State<SwipeUp> {
+class _SwipeUpState extends State<SwipeUp> with GetItStateMixin {
   late Timer _timer;
 
   double arrow1 = 0;
@@ -28,14 +22,14 @@ class _SwipeUpState extends State<SwipeUp> {
 
   bool isShowed = false;
 
-  void periodic() {
+  void periodic(ViewModel vM) {
     _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
       if (timer.tick % 2 == 0) {
-        arrow1 = w(widget.wType, 107, 110, 113, 116);
-        arrow2 = w(widget.wType, 118, 122, 126, 130);
+        arrow1 = s(vM.w, 107, 110, 113, 116);
+        arrow2 = s(vM.w, 118, 122, 126, 130);
       } else {
-        arrow1 = w(widget.wType, 17, 20, 23, 26);
-        arrow2 = w(widget.wType, 28, 32, 36, 40);
+        arrow1 = s(vM.w, 17, 20, 23, 26);
+        arrow2 = s(vM.w, 28, 32, 36, 40);
         isShowed = !isShowed;
       }
 
@@ -45,9 +39,13 @@ class _SwipeUpState extends State<SwipeUp> {
 
   @override
   void initState() {
-    arrow1 = w(widget.wType, 17, 20, 23, 26);
-    arrow2 = w(widget.wType, 28, 32, 36, 40);
-    periodic();
+    final ViewModel vM = get<ViewModel>();
+
+    arrow1 = s(vM.w, 17, 20, 23, 26);
+    arrow2 = s(vM.w, 28, 32, 36, 40);
+
+    periodic(vM);
+
     super.initState();
   }
 
@@ -59,6 +57,8 @@ class _SwipeUpState extends State<SwipeUp> {
 
   @override
   Widget build(BuildContext context) {
+    final ViewModel vM = get<ViewModel>();
+
     return SizedBox(
       width: 100,
       height: 120,
@@ -75,7 +75,7 @@ class _SwipeUpState extends State<SwipeUp> {
                       child: Icon(
                         Icons.arrow_back_ios_rounded,
                         color: const Color.fromARGB(240, 255, 198, 192),
-                        size: w(widget.wType, 26, 28, 30, 32),
+                        size: s(vM.w, 26, 28, 30, 32),
                       ),
                     ),
                   ),
@@ -91,18 +91,18 @@ class _SwipeUpState extends State<SwipeUp> {
                       child: Icon(
                         Icons.arrow_back_ios_rounded,
                         color: const Color.fromARGB(255, 230, 211, 164),
-                        size: w(widget.wType, 26, 28, 30, 32),
+                        size: s(vM.w, 26, 28, 30, 32),
                       ),
                     ),
                   ),
                 )
               : const SizedBox.shrink(),
           Positioned(
-            bottom: w(widget.wType, 9, 10, 11, 12),
+            bottom: s(vM.w, 9, 10, 11, 12),
             child: Text(
               "Geser ke atas",
               style: TextStyle(
-                fontSize: w(widget.wType, 11, 12, 13, 14),
+                fontSize: s(vM.w, 11, 12, 13, 14),
                 color: const Color.fromARGB(255, 230, 211, 164),
               ),
             ),

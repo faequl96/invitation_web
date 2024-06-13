@@ -41,3 +41,17 @@ double w(W widthType, double sm, double md, double lg, double xl) {
       return xl;
   }
 }
+
+double s(Enum type, double sm, double md, double lg, double xl) {
+  final Map<Enum, double> map = {
+    H.Sm: sm,
+    H.Md: md,
+    H.Lg: lg,
+    H.Xl: xl,
+    W.Sm: sm,
+    W.Md: md,
+    W.Lg: lg,
+    W.Xl: xl
+  };
+  return map[type] ?? 0;
+}
