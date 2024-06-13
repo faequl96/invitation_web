@@ -78,7 +78,7 @@ class RightBackground extends StatelessWidget with GetItMixin {
           isTransparent == true
               ? const SizedBox.shrink()
               : Positioned(
-                  left: 0,
+                  left: -0.2,
                   child: Container(
                     height: vM.s.height,
                     width: vM.s.width / 2,

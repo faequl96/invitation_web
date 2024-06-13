@@ -66,7 +66,7 @@ class LeftBackground extends StatelessWidget with GetItMixin {
             ),
           ),
           Positioned(
-            right: 0,
+            right: -0.2,
             child: Container(
               height: vM.s.height,
               width: vM.s.width / 2,
