@@ -43,4 +43,18 @@ class ViewModel extends ChangeNotifier {
   // countdownPositionYValue
   double cdPositionY1 = 50;
   double cdPositionY2 = 0;
+
+  int _swipeUpViewState = 0;
+  int get swipeUpViewState => _swipeUpViewState;
+  set swipeUpViewState(int value) {
+    _swipeUpViewState = value;
+    notifyListeners();
+  }
+
+  int _frontViewState = 0;
+  int get frontViewState => _frontViewState;
+  set frontViewState(int value) {
+    _frontViewState = value;
+    notifyListeners();
+  }
 }

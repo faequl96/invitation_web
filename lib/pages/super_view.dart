@@ -10,9 +10,7 @@ import 'package:invitation_web/pages/page_1/page_1.dart';
 import 'package:invitation_web/view_model.dart';
 
 class SuperView extends StatefulWidget {
-  const SuperView({super.key, required this.onChange});
-
-  final void Function() onChange;
+  const SuperView({super.key});
 
   @override
   State<SuperView> createState() => _SuperViewState();
@@ -24,10 +22,13 @@ class _SuperViewState extends State<SuperView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final ViewModel vM = locator<ViewModel>();
 
+      vM.toName = Uri.base.queryParameters["to"] ?? "";
+      vM.instance = Uri.base.queryParameters["instance"] ?? "";
+      setState(() {});
+
       vM.pageController.addListener(() {
-        superLogic(vM, widget.onChange).then((isSetState) {
-          if (isSetState) setState(() {});
-        });
+        superLogic(vM);
+        setState(() {});
       });
     });
 
@@ -216,7 +217,7 @@ class _SuperViewState extends State<SuperView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
-                    image: AssetImage("assets/$vM.instance.png"),
+                    image: AssetImage("assets/${vM.instance}.png"),
                     height: s(vM.w, 20, 22, 24, 26),
                     fit: BoxFit.fitHeight,
                   ),
