@@ -75,7 +75,9 @@ void initCountdownPosition(ViewModel vM) {
   vM.cdPositionY2 = 50 + 140 * 2;
 }
 
-void superLogic(ViewModel vM) {
+Future<bool> superLogic(ViewModel vM, void Function() onChange) async {
+  bool returnValue = true;
+
   final double divideds = vM.s.height / vM.s.width;
 
   vM.sV = vM.pageController.offset.ceil().toDouble();
@@ -119,6 +121,11 @@ void superLogic(ViewModel vM) {
   }
 
   if (vM.sV <= vM.s.height) {
+    if (vM.sV <= 10) {
+      onChange();
+      returnValue = false;
+    }
+
     if (vM.sV <= vM.fract) {
       vM.opacity = 1;
       vM.flash = 1;
@@ -188,6 +195,9 @@ void superLogic(ViewModel vM) {
         vM.sV - vM.s.height <= vM.s.height) {
       vM.cdPositionY2 = 50;
     }
+
+    onChange();
+    returnValue = false;
   }
 
   if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {}
@@ -268,4 +278,6 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
+
+  return returnValue;
 }

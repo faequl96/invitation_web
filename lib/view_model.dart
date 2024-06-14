@@ -9,6 +9,9 @@ void setupLocator() => locator.registerSingleton<ViewModel>(ViewModel());
 class ViewModel extends ChangeNotifier {
   final PageController pageController = PageController();
 
+  String toName = "";
+  String instance = "";
+
   // hType
   H h = H.Sm;
 
