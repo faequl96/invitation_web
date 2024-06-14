@@ -9,7 +9,7 @@ class LightEffect extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = get<ViewModel>();
 
     return SizedBox(
       height: vM.s.height,

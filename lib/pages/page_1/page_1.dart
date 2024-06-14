@@ -8,12 +8,11 @@ class Page1 extends StatelessWidget with GetItMixin {
   Page1({super.key});
 
   final DateTime _dateTime = DateTime(2024, 8, 10, 9);
+  final DateFormat dateFormater = DateFormat("EEEE, dd MMMM yyyy", "id_ID");
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
-
-    final DateFormat dateFormater = DateFormat("EEEE, dd MMMM yyyy", "id_ID");
+    final ViewModel vM = get<ViewModel>();
 
     return Container(
       height: vM.s.height,
