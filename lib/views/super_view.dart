@@ -71,96 +71,102 @@ class _SuperViewState extends State<SuperView> {
             child: TitleInvitation(isBottomTitle: true),
           ),
         ],
-        Positioned(
-          left: vM.cdPosition2.xAxis >=
-                      (s(vM.w, 68, 72, 76, 80) +
-                          ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)) &&
-                  vM.cdPosition2.xAxis <=
-                      (vM.s.width / 2) -
-                          (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2)
-              ? vM.cdPosition2.xAxis
-              : vM.cdPosition2.xAxis <
-                      (s(vM.w, 68, 72, 76, 80) +
-                          ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
-                  ? (s(vM.w, 68, 72, 76, 80) +
-                      ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
-                  : (vM.s.width / 2) -
-                      (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
-          bottom: vM.cdPosition2.yAxis >= 40
-              ? vM.cdPosition2.yAxis
-              : vM.cdPosition2.yAxis < 40
-                  ? 40
-                  : s(vM.h, 202, 218, 234, 250),
-          child: const CountDown(
-            unitTimeType: UnitTimeType.Hour,
-            sizeType: CountdownSizeType.Sm,
+        if (vM.sV < vM.s.height + 100) ...[
+          Positioned(
+            left: vM.cdPosition2.xAxis >=
+                        (s(vM.w, 68, 72, 76, 80) +
+                            ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)) &&
+                    vM.cdPosition2.xAxis <=
+                        (vM.s.width / 2) -
+                            (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) /
+                                2)
+                ? vM.cdPosition2.xAxis
+                : vM.cdPosition2.xAxis <
+                        (s(vM.w, 68, 72, 76, 80) +
+                            ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
+                    ? (s(vM.w, 68, 72, 76, 80) +
+                        ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
+                    : (vM.s.width / 2) -
+                        (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
+            bottom: vM.cdPosition2.yAxis >= 40
+                ? vM.cdPosition2.yAxis
+                : vM.cdPosition2.yAxis < 40
+                    ? 40
+                    : s(vM.h, 202, 218, 234, 250),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Hour,
+              sizeType: CountdownSizeType.Sm,
+            ),
           ),
-        ),
-        Positioned(
-          right: vM.cdPosition2.xAxis >=
-                      (s(vM.w, 68, 72, 76, 80) +
-                          ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)) &&
-                  vM.cdPosition2.xAxis <=
-                      (vM.s.width / 2) -
-                          (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2)
-              ? vM.cdPosition2.xAxis
-              : vM.cdPosition2.xAxis <
-                      (s(vM.w, 68, 72, 76, 80) +
-                          ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
-                  ? (s(vM.w, 68, 72, 76, 80) +
-                      ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
-                  : (vM.s.width / 2) -
-                      (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
-          bottom: vM.cdPosition2.yAxis >= 40
-              ? vM.cdPosition2.yAxis
-              : vM.cdPosition2.yAxis < 40
-                  ? 40
-                  : s(vM.h, 202, 218, 234, 250),
-          child: const CountDown(
-            unitTimeType: UnitTimeType.Minute,
-            sizeType: CountdownSizeType.Sm,
+          Positioned(
+            right: vM.cdPosition2.xAxis >=
+                        (s(vM.w, 68, 72, 76, 80) +
+                            ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)) &&
+                    vM.cdPosition2.xAxis <=
+                        (vM.s.width / 2) -
+                            (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) /
+                                2)
+                ? vM.cdPosition2.xAxis
+                : vM.cdPosition2.xAxis <
+                        (s(vM.w, 68, 72, 76, 80) +
+                            ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
+                    ? (s(vM.w, 68, 72, 76, 80) +
+                        ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4))
+                    : (vM.s.width / 2) -
+                        (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
+            bottom: vM.cdPosition2.yAxis >= 40
+                ? vM.cdPosition2.yAxis
+                : vM.cdPosition2.yAxis < 40
+                    ? 40
+                    : s(vM.h, 202, 218, 234, 250),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Minute,
+              sizeType: CountdownSizeType.Sm,
+            ),
           ),
-        ),
-        Positioned(
-          right: vM.cdPosition1.xAxis >= s(vM.w, 48, 52, 56, 60) &&
-                  vM.cdPosition1.xAxis <=
-                      (vM.s.width / 2) -
-                          (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2)
-              ? vM.cdPosition1.xAxis
-              : vM.cdPosition1.xAxis < s(vM.w, 48, 52, 56, 60)
-                  ? s(vM.w, 48, 52, 56, 60)
-                  : (vM.s.width / 2) -
-                      (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
-          bottom: vM.cdPosition1.yAxis >= 40
-              ? vM.cdPosition1.yAxis
-              : vM.cdPosition1.yAxis < 40
-                  ? 40
-                  : s(vM.h, 202, 218, 234, 250),
-          child: const CountDown(
-            unitTimeType: UnitTimeType.Second,
-            sizeType: CountdownSizeType.Sm,
+          Positioned(
+            right: vM.cdPosition1.xAxis >= s(vM.w, 48, 52, 56, 60) &&
+                    vM.cdPosition1.xAxis <=
+                        (vM.s.width / 2) -
+                            (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) /
+                                2)
+                ? vM.cdPosition1.xAxis
+                : vM.cdPosition1.xAxis < s(vM.w, 48, 52, 56, 60)
+                    ? s(vM.w, 48, 52, 56, 60)
+                    : (vM.s.width / 2) -
+                        (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
+            bottom: vM.cdPosition1.yAxis >= 40
+                ? vM.cdPosition1.yAxis
+                : vM.cdPosition1.yAxis < 40
+                    ? 40
+                    : s(vM.h, 202, 218, 234, 250),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Second,
+              sizeType: CountdownSizeType.Sm,
+            ),
           ),
-        ),
-        Positioned(
-          left: vM.cdPosition1.xAxis >= s(vM.w, 48, 52, 56, 60) &&
-                  vM.cdPosition1.xAxis <=
-                      (vM.s.width / 2) -
-                          (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2)
-              ? vM.cdPosition1.xAxis
-              : vM.cdPosition1.xAxis < s(vM.w, 48, 52, 56, 60)
-                  ? s(vM.w, 48, 52, 56, 60)
-                  : (vM.s.width / 2) -
-                      (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
-          bottom: vM.cdPosition1.yAxis >= 40
-              ? vM.cdPosition1.yAxis
-              : vM.cdPosition1.yAxis < 40
-                  ? 40
-                  : s(vM.h, 202, 218, 234, 250),
-          child: const CountDown(
-            unitTimeType: UnitTimeType.Day,
-            sizeType: CountdownSizeType.Sm,
+          Positioned(
+            left: vM.cdPosition1.xAxis >= s(vM.w, 48, 52, 56, 60) &&
+                    vM.cdPosition1.xAxis <=
+                        (vM.s.width / 2) -
+                            (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) /
+                                2)
+                ? vM.cdPosition1.xAxis
+                : vM.cdPosition1.xAxis < s(vM.w, 48, 52, 56, 60)
+                    ? s(vM.w, 48, 52, 56, 60)
+                    : (vM.s.width / 2) -
+                        (((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4) / 2),
+            bottom: vM.cdPosition1.yAxis >= 40
+                ? vM.cdPosition1.yAxis
+                : vM.cdPosition1.yAxis < 40
+                    ? 40
+                    : s(vM.h, 202, 218, 234, 250),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Day,
+              sizeType: CountdownSizeType.Sm,
+            ),
           ),
-        ),
+        ],
         if (vM.cdPositionY1 > 50 && vM.cdPositionY1 <= 50 + 140 * 2) ...[
           Positioned(
             left: (s(vM.w, 68, 72, 76, 80) +

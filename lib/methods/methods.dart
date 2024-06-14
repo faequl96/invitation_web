@@ -204,7 +204,11 @@ void superLogic(ViewModel vM) {
     vM.countdownViewState += 1;
   }
 
-  if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {}
+  if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
+    vM.cdPositionY2 = 50 + (vM.sV - vM.s.height * 2);
+
+    vM.countdownViewState += 1;
+  }
 
   // if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
   //   if (vM.sV - (vM.s.height * 2) <= vM.fract) {
