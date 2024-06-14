@@ -76,10 +76,10 @@ void initCountdownPosition(ViewModel vM) {
 }
 
 void superLogic(ViewModel vM) {
-  final double divideds = vM.s.height / vM.s.width;
-
   vM.sV = vM.pageController.offset.ceil().toDouble();
-  vM.bgPositionX = (vM.pageController.offset / divideds) / 2;
+
+  final double divideds = vM.s.height / vM.s.width;
+  vM.bgPositionX = (vM.sV / divideds) / 2;
 
   if (vM.sV > 0 && vM.sV <= vM.s.height / 3) {
     vM.cdPosition1 = PositionValue(
@@ -201,7 +201,7 @@ void superLogic(ViewModel vM) {
       vM.cdPositionY2 = 50;
     }
 
-    vM.frontViewState += 1;
+    vM.countdownViewState += 1;
   }
 
   if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {}

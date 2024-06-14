@@ -13,7 +13,7 @@ class FrontView extends StatelessWidget with GetItMixin {
   Widget build(BuildContext context) {
     final ViewModel vM = get<ViewModel>();
     watchOnly((ViewModel x) => x.swipeUpViewState);
-    watchOnly((ViewModel x) => x.frontViewState);
+    watchOnly((ViewModel x) => x.countdownViewState);
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,

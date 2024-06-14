@@ -7,9 +7,13 @@ final GetIt locator = GetIt.instance;
 void setupLocator() => locator.registerSingleton<ViewModel>(ViewModel());
 
 class ViewModel extends ChangeNotifier {
+  // page controller for PageView widget
   final PageController pageController = PageController();
 
+  // name of person invited
   String toName = "";
+
+  // instance of the person invited
   String instance = "";
 
   // hType
@@ -44,6 +48,7 @@ class ViewModel extends ChangeNotifier {
   double cdPositionY1 = 50;
   double cdPositionY2 = 0;
 
+  // for refresh UI SwipeUp widget only in FrontView widget
   int _swipeUpViewState = 0;
   int get swipeUpViewState => _swipeUpViewState;
   set swipeUpViewState(int value) {
@@ -51,10 +56,11 @@ class ViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _frontViewState = 0;
-  int get frontViewState => _frontViewState;
-  set frontViewState(int value) {
-    _frontViewState = value;
+  // for refresh UI CountDown widget only in FrontView widget
+  int _countdownViewState = 0;
+  int get countdownViewState => _countdownViewState;
+  set countdownViewState(int value) {
+    _countdownViewState = value;
     notifyListeners();
   }
 }
