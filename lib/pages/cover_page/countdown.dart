@@ -1,23 +1,31 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class CountDown extends StatefulWidget with GetItStatefulWidgetMixin {
-  CountDown({super.key, required this.unitTimeType, required this.size});
+class CountDown extends StatefulWidget {
+  const CountDown({
+    super.key,
+    required this.unitTimeType,
+    required this.sizeType,
+  });
 
   final UnitTimeType unitTimeType;
-  final double size;
+  final CountdownSizeType sizeType;
 
   @override
   State<CountDown> createState() => _CountDownState();
 }
 
-class _CountDownState extends State<CountDown> with GetItStateMixin {
-  late Timer _timer;
+class _CountDownState extends State<CountDown> {
+  late final ViewModel vM;
+
+  late final double smSize;
+  late final double lgSize;
+
+  late final Timer _timer;
 
   final DateTime dateTime = DateTime(2024, 8, 10, 9);
 
@@ -72,6 +80,10 @@ class _CountDownState extends State<CountDown> with GetItStateMixin {
 
   @override
   void initState() {
+    vM = locator<ViewModel>();
+    smSize = (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4;
+    lgSize = (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4;
+
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {});
     });
@@ -86,11 +98,9 @@ class _CountDownState extends State<CountDown> with GetItStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
-
     return Container(
-      height: widget.size,
-      width: widget.size,
+      height: widget.sizeType == CountdownSizeType.Sm ? smSize : lgSize,
+      width: widget.sizeType == CountdownSizeType.Sm ? smSize : lgSize,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: getFrameColor(),

@@ -2,6 +2,8 @@
 
 enum UnitTimeType { Day, Hour, Minute, Second }
 
+enum CountdownSizeType { Sm, Lg }
+
 enum BackgroundType { Cover, Page2 }
 
 enum H { Sm, Md, Lg, Xl }

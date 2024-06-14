@@ -101,9 +101,9 @@ class _AppViewState extends State<AppView> {
               : vM.cdPosition2.yAxis < 40
                   ? 40
                   : s(vM.h, 202, 218, 234, 250),
-          child: CountDown(
+          child: const CountDown(
             unitTimeType: UnitTimeType.Hour,
-            size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+            sizeType: CountdownSizeType.Sm,
           ),
         ),
         Positioned(
@@ -126,9 +126,9 @@ class _AppViewState extends State<AppView> {
               : vM.cdPosition2.yAxis < 40
                   ? 40
                   : s(vM.h, 202, 218, 234, 250),
-          child: CountDown(
+          child: const CountDown(
             unitTimeType: UnitTimeType.Minute,
-            size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+            sizeType: CountdownSizeType.Sm,
           ),
         ),
         Positioned(
@@ -146,9 +146,9 @@ class _AppViewState extends State<AppView> {
               : vM.cdPosition1.yAxis < 40
                   ? 40
                   : s(vM.h, 202, 218, 234, 250),
-          child: CountDown(
+          child: const CountDown(
             unitTimeType: UnitTimeType.Second,
-            size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+            sizeType: CountdownSizeType.Sm,
           ),
         ),
         Positioned(
@@ -166,9 +166,9 @@ class _AppViewState extends State<AppView> {
               : vM.cdPosition1.yAxis < 40
                   ? 40
                   : s(vM.h, 202, 218, 234, 250),
-          child: CountDown(
+          child: const CountDown(
             unitTimeType: UnitTimeType.Day,
-            size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+            sizeType: CountdownSizeType.Sm,
           ),
         ),
         if (vM.cdPositionY1 > 50 && vM.cdPositionY1 <= 50 + 140 * 2) ...[
@@ -176,34 +176,34 @@ class _AppViewState extends State<AppView> {
             left: (s(vM.w, 68, 72, 76, 80) +
                 ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),
             bottom: vM.cdPositionY1,
-            child: CountDown(
+            child: const CountDown(
               unitTimeType: UnitTimeType.Hour,
-              size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+              sizeType: CountdownSizeType.Sm,
             ),
           ),
           Positioned(
             right: (s(vM.w, 68, 72, 76, 80) +
                 ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),
             bottom: vM.cdPositionY1,
-            child: CountDown(
+            child: const CountDown(
               unitTimeType: UnitTimeType.Minute,
-              size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+              sizeType: CountdownSizeType.Sm,
             ),
           ),
           Positioned(
             right: s(vM.w, 48, 52, 56, 60),
             bottom: vM.cdPositionY1,
-            child: CountDown(
+            child: const CountDown(
               unitTimeType: UnitTimeType.Second,
-              size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+              sizeType: CountdownSizeType.Sm,
             ),
           ),
           Positioned(
             left: s(vM.w, 48, 52, 56, 60),
             bottom: vM.cdPositionY1,
-            child: CountDown(
+            child: const CountDown(
               unitTimeType: UnitTimeType.Day,
-              size: (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4,
+              sizeType: CountdownSizeType.Sm,
             ),
           ),
         ],
@@ -271,34 +271,34 @@ class _AppViewState extends State<AppView> {
                 left: (s(vM.w, 62, 66, 70, 74) +
                     ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
                 bottom: vM.cdPositionY2,
-                child: CountDown(
+                child: const CountDown(
                   unitTimeType: UnitTimeType.Hour,
-                  size: (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4,
+                  sizeType: CountdownSizeType.Lg,
                 ),
               ),
               Positioned(
                 right: (s(vM.w, 62, 66, 70, 74) +
                     ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
                 bottom: vM.cdPositionY2,
-                child: CountDown(
+                child: const CountDown(
                   unitTimeType: UnitTimeType.Minute,
-                  size: (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4,
+                  sizeType: CountdownSizeType.Lg,
                 ),
               ),
               Positioned(
                 right: s(vM.w, 46, 50, 54, 58),
                 bottom: vM.cdPositionY2,
-                child: CountDown(
+                child: const CountDown(
                   unitTimeType: UnitTimeType.Second,
-                  size: (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4,
+                  sizeType: CountdownSizeType.Lg,
                 ),
               ),
               Positioned(
                 left: s(vM.w, 46, 50, 54, 58),
                 bottom: vM.cdPositionY2,
-                child: CountDown(
+                child: const CountDown(
                   unitTimeType: UnitTimeType.Day,
-                  size: (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4,
+                  sizeType: CountdownSizeType.Lg,
                 ),
               ),
             ],
@@ -308,11 +308,7 @@ class _AppViewState extends State<AppView> {
             //   child: SealInvitation(isSealOpened: isSealOpened),
             // ),
             // if (isOpenCompleted)
-            if (vM.sV < 10)
-              Positioned(
-                bottom: 0,
-                child: SwipeUp(isOpenCompleted: isOpenCompleted),
-              ),
+            if (vM.sV < 10) const Positioned(bottom: 0, child: SwipeUp()),
             // AnimatedPositioned(
             //   duration: const Duration(milliseconds: 200),
             //   bottom: isKeyOpened ? -50 : 20,

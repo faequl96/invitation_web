@@ -1,28 +1,27 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class SwipeUp extends StatefulWidget with GetItStatefulWidgetMixin {
-  SwipeUp({super.key, required this.isOpenCompleted});
-
-  final bool isOpenCompleted;
+class SwipeUp extends StatefulWidget {
+  const SwipeUp({super.key});
 
   @override
   State<SwipeUp> createState() => _SwipeUpState();
 }
 
-class _SwipeUpState extends State<SwipeUp> with GetItStateMixin {
-  late Timer _timer;
+class _SwipeUpState extends State<SwipeUp> {
+  late final ViewModel vM;
+
+  late final Timer _timer;
 
   double arrow1 = 0;
   double arrow2 = 0;
 
   bool isShowed = false;
 
-  void periodic(ViewModel vM) {
+  void periodic() {
     _timer = Timer.periodic(const Duration(milliseconds: 300), (timer) {
       if (timer.tick % 2 == 0) {
         arrow1 = s(vM.w, 107, 110, 113, 116);
@@ -39,12 +38,12 @@ class _SwipeUpState extends State<SwipeUp> with GetItStateMixin {
 
   @override
   void initState() {
-    final ViewModel vM = get<ViewModel>();
+    vM = locator<ViewModel>();
 
     arrow1 = s(vM.w, 17, 20, 23, 26);
     arrow2 = s(vM.w, 28, 32, 36, 40);
 
-    periodic(vM);
+    periodic();
 
     super.initState();
   }
@@ -57,8 +56,6 @@ class _SwipeUpState extends State<SwipeUp> with GetItStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
-
     return SizedBox(
       width: 100,
       height: 120,
