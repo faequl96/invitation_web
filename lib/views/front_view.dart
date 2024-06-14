@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
-import 'package:invitation_web/pages/cover_page/countdown.dart';
-import 'package:invitation_web/pages/cover_page/swipe_up.dart';
+import 'package:invitation_web/views/shared/countdown.dart';
+import 'package:invitation_web/views/cover_page/swipe_up.dart';
 import 'package:invitation_web/view_model.dart';
 
 class FrontView extends StatelessWidget with GetItMixin {

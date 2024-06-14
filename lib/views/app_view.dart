@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invitation_web/pages/front_view.dart';
-import 'package:invitation_web/pages/page_2/page_2.dart';
-import 'package:invitation_web/pages/super_view.dart';
+import 'package:invitation_web/views/front_view.dart';
+import 'package:invitation_web/views/page_2/page_2.dart';
+import 'package:invitation_web/views/super_view.dart';
 import 'package:invitation_web/view_model.dart';
 
 class AppView extends StatelessWidget {

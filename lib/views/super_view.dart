@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
-import 'package:invitation_web/pages/cover_page/countdown.dart';
-import 'package:invitation_web/pages/cover_page/left_bg.dart';
-import 'package:invitation_web/pages/cover_page/light_effect.dart';
-import 'package:invitation_web/pages/cover_page/right_bg.dart';
-import 'package:invitation_web/pages/cover_page/title_invitation.dart';
-import 'package:invitation_web/pages/page_1/page_1.dart';
+import 'package:invitation_web/views/shared/countdown.dart';
+import 'package:invitation_web/views/cover_page/left_bg.dart';
+import 'package:invitation_web/views/cover_page/light_effect.dart';
+import 'package:invitation_web/views/cover_page/right_bg.dart';
+import 'package:invitation_web/views/cover_page/title_invitation.dart';
+import 'package:invitation_web/views/page_1/page_1.dart';
 import 'package:invitation_web/view_model.dart';
 
 class SuperView extends StatefulWidget {
