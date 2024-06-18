@@ -47,6 +47,10 @@ class ViewModel extends ChangeNotifier {
   // countdownPositionYValue
   double cdPositionY1 = 50;
   double cdPositionY2 = 0;
+  double cdPositionY21 = 0;
+  double cdPositionY22 = 0;
+  double cdPositionY23 = 0;
+  double cdPositionY24 = 0;
 
   // for refresh UI SwipeUp widget only in FrontView widget
   int _swipeUpViewState = 0;

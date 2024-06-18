@@ -59,7 +59,7 @@ class FrontView extends StatelessWidget with GetItMixin {
           Positioned(
             left: (s(vM.w, 62, 66, 70, 74) +
                 ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
-            bottom: vM.cdPositionY2,
+            bottom: vM.cdPositionY23,
             child: const CountDown(
               unitTimeType: UnitTimeType.Hour,
               sizeType: CountdownSizeType.Lg,
@@ -68,7 +68,7 @@ class FrontView extends StatelessWidget with GetItMixin {
           Positioned(
             right: (s(vM.w, 62, 66, 70, 74) +
                 ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
-            bottom: vM.cdPositionY2,
+            bottom: vM.cdPositionY22,
             child: const CountDown(
               unitTimeType: UnitTimeType.Minute,
               sizeType: CountdownSizeType.Lg,
@@ -76,7 +76,7 @@ class FrontView extends StatelessWidget with GetItMixin {
           ),
           Positioned(
             right: s(vM.w, 46, 50, 54, 58),
-            bottom: vM.cdPositionY2,
+            bottom: vM.cdPositionY24,
             child: const CountDown(
               unitTimeType: UnitTimeType.Second,
               sizeType: CountdownSizeType.Lg,
@@ -84,7 +84,7 @@ class FrontView extends StatelessWidget with GetItMixin {
           ),
           Positioned(
             left: s(vM.w, 46, 50, 54, 58),
-            bottom: vM.cdPositionY2,
+            bottom: vM.cdPositionY21,
             child: const CountDown(
               unitTimeType: UnitTimeType.Day,
               sizeType: CountdownSizeType.Lg,

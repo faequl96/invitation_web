@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/views/page_3/page_3.dart';
 import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/left_bg.dart';
 import 'package:invitation_web/views/cover_page/light_effect.dart';
@@ -42,6 +43,47 @@ class _SuperViewState extends State<SuperView> {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
+        if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) Page3(),
+        if (vM.cdPositionY1 > 0) ...[
+          Positioned(
+            left: (s(vM.w, 68, 72, 76, 80) +
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),
+            bottom: vM.cdPositionY1 -
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Hour,
+              sizeType: CountdownSizeType.Sm,
+            ),
+          ),
+          Positioned(
+            right: (s(vM.w, 68, 72, 76, 80) +
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),
+            bottom: vM.cdPositionY1 -
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Minute,
+              sizeType: CountdownSizeType.Sm,
+            ),
+          ),
+          Positioned(
+            right: s(vM.w, 48, 52, 56, 60),
+            bottom: vM.cdPositionY1 -
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Second,
+              sizeType: CountdownSizeType.Sm,
+            ),
+          ),
+          Positioned(
+            left: s(vM.w, 48, 52, 56, 60),
+            bottom: vM.cdPositionY1 -
+                ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4),
+            child: const CountDown(
+              unitTimeType: UnitTimeType.Day,
+              sizeType: CountdownSizeType.Sm,
+            ),
+          ),
+        ],
         if (vM.sV < vM.s.height * 2) Page1(),
         if (vM.sV < vM.s.height)
           Container(
@@ -167,7 +209,9 @@ class _SuperViewState extends State<SuperView> {
             ),
           ),
         ],
-        if (vM.cdPositionY1 > 50 && vM.cdPositionY1 <= 50 + 140 * 2) ...[
+        if (vM.cdPositionY1 > 50 &&
+            vM.cdPositionY1 <= 50 + 140 * 2 &&
+            vM.sV <= vM.s.height * 2) ...[
           Positioned(
             left: (s(vM.w, 68, 72, 76, 80) +
                 ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),

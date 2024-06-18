@@ -207,6 +207,31 @@ void superLogic(ViewModel vM) {
   if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
     vM.cdPositionY2 = 50 + (vM.sV - vM.s.height * 2);
 
+    if (vM.sV <= vM.s.height * 2 + 240) {
+      vM.cdPositionY21 = 50 + (vM.sV - vM.s.height * 2);
+    } else if (vM.sV > vM.s.height * 2 + 240) {
+      vM.cdPositionY21 = 195 - ((vM.sV - vM.s.height * 2 - 289) * 2);
+    }
+    if (vM.sV <= vM.s.height * 2 + 270) {
+      vM.cdPositionY22 = 50 + (vM.sV - vM.s.height * 2);
+    } else if (vM.sV > vM.s.height * 2 + 270) {
+      vM.cdPositionY22 = 225 - ((vM.sV - vM.s.height * 2 - 319) * 2);
+    }
+    if (vM.sV <= vM.s.height * 2 + 300) {
+      vM.cdPositionY23 = 50 + (vM.sV - vM.s.height * 2);
+    } else if (vM.sV > vM.s.height * 2 + 300) {
+      vM.cdPositionY23 = 255 - ((vM.sV - vM.s.height * 2 - 349) * 2);
+    }
+    if (vM.sV <= vM.s.height * 2 + 320) {
+      vM.cdPositionY24 = 50 + (vM.sV - vM.s.height * 2);
+    } else if (vM.sV > vM.s.height * 2 + 320) {
+      vM.cdPositionY24 = 275 - ((vM.sV - vM.s.height * 2 - 369) * 2);
+    }
+
+    vM.cdPositionY1 = vM.sV -
+        (vM.s.height * 3 -
+            ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4 + 50));
+
     vM.countdownViewState += 1;
   }
 
