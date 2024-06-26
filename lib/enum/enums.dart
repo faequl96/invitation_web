@@ -9,3 +9,5 @@ enum BackgroundType { Cover, Page2 }
 enum H { Sm, Md, Lg, Xl }
 
 enum W { Sm, Md, Lg, Xl }
+
+enum AnimatedType { T1, T2, T3 }

@@ -232,6 +232,12 @@ void superLogic(ViewModel vM) {
         (vM.s.height * 3 -
             ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4 + 50));
 
+    if (vM.sV == vM.s.height * 3) {
+      setAnimated(vM);
+    } else if (vM.sV < vM.s.height * 3) {
+      vM.animatedType = AnimatedType.T1;
+    }
+
     vM.countdownViewState += 1;
   }
 
@@ -311,4 +317,11 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
+}
+
+void setAnimated(ViewModel vM) async {
+  vM.animatedType = AnimatedType.T2;
+  await Future.delayed(const Duration(milliseconds: 300));
+  vM.animatedType = AnimatedType.T3;
+  await Future.delayed(const Duration(milliseconds: 300));
 }

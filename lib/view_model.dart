@@ -67,4 +67,11 @@ class ViewModel extends ChangeNotifier {
     _countdownViewState = value;
     notifyListeners();
   }
+
+  AnimatedType _animatedType = AnimatedType.T1;
+  AnimatedType get animatedType => _animatedType;
+  set animatedType(AnimatedType value) {
+    _animatedType = value;
+    notifyListeners();
+  }
 }
