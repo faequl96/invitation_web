@@ -142,7 +142,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 414, 454, 484, 514),
+          bottom: s(vM.h, 410, 450, 480, 510),
           right: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -152,7 +152,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -193,7 +193,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 360, 390, 420, 450),
+          bottom: s(vM.h, 358, 388, 418, 448),
           right: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -203,7 +203,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -281,7 +281,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 224, 254, 284, 314),
+          bottom: s(vM.h, 216, 246, 276, 306),
           left: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -291,7 +291,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -342,7 +342,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
