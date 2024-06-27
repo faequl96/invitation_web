@@ -1,5 +1,6 @@
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
@@ -39,7 +40,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
 
     watchOnly((ViewModel x) => x.animatedType);
 
-    double paddingSide = vM.s.width / 2 - (s(vM.w, 100, 110, 120, 130) + 50);
+    double paddingSide = vM.s.width / 2 - (s(vM.w, 96, 106, 116, 126) + 50);
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
@@ -59,8 +60,33 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               width: vM.sV > vM.s.height * 3 - 280
-                  ? s(vM.w, 100, 110, 120, 130)
-                  : s(vM.w, 200, 210, 220, 230),
+                  ? s(vM.w, 96, 106, 116, 126)
+                  : s(vM.w, 196, 206, 216, 226),
+              padding: vM.animatedType == AnimatedType.T1 ||
+                      vM.animatedType == AnimatedType.T2
+                  ? const EdgeInsets.all(0)
+                  : const EdgeInsets.all(3),
+              decoration: vM.animatedType == AnimatedType.T1 ||
+                      vM.animatedType == AnimatedType.T2
+                  ? null
+                  : const BoxDecoration(
+                      border: GradientBoxBorder(
+                        width: 2,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(0, 230, 211, 164),
+                            Color.fromARGB(255, 255, 198, 192),
+                            Color.fromARGB(255, 230, 211, 164),
+                            Color.fromARGB(255, 255, 198, 192),
+                            Color.fromARGB(255, 230, 211, 164),
+                          ],
+                          stops: [0.1, 0.4, 0.5, 0.6, 0.9],
+                          transform: GradientRotation(-0.2),
+                        ),
+                      ),
+                    ),
               child: const Image(
                 image: AssetImage("assets/groom.png"),
               ),
@@ -82,8 +108,33 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               width: vM.sV > vM.s.height * 3 - 280
-                  ? s(vM.w, 100, 110, 120, 130)
-                  : s(vM.w, 200, 210, 220, 230),
+                  ? s(vM.w, 96, 106, 116, 126)
+                  : s(vM.w, 196, 206, 216, 226),
+              padding: vM.animatedType == AnimatedType.T1 ||
+                      vM.animatedType == AnimatedType.T2
+                  ? const EdgeInsets.all(0)
+                  : const EdgeInsets.all(3),
+              decoration: vM.animatedType == AnimatedType.T1 ||
+                      vM.animatedType == AnimatedType.T2
+                  ? null
+                  : const BoxDecoration(
+                      border: GradientBoxBorder(
+                        width: 2,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(0, 230, 211, 164),
+                            Color.fromARGB(255, 255, 198, 192),
+                            Color.fromARGB(255, 230, 211, 164),
+                            Color.fromARGB(255, 255, 198, 192),
+                            Color.fromARGB(255, 230, 211, 164),
+                          ],
+                          stops: [0.1, 0.4, 0.5, 0.6, 0.9],
+                          transform: GradientRotation(-0.2),
+                        ),
+                      ),
+                    ),
               child: const Image(
                 image: AssetImage("assets/bride.png"),
               ),
@@ -101,7 +152,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 100, 110, 120, 130) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -111,18 +162,28 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(240, 255, 204, 192),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 38, 40, 42, 44),
+                      fontSize: s(vM.w, 44, 46, 48, 50),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    "Nur Istiqomah, M.Si.",
+                  const SizedBox(height: 3),
+                  Text.rich(
+                    const TextSpan(children: [
+                      TextSpan(
+                        text: "Nur Istiqomah",
+                        style: TextStyle(
+                          color: Color.fromARGB(240, 255, 204, 192),
+                        ),
+                      ),
+                      TextSpan(
+                        text: ", M.Biomed",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ]),
                     style: TextStyle(
                       fontFamily: "BrushScriptMT",
-                      color: const Color.fromARGB(240, 255, 204, 192),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 20, 22, 24, 26),
+                      fontSize: s(vM.w, 17, 19, 21, 23),
                       height: 1,
                     ),
                   ),
@@ -142,7 +203,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 100, 110, 120, 130) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -150,7 +211,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     "Putri Tunggal dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 9, 10, 11, 12),
                       height: 1.2,
                     ),
                   ),
@@ -158,23 +219,26 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
-                        text: "B. ",
+                        text: "Bapak ",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextSpan(
                         text: "Bagyo Trisno Ngulandoro",
                         style: TextStyle(
                           color: Color.fromARGB(255, 230, 211, 164),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: ", S.T.",
-                        style: TextStyle(color: Colors.white),
+                        text: ", S.T",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ]),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
@@ -184,26 +248,30 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                         text: "& ",
                         style: TextStyle(
                           color: Color.fromARGB(255, 230, 211, 164),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: "I. ",
+                        text: "Ibu ",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextSpan(
                         text: "Peni Lestari",
                         style: TextStyle(
                           color: Color.fromARGB(240, 255, 204, 192),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: ", S.E.",
-                        style: TextStyle(color: Colors.white),
+                        text: ", S.E",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ]),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
@@ -223,7 +291,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 100, 110, 120, 130) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -233,18 +301,28 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(255, 230, 211, 164),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 38, 40, 42, 44),
+                      fontSize: s(vM.w, 44, 46, 48, 50),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    "Ulul Fahmi, S.Pd.",
+                  const SizedBox(height: 3),
+                  Text.rich(
+                    const TextSpan(children: [
+                      TextSpan(
+                        text: "Ulul Fahmi",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 230, 211, 164),
+                        ),
+                      ),
+                      TextSpan(
+                        text: ", S.Pd",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ]),
                     style: TextStyle(
                       fontFamily: "BrushScriptMT",
-                      color: const Color.fromARGB(255, 230, 211, 164),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 20, 22, 24, 26),
+                      fontSize: s(vM.w, 17, 19, 21, 23),
                       height: 1,
                     ),
                   ),
@@ -264,15 +342,15 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 100, 110, 120, 130) + 10 + paddingSide * 2),
+                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide * 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Putri ke-empat dari",
+                    "Putra ke-empat dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 9, 10, 11, 12),
                       height: 1.2,
                     ),
                   ),
@@ -280,23 +358,26 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
-                        text: "B. ",
+                        text: "Bapak ",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextSpan(
                         text: "Syamsuddin",
                         style: TextStyle(
                           color: Color.fromARGB(255, 230, 211, 164),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: ", S.Pd.",
-                        style: TextStyle(color: Colors.white),
+                        text: ", S.Pd",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ]),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
@@ -306,22 +387,23 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                         text: "& ",
                         style: TextStyle(
                           color: Color.fromARGB(255, 230, 211, 164),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextSpan(
-                        text: "I. ",
+                        text: "Ibu ",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextSpan(
                         text: "Sa'idah",
                         style: TextStyle(
                           color: Color.fromARGB(240, 255, 204, 192),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ]),
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
