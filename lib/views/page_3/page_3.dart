@@ -48,7 +48,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           bottom: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
               ? s(vM.h, 250, 280, 310, 340)
-              : s(vM.h, 150, 180, 210, 240),
+              : s(vM.h, 140, 170, 200, 230),
           right: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -71,7 +71,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           bottom: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
               ? s(vM.h, 250, 280, 310, 340)
-              : s(vM.h, 350, 380, 410, 440),
+              : s(vM.h, 360, 390, 420, 450),
           left: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -122,7 +122,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(240, 255, 204, 192),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 22, 24, 26, 28),
+                      fontSize: s(vM.w, 20, 22, 24, 26),
                       height: 1,
                     ),
                   ),
@@ -150,7 +150,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     "Putri Tunggal dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
@@ -174,7 +174,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ]),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 12, 13, 14, 15),
+                      fontSize: s(vM.w, 11, 12, 13, 14),
                       height: 1.2,
                     ),
                   ),
@@ -203,7 +203,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ]),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 12, 13, 14, 15),
+                      fontSize: s(vM.w, 11, 12, 13, 14),
                       height: 1.2,
                     ),
                   ),
@@ -213,7 +213,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 224, 254, 284, 414),
+          bottom: s(vM.h, 224, 254, 284, 314),
           left: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -244,7 +244,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(255, 230, 211, 164),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 22, 24, 26, 28),
+                      fontSize: s(vM.w, 20, 22, 24, 26),
                       height: 1,
                     ),
                   ),
@@ -272,7 +272,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     "Putri ke-empat dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 11, 12, 13, 14),
+                      fontSize: s(vM.w, 10, 11, 12, 13),
                       height: 1.2,
                     ),
                   ),
@@ -296,7 +296,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ]),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 12, 13, 14, 15),
+                      fontSize: s(vM.w, 11, 12, 13, 14),
                       height: 1.2,
                     ),
                   ),
@@ -321,7 +321,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ]),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 12, 13, 14, 15),
+                      fontSize: s(vM.w, 11, 12, 13, 14),
                       height: 1.2,
                     ),
                   ),
