@@ -46,10 +46,12 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
       alignment: AlignmentDirectional.bottomCenter,
       children: [
         AnimatedPositioned(
-          bottom: vM.animatedType == AnimatedType.T1 ||
+          top: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
-              ? s(vM.h, 250, 280, 310, 340)
-              : s(vM.h, 140, 170, 200, 230),
+              ? vM.s.height -
+                  (s(vM.h, 250, 280, 310, 340) + s(vM.w, 120, 130, 140, 150))
+              : vM.s.height -
+                  (s(vM.h, 250, 280, 310, 340) + s(vM.w, 20, 30, 40, 50)),
           right: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -62,6 +64,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
               width: vM.sV > vM.s.height * 3 - 280
                   ? s(vM.w, 96, 106, 116, 126)
                   : s(vM.w, 196, 206, 216, 226),
+              height: s(vM.w, 120, 130, 140, 150),
               padding: vM.animatedType == AnimatedType.T1 ||
                       vM.animatedType == AnimatedType.T2
                   ? const EdgeInsets.all(0)
@@ -89,6 +92,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ),
               child: const Image(
                 image: AssetImage("assets/groom.png"),
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
@@ -110,6 +114,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
               width: vM.sV > vM.s.height * 3 - 280
                   ? s(vM.w, 96, 106, 116, 126)
                   : s(vM.w, 196, 206, 216, 226),
+              height: s(vM.w, 120, 130, 140, 150),
               padding: vM.animatedType == AnimatedType.T1 ||
                       vM.animatedType == AnimatedType.T2
                   ? const EdgeInsets.all(0)
@@ -137,12 +142,13 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     ),
               child: const Image(
                 image: AssetImage("assets/bride.png"),
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 410, 450, 480, 510),
+          bottom: s(vM.h, 360, 390, 420, 450),
           right: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -187,26 +193,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       height: 1,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        AnimatedPositioned(
-          bottom: s(vM.h, 358, 388, 418, 448),
-          right: vM.animatedType == AnimatedType.T3
-              ? vM.s.width / 2 - 40
-              : vM.s.width / 2 + 50,
-          duration: const Duration(milliseconds: 300),
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 300),
-            opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
-            child: SizedBox(
-              width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
+                  const SizedBox(height: 14),
                   Text(
                     "Putri Tunggal dari",
                     style: TextStyle(
@@ -281,7 +268,8 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 216, 246, 276, 306),
+          top: vM.s.height -
+              (s(vM.h, 250, 280, 310, 340) + s(vM.w, 25, 35, 45, 55)),
           left: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -326,26 +314,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       height: 1,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        AnimatedPositioned(
-          bottom: s(vM.h, 156, 186, 216, 246),
-          left: vM.animatedType == AnimatedType.T3
-              ? vM.s.width / 2 - 40
-              : vM.s.width / 2 + 50,
-          duration: const Duration(milliseconds: 300),
-          child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 300),
-            opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
-            child: SizedBox(
-              width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                  const SizedBox(height: 14),
                   Text(
                     "Putra ke-empat dari",
                     style: TextStyle(
