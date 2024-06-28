@@ -35,6 +35,7 @@ double s(Enum type, double sm, double md, double lg, double xl) {
 
 void initViewModel(BuildContext context, ViewModel vM) {
   vM.s = MediaQuery.of(context).size;
+  if (vM.s.width > 480) vM.s = const Size(400, 720);
 
   if (vM.s.height <= 660) {
     vM.h = H.Sm;
