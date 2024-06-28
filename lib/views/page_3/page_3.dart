@@ -40,18 +40,29 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
 
     watchOnly((ViewModel x) => x.animatedType);
 
-    double paddingSide = vM.s.width / 2 - (s(vM.w, 96, 106, 116, 126) + 50);
+    double paddingSide = vM.s.width / 2 - (s(vM.w, 104, 108, 116, 126) + 50);
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
+        Positioned(
+          top: s(vM.h, 40, 48, 60, 76),
+          child: Text(
+            "Kami Yang Mengundang",
+            style: TextStyle(
+              fontFamily: "BrushScriptMT",
+              fontSize: s(vM.w, 30, 34, 38, 42),
+              fontWeight: FontWeight.w600,
+              color: const Color.fromARGB(255, 230, 211, 164),
+            ),
+          ),
+        ),
         AnimatedPositioned(
           top: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
               ? vM.s.height -
-                  (s(vM.h, 240, 270, 310, 340) + s(vM.w, 120, 130, 140, 150))
-              : vM.s.height -
-                  (s(vM.h, 260, 290, 310, 340) + s(vM.w, 20, 30, 40, 50)),
+                  (s(vM.h, 240, 270, 310, 340) + s(vM.w, 126, 132, 140, 150))
+              : vM.s.height - (s(vM.h, 260, 290, 310, 340) + 40),
           right: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -59,41 +70,64 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           child: AnimatedOpacity(
             duration: const Duration(milliseconds: 300),
             opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              width: vM.sV > vM.s.height * 3 - 280
-                  ? s(vM.w, 96, 106, 116, 126)
-                  : s(vM.w, 196, 206, 216, 226),
-              height: s(vM.w, 120, 130, 140, 150),
-              padding: vM.animatedType == AnimatedType.T1 ||
-                      vM.animatedType == AnimatedType.T2
-                  ? const EdgeInsets.all(0)
-                  : const EdgeInsets.all(3),
-              decoration: vM.animatedType == AnimatedType.T1 ||
-                      vM.animatedType == AnimatedType.T2
-                  ? null
-                  : const BoxDecoration(
-                      border: GradientBoxBorder(
-                        width: 2,
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(0, 230, 211, 164),
-                            Color.fromARGB(255, 255, 198, 192),
-                            Color.fromARGB(255, 230, 211, 164),
-                            Color.fromARGB(255, 255, 198, 192),
-                            Color.fromARGB(255, 230, 211, 164),
-                          ],
-                          stops: [0.1, 0.4, 0.5, 0.6, 0.9],
-                          transform: GradientRotation(-0.2),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: vM.sV > vM.s.height * 3 - 280
+                      ? s(vM.w, 104, 108, 116, 126)
+                      : s(vM.w, 200, 206, 216, 226),
+                  height: s(vM.w, 126, 132, 140, 150),
+                  padding: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.all(3),
+                  decoration: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? null
+                      : const BoxDecoration(
+                          border: GradientBoxBorder(
+                            width: 2,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(0, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(255, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(0, 230, 211, 164),
+                              ],
+                              stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                              transform: GradientRotation(-0.2),
+                            ),
+                          ),
                         ),
-                      ),
+                  child: const Image(
+                    image: AssetImage("assets/groom.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                if (vM.animatedType == AnimatedType.T3) ...[
+                  Positioned(
+                    top: -14,
+                    left: -10,
+                    child: Image.asset(
+                      "assets/frame_top_left.png",
+                      width: s(vM.w, 52, 58, 66, 74),
                     ),
-              child: const Image(
-                image: AssetImage("assets/groom.png"),
-                fit: BoxFit.fitWidth,
-              ),
+                  ),
+                  Positioned(
+                    bottom: -14,
+                    right: -10,
+                    child: Image.asset(
+                      "assets/frame_bottom_right.png",
+                      width: s(vM.w, 52, 58, 66, 74),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
         ),
@@ -109,46 +143,69 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           child: AnimatedOpacity(
             duration: const Duration(milliseconds: 300),
             opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              width: vM.sV > vM.s.height * 3 - 280
-                  ? s(vM.w, 96, 106, 116, 126)
-                  : s(vM.w, 196, 206, 216, 226),
-              height: s(vM.w, 120, 130, 140, 150),
-              padding: vM.animatedType == AnimatedType.T1 ||
-                      vM.animatedType == AnimatedType.T2
-                  ? const EdgeInsets.all(0)
-                  : const EdgeInsets.all(3),
-              decoration: vM.animatedType == AnimatedType.T1 ||
-                      vM.animatedType == AnimatedType.T2
-                  ? null
-                  : const BoxDecoration(
-                      border: GradientBoxBorder(
-                        width: 2,
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(0, 230, 211, 164),
-                            Color.fromARGB(255, 255, 198, 192),
-                            Color.fromARGB(255, 230, 211, 164),
-                            Color.fromARGB(255, 255, 198, 192),
-                            Color.fromARGB(255, 230, 211, 164),
-                          ],
-                          stops: [0.1, 0.4, 0.5, 0.6, 0.9],
-                          transform: GradientRotation(-0.2),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: vM.sV > vM.s.height * 3 - 280
+                      ? s(vM.w, 104, 108, 116, 126)
+                      : s(vM.w, 200, 206, 216, 226),
+                  height: s(vM.w, 126, 132, 140, 150),
+                  padding: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.all(3),
+                  decoration: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? null
+                      : const BoxDecoration(
+                          border: GradientBoxBorder(
+                            width: 2,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(0, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(255, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(0, 230, 211, 164),
+                              ],
+                              stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                              transform: GradientRotation(-0.2),
+                            ),
+                          ),
                         ),
-                      ),
+                  child: const Image(
+                    image: AssetImage("assets/bride.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                if (vM.animatedType == AnimatedType.T3) ...[
+                  Positioned(
+                    top: -14,
+                    left: -10,
+                    child: Image.asset(
+                      "assets/frame_top_left.png",
+                      width: s(vM.w, 52, 58, 66, 74),
                     ),
-              child: const Image(
-                image: AssetImage("assets/bride.png"),
-                fit: BoxFit.fitWidth,
-              ),
+                  ),
+                  Positioned(
+                    bottom: -14,
+                    right: -10,
+                    child: Image.asset(
+                      "assets/frame_bottom_right.png",
+                      width: s(vM.w, 52, 58, 66, 74),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 350, 380, 420, 450),
+          bottom: s(vM.h, 348, 378, 418, 448),
           right: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -158,7 +215,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
+                  (s(vM.w, 104, 108, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -168,11 +225,11 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(240, 255, 204, 192),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 44, 46, 48, 50),
+                      fontSize: s(vM.w, 46, 46.8, 48, 49.6),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 3),
+                  SizedBox(height: s(vM.w, 1.6, 2.2, 3, 4)),
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
@@ -189,20 +246,20 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     style: TextStyle(
                       fontFamily: "BrushScriptMT",
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 17, 19, 21, 23),
+                      fontSize: s(vM.w, 18.4, 19.2, 20.4, 22),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  SizedBox(height: s(vM.w, 10.6, 11.2, 12, 13)),
                   Text(
                     "Putri Tunggal dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 9, 10, 11, 12),
+                      fontSize: s(vM.w, 9.6, 10, 10.8, 12),
                       height: 1.2,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
@@ -225,7 +282,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       ),
                     ]),
                     style: TextStyle(
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 10.8, 11.2, 11.8, 12.6),
                       height: 1.2,
                     ),
                   ),
@@ -258,7 +315,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       ),
                     ]),
                     style: TextStyle(
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 10.8, 11.2, 11.8, 12.6),
                       height: 1.2,
                     ),
                   ),
@@ -268,8 +325,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          top: vM.s.height -
-              (s(vM.h, 260, 290, 310, 340) + s(vM.w, 25, 35, 45, 55)),
+          top: vM.s.height - (s(vM.h, 260, 290, 310, 340) + 46),
           left: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -279,7 +335,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             opacity: vM.animatedType == AnimatedType.T3 ? 1 : 0,
             child: SizedBox(
               width: vM.s.width -
-                  (s(vM.w, 96, 106, 116, 126) + 10 + paddingSide + 6),
+                  (s(vM.w, 104, 108, 116, 126) + 10 + paddingSide + 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -289,11 +345,11 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       fontFamily: "BrushScriptMT",
                       color: const Color.fromARGB(255, 230, 211, 164),
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 44, 46, 48, 50),
+                      fontSize: s(vM.w, 46, 46.8, 48, 49.6),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 3),
+                  SizedBox(height: s(vM.w, 1.6, 2.2, 3, 4)),
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
@@ -310,20 +366,20 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     style: TextStyle(
                       fontFamily: "BrushScriptMT",
                       fontWeight: FontWeight.bold,
-                      fontSize: s(vM.w, 17, 19, 21, 23),
+                      fontSize: s(vM.w, 18.4, 19.2, 20.4, 22),
                       height: 1,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  SizedBox(height: s(vM.w, 10.6, 11.2, 12, 13)),
                   Text(
                     "Putra ke-empat dari",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: s(vM.w, 9, 10, 11, 12),
+                      fontSize: s(vM.w, 9.6, 10, 10.8, 12),
                       height: 1.2,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   Text.rich(
                     const TextSpan(children: [
                       TextSpan(
@@ -346,7 +402,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       ),
                     ]),
                     style: TextStyle(
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 10.8, 11.2, 11.8, 12.6),
                       height: 1.2,
                     ),
                   ),
@@ -372,7 +428,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       ),
                     ]),
                     style: TextStyle(
-                      fontSize: s(vM.w, 10, 11, 12, 13),
+                      fontSize: s(vM.w, 10.8, 11.2, 11.8, 12.6),
                       height: 1.2,
                     ),
                   ),
