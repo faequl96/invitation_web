@@ -49,9 +49,9 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           top: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
               ? vM.s.height -
-                  (s(vM.h, 250, 280, 310, 340) + s(vM.w, 120, 130, 140, 150))
+                  (s(vM.h, 240, 270, 310, 340) + s(vM.w, 120, 130, 140, 150))
               : vM.s.height -
-                  (s(vM.h, 250, 280, 310, 340) + s(vM.w, 20, 30, 40, 50)),
+                  (s(vM.h, 260, 290, 310, 340) + s(vM.w, 20, 30, 40, 50)),
           right: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -100,8 +100,8 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
         AnimatedPositioned(
           bottom: vM.animatedType == AnimatedType.T1 ||
                   vM.animatedType == AnimatedType.T2
-              ? s(vM.h, 250, 280, 310, 340)
-              : s(vM.h, 360, 390, 420, 450),
+              ? s(vM.h, 240, 270, 310, 340)
+              : s(vM.h, 350, 380, 420, 450),
           left: vM.animatedType == AnimatedType.T1
               ? vM.s.width / 2
               : vM.s.width / 2 + 50,
@@ -148,7 +148,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
           ),
         ),
         AnimatedPositioned(
-          bottom: s(vM.h, 360, 390, 420, 450),
+          bottom: s(vM.h, 350, 380, 420, 450),
           right: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
@@ -269,7 +269,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
         ),
         AnimatedPositioned(
           top: vM.s.height -
-              (s(vM.h, 250, 280, 310, 340) + s(vM.w, 25, 35, 45, 55)),
+              (s(vM.h, 260, 290, 310, 340) + s(vM.w, 25, 35, 45, 55)),
           left: vM.animatedType == AnimatedType.T3
               ? vM.s.width / 2 - 40
               : vM.s.width / 2 + 50,
