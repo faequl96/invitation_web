@@ -51,7 +51,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             "Kami Yang Mengundang",
             style: TextStyle(
               fontFamily: "BrushScriptMT",
-              fontSize: s(vM.w, 30, 34, 38, 42),
+              fontSize: s(vM.w, 32, 34, 36, 38),
               fontWeight: FontWeight.w600,
               color: const Color.fromARGB(255, 230, 211, 164),
             ),
@@ -111,19 +111,19 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                 ),
                 if (vM.animatedType == AnimatedType.T3) ...[
                   Positioned(
-                    top: -14,
-                    left: -10,
+                    top: -16,
+                    left: -12,
                     child: Image.asset(
                       "assets/frame_top_left.png",
-                      width: s(vM.w, 52, 58, 66, 74),
+                      width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                   Positioned(
-                    bottom: -14,
-                    right: -10,
+                    bottom: -16,
+                    right: -12,
                     child: Image.asset(
                       "assets/frame_bottom_right.png",
-                      width: s(vM.w, 52, 58, 66, 74),
+                      width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                 ],
@@ -184,19 +184,19 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                 ),
                 if (vM.animatedType == AnimatedType.T3) ...[
                   Positioned(
-                    top: -14,
-                    left: -10,
+                    top: -16,
+                    left: -12,
                     child: Image.asset(
                       "assets/frame_top_left.png",
-                      width: s(vM.w, 52, 58, 66, 74),
+                      width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                   Positioned(
-                    bottom: -14,
-                    right: -10,
+                    bottom: -16,
+                    right: -12,
                     child: Image.asset(
                       "assets/frame_bottom_right.png",
-                      width: s(vM.w, 52, 58, 66, 74),
+                      width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                 ],
