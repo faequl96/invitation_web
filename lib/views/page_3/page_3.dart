@@ -111,16 +111,16 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                 ),
                 if (vM.animatedType == AnimatedType.T3) ...[
                   Positioned(
-                    top: -16,
-                    left: -12,
+                    top: -19,
+                    left: -13,
                     child: Image.asset(
                       "assets/frame_top_left.png",
                       width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                   Positioned(
-                    bottom: -16,
-                    right: -12,
+                    bottom: -19,
+                    right: -13,
                     child: Image.asset(
                       "assets/frame_bottom_right.png",
                       width: s(vM.w, 52, 54, 58, 64),
@@ -184,16 +184,16 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                 ),
                 if (vM.animatedType == AnimatedType.T3) ...[
                   Positioned(
-                    top: -16,
-                    left: -12,
+                    top: -19,
+                    left: -13,
                     child: Image.asset(
                       "assets/frame_top_left.png",
                       width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
                   Positioned(
-                    bottom: -16,
-                    right: -12,
+                    bottom: -19,
+                    right: -13,
                     child: Image.asset(
                       "assets/frame_bottom_right.png",
                       width: s(vM.w, 52, 54, 58, 64),
@@ -437,6 +437,62 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             ),
           ),
         ),
+        if (vM.animatedType == AnimatedType.T3) ...[
+          Container(
+            height: s(vM.w, 104, 112, 120, 132),
+            margin: EdgeInsets.only(
+              left: s(vM.w, 30, 32, 34, 36),
+              right: s(vM.w, 30, 32, 34, 36),
+              bottom: 20,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              border: const GradientBoxBorder(
+                width: 2,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                  ],
+                  stops: [0.1, 0.4, 0.5, 0.6, 0.9],
+                  transform: GradientRotation(-0.2),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            height: s(vM.w, 76, 84, 92, 100),
+            margin: EdgeInsets.only(
+              left: s(vM.w, 24, 26, 28, 30),
+              right: s(vM.w, 24, 26, 28, 30),
+              bottom: 34,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              border: const GradientBoxBorder(
+                width: 2,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                  ],
+                  stops: [0.1, 0.4, 0.5, 0.6, 0.9],
+                  transform: GradientRotation(-0.2),
+                ),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
