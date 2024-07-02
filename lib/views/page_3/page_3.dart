@@ -437,40 +437,13 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             ),
           ),
         ),
-        if (vM.animatedType == AnimatedType.T3) ...[
-          Container(
-            height: s(vM.w, 104, 112, 120, 132),
-            margin: EdgeInsets.only(
-              left: s(vM.w, 30, 32, 34, 36),
-              right: s(vM.w, 30, 32, 34, 36),
-              bottom: 20,
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2),
-              border: const GradientBoxBorder(
-                width: 2,
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 230, 211, 164),
-                    Color.fromARGB(255, 255, 198, 192),
-                    Color.fromARGB(255, 230, 211, 164),
-                    Color.fromARGB(255, 255, 198, 192),
-                    Color.fromARGB(255, 230, 211, 164),
-                  ],
-                  stops: [0.1, 0.4, 0.5, 0.6, 0.9],
-                  transform: GradientRotation(-0.2),
-                ),
-              ),
-            ),
-          ),
+        if (vM.animatedType == AnimatedType.T3)
           Container(
             height: s(vM.w, 76, 84, 92, 100),
             margin: EdgeInsets.only(
               left: s(vM.w, 24, 26, 28, 30),
               right: s(vM.w, 24, 26, 28, 30),
-              bottom: 34,
+              bottom: s(vM.w, 34, 32, 30, 28),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
@@ -492,7 +465,6 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
               ),
             ),
           ),
-        ],
       ],
     );
   }

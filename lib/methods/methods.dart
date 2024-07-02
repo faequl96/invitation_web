@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:just_audio/just_audio.dart';
 
 String toCapitalize(String value) {
   List<String> values = value.split("-");
@@ -59,10 +60,16 @@ void initViewModel(BuildContext context, ViewModel vM) {
 
   vM.fract = vM.s.height / 20;
 
-  initCountdownPosition(vM);
+  _initCountdownPosition(vM);
+  _setup(vM);
 }
 
-void initCountdownPosition(ViewModel vM) {
+void _setup(ViewModel vM) async {
+  vM.player = AudioPlayer();
+  await vM.player.setAudioSource(AudioSource.asset("assets/its_you.mp3"));
+}
+
+void _initCountdownPosition(ViewModel vM) {
   vM.cdPosition1 = PositionValue(
     xAxis: s(vM.w, 48, 52, 56, 60),
     yAxis: s(vM.h, 202, 218, 234, 250),
@@ -75,6 +82,8 @@ void initCountdownPosition(ViewModel vM) {
 
   vM.cdPositionY2 = 50 + 140 * 2;
 }
+
+bool played = false;
 
 void superLogic(ViewModel vM) {
   vM.sV = vM.pageController.offset.ceil().toDouble();

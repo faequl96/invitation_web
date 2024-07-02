@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/views/app_view.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:invitation_web/views/audio_player/audio_player.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class App extends StatelessWidget {
@@ -37,6 +38,7 @@ class App extends StatelessWidget {
             ),
           ),
         ),
+        floatingActionButton: AudioPlayerWidget(),
       ),
     );
   }
