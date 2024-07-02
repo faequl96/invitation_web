@@ -6,7 +6,7 @@ import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/left_bg.dart';
 import 'package:invitation_web/views/cover_page/light_effect.dart';
 import 'package:invitation_web/views/cover_page/right_bg.dart';
-import 'package:invitation_web/views/cover_page/title_invitation.dart';
+import 'package:invitation_web/views/cover_page/invitation_title.dart';
 import 'package:invitation_web/views/page_1/page_1.dart';
 import 'package:invitation_web/view_model.dart';
 
@@ -105,12 +105,12 @@ class _SuperViewState extends State<SuperView> {
           Positioned(
             top: s(vM.h, 6, 12, 30, 60) - (vM.sV / 14),
             left: s(vM.w, 45, 48, 51, 54),
-            child: TitleInvitation(),
+            child: InvitationTitle(),
           ),
           Positioned(
             top: s(vM.h, 50, 56, 74, 104) - (vM.sV / 14),
             right: s(vM.w, 45, 48, 51, 54),
-            child: TitleInvitation(isBottomTitle: true),
+            child: InvitationTitle(isBottomTitle: true),
           ),
         ],
         if (vM.sV < vM.s.height + 100) ...[

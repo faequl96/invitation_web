@@ -3,8 +3,8 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class TitleInvitation extends StatelessWidget with GetItMixin {
-  TitleInvitation({super.key, this.isBottomTitle = false});
+class InvitationTitle extends StatelessWidget with GetItMixin {
+  InvitationTitle({super.key, this.isBottomTitle = false});
 
   final bool isBottomTitle;
 

@@ -12,7 +12,34 @@ class ViewModel extends ChangeNotifier {
   final PageController pageController = PageController();
 
   late AudioPlayer player;
-  int audioPlayerMark = 0;
+
+  bool _isKeyOpened = false;
+  bool get isKeyOpened => _isKeyOpened;
+  set isKeyOpened(bool value) {
+    _isKeyOpened = value;
+    notifyListeners();
+  }
+
+  bool _isSealOpened = false;
+  bool get isSealOpened => _isSealOpened;
+  set isSealOpened(bool value) {
+    _isSealOpened = value;
+    notifyListeners();
+  }
+
+  bool _isSealOpenCompleted = false;
+  bool get isSealOpenCompleted => _isSealOpenCompleted;
+  set isSealOpenCompleted(bool value) {
+    _isSealOpenCompleted = value;
+    notifyListeners();
+  }
+
+  bool _isCompleted = false;
+  bool get isCompleted => _isCompleted;
+  set isCompleted(bool value) {
+    _isCompleted = value;
+    notifyListeners();
+  }
 
   // name of person invited
   String toName = "";

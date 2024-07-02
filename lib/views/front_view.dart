@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/views/cover_page/invitation_wrap.dart';
+import 'package:invitation_web/views/cover_page/invitation_key.dart';
+import 'package:invitation_web/views/cover_page/invitation_seal.dart';
 import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/swipe_up.dart';
 import 'package:invitation_web/view_model.dart';
@@ -14,11 +17,16 @@ class FrontView extends StatelessWidget with GetItMixin {
     final ViewModel vM = get<ViewModel>();
     watchOnly((ViewModel x) => x.swipeUpViewState);
     watchOnly((ViewModel x) => x.countdownViewState);
+    watchOnly((ViewModel x) => x.isKeyOpened);
+    watchOnly((ViewModel x) => x.isSealOpened);
+    watchOnly((ViewModel x) => x.isSealOpenCompleted);
+    watchOnly((ViewModel x) => x.isCompleted);
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        if (vM.sV < 1) const Positioned(bottom: 0, child: SwipeUp()),
+        if (vM.isSealOpenCompleted)
+          if (vM.sV < 1) const Positioned(bottom: 0, child: SwipeUp()),
         if (vM.cdPositionY2 < 50 + 140 * 2 && vM.sV <= vM.s.height * 2) ...[
           Positioned(
             left: (s(vM.w, 62, 66, 70, 74) +
@@ -88,6 +96,44 @@ class FrontView extends StatelessWidget with GetItMixin {
             child: const CountDown(
               unitTimeType: UnitTimeType.Day,
               sizeType: CountdownSizeType.Lg,
+            ),
+          ),
+        ],
+        if (vM.isCompleted == false) ...[
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInCubic,
+            right: vM.isSealOpenCompleted ? -(vM.s.width / 2) : 0,
+            child: InvitationWrap(),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInCubic,
+            left: vM.isSealOpenCompleted ? -(vM.s.width / 2) : 0,
+            child: InvitationWrap(),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.easeInCubic,
+            top: vM.isSealOpened ? -vM.s.height : 0,
+            child: InvitationSeal(isSealOpened: vM.isSealOpened),
+          ),
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 200),
+            bottom: vM.isKeyOpened ? -50 : 20,
+            child: InvitationKey(
+              onOpened: () async {
+                vM.isKeyOpened = true;
+
+                await Future.delayed(const Duration(milliseconds: 300));
+                vM.isSealOpened = true;
+
+                await Future.delayed(const Duration(milliseconds: 1000));
+                vM.isSealOpenCompleted = true;
+
+                await Future.delayed(const Duration(milliseconds: 600));
+                vM.isCompleted = true;
+              },
             ),
           ),
         ],

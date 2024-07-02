@@ -61,12 +61,13 @@ void initViewModel(BuildContext context, ViewModel vM) {
   vM.fract = vM.s.height / 20;
 
   _initCountdownPosition(vM);
-  _setup(vM);
+  _setupAudioPlayer(vM);
 }
 
-void _setup(ViewModel vM) async {
+void _setupAudioPlayer(ViewModel vM) async {
   vM.player = AudioPlayer();
   await vM.player.setAudioSource(AudioSource.asset("assets/its_you.mp3"));
+  // vM.player.play();
 }
 
 void _initCountdownPosition(ViewModel vM) {
@@ -82,8 +83,6 @@ void _initCountdownPosition(ViewModel vM) {
 
   vM.cdPositionY2 = 50 + 140 * 2;
 }
-
-bool played = false;
 
 void superLogic(ViewModel vM) {
   vM.sV = vM.pageController.offset.ceil().toDouble();
