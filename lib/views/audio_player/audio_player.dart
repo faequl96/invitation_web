@@ -69,9 +69,9 @@ class AudioPlayerWidget extends StatelessWidget with GetItMixin {
               );
             } else {
               return GestureDetector(
-                onTap: () {
+                onTap: () async {
                   vM.player.seek(Duration.zero);
-                  print("tes");
+                  vM.player.pause();
                   vM.player.play();
                 },
                 child: Container(

@@ -62,6 +62,17 @@ void initViewModel(BuildContext context, ViewModel vM) {
 
   _initCountdownPosition(vM);
   _setupAudioPlayer(vM);
+  precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_rose_gold.png"), context);
+  precacheImage(const AssetImage("assets/landing_bg_right.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_gold.png"), context);
+  precacheImage(const AssetImage("assets/default_bg.png"), context);
+  precacheImage(const AssetImage("assets/unifying_frame.png"), context);
+  precacheImage(const AssetImage("assets/bismillah.png"), context);
+  precacheImage(const AssetImage("assets/frame_top_left.png"), context);
+  precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
+  precacheImage(const AssetImage("assets/groom.png"), context);
+  precacheImage(const AssetImage("assets/bride.png"), context);
 }
 
 void _setupAudioPlayer(ViewModel vM) async {
