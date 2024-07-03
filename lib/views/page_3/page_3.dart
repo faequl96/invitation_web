@@ -57,153 +57,153 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
             ),
           ),
         ),
-        // AnimatedPositioned(
-        //   top: vM.animatedType == AnimatedType.T1 ||
-        //           vM.animatedType == AnimatedType.T2
-        //       ? vM.s.height -
-        //           (s(vM.h, 240, 270, 310, 340) + s(vM.w, 126, 132, 140, 150))
-        //       : vM.s.height - (s(vM.h, 260, 290, 310, 340) + 40),
-        //   right: vM.animatedType == AnimatedType.T1
-        //       ? vM.s.width / 2
-        //       : vM.s.width / 2 + 50,
-        //   duration: const Duration(milliseconds: 300),
-        //   child: AnimatedOpacity(
-        //     duration: const Duration(milliseconds: 300),
-        //     opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
-        //     child: Stack(
-        //       clipBehavior: Clip.none,
-        //       children: [
-        //         AnimatedContainer(
-        //           duration: const Duration(milliseconds: 300),
-        //           width: vM.sV > vM.s.height * 3 - 280
-        //               ? s(vM.w, 104, 108, 116, 126)
-        //               : s(vM.w, 200, 206, 216, 226),
-        //           height: s(vM.w, 126, 132, 140, 150),
-        //           padding: vM.animatedType == AnimatedType.T1 ||
-        //                   vM.animatedType == AnimatedType.T2
-        //               ? const EdgeInsets.all(0)
-        //               : const EdgeInsets.all(3),
-        //           decoration: vM.animatedType == AnimatedType.T1 ||
-        //                   vM.animatedType == AnimatedType.T2
-        //               ? null
-        //               : const BoxDecoration(
-        //                   border: GradientBoxBorder(
-        //                     width: 2,
-        //                     gradient: LinearGradient(
-        //                       begin: Alignment.topLeft,
-        //                       end: Alignment.bottomRight,
-        //                       colors: [
-        //                         Color.fromARGB(0, 230, 211, 164),
-        //                         Color.fromARGB(255, 255, 198, 192),
-        //                         Color.fromARGB(255, 230, 211, 164),
-        //                         Color.fromARGB(255, 255, 198, 192),
-        //                         Color.fromARGB(0, 230, 211, 164),
-        //                       ],
-        //                       stops: [0.1, 0.3, 0.5, 0.7, 0.9],
-        //                       transform: GradientRotation(-0.2),
-        //                     ),
-        //                   ),
-        //                 ),
-        //           child: const Image(
-        //             image: AssetImage("assets/groom.png"),
-        //             fit: BoxFit.fitWidth,
-        //           ),
-        //         ),
-        //         if (vM.animatedType == AnimatedType.T3) ...[
-        //           Positioned(
-        //             top: -19,
-        //             left: -13,
-        //             child: Image.asset(
-        //               "assets/frame_top_left.png",
-        //               width: s(vM.w, 52, 54, 58, 64),
-        //             ),
-        //           ),
-        //           Positioned(
-        //             bottom: -19,
-        //             right: -13,
-        //             child: Image.asset(
-        //               "assets/frame_bottom_right.png",
-        //               width: s(vM.w, 52, 54, 58, 64),
-        //             ),
-        //           ),
-        //         ],
-        //       ],
-        //     ),
-        //   ),
-        // ),
-        // AnimatedPositioned(
-        //   bottom: vM.animatedType == AnimatedType.T1 ||
-        //           vM.animatedType == AnimatedType.T2
-        //       ? s(vM.h, 240, 270, 310, 340)
-        //       : s(vM.h, 350, 380, 420, 450),
-        //   left: vM.animatedType == AnimatedType.T1
-        //       ? vM.s.width / 2
-        //       : vM.s.width / 2 + 50,
-        //   duration: const Duration(milliseconds: 300),
-        //   child: AnimatedOpacity(
-        //     duration: const Duration(milliseconds: 300),
-        //     opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
-        //     child: Stack(
-        //       clipBehavior: Clip.none,
-        //       children: [
-        //         AnimatedContainer(
-        //           duration: const Duration(milliseconds: 300),
-        //           width: vM.sV > vM.s.height * 3 - 280
-        //               ? s(vM.w, 104, 108, 116, 126)
-        //               : s(vM.w, 200, 206, 216, 226),
-        //           height: s(vM.w, 126, 132, 140, 150),
-        //           padding: vM.animatedType == AnimatedType.T1 ||
-        //                   vM.animatedType == AnimatedType.T2
-        //               ? const EdgeInsets.all(0)
-        //               : const EdgeInsets.all(3),
-        //           decoration: vM.animatedType == AnimatedType.T1 ||
-        //                   vM.animatedType == AnimatedType.T2
-        //               ? null
-        //               : const BoxDecoration(
-        //                   border: GradientBoxBorder(
-        //                     width: 2,
-        //                     gradient: LinearGradient(
-        //                       begin: Alignment.topLeft,
-        //                       end: Alignment.bottomRight,
-        //                       colors: [
-        //                         Color.fromARGB(0, 230, 211, 164),
-        //                         Color.fromARGB(255, 255, 198, 192),
-        //                         Color.fromARGB(255, 230, 211, 164),
-        //                         Color.fromARGB(255, 255, 198, 192),
-        //                         Color.fromARGB(0, 230, 211, 164),
-        //                       ],
-        //                       stops: [0.1, 0.3, 0.5, 0.7, 0.9],
-        //                       transform: GradientRotation(-0.2),
-        //                     ),
-        //                   ),
-        //                 ),
-        //           child: const Image(
-        //             image: AssetImage("assets/bride.png"),
-        //             fit: BoxFit.fitWidth,
-        //           ),
-        //         ),
-        //         if (vM.animatedType == AnimatedType.T3) ...[
-        //           Positioned(
-        //             top: -19,
-        //             left: -13,
-        //             child: Image.asset(
-        //               "assets/frame_top_left.png",
-        //               width: s(vM.w, 52, 54, 58, 64),
-        //             ),
-        //           ),
-        //           Positioned(
-        //             bottom: -19,
-        //             right: -13,
-        //             child: Image.asset(
-        //               "assets/frame_bottom_right.png",
-        //               width: s(vM.w, 52, 54, 58, 64),
-        //             ),
-        //           ),
-        //         ],
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        AnimatedPositioned(
+          top: vM.animatedType == AnimatedType.T1 ||
+                  vM.animatedType == AnimatedType.T2
+              ? vM.s.height -
+                  (s(vM.h, 240, 270, 310, 340) + s(vM.w, 126, 132, 140, 150))
+              : vM.s.height - (s(vM.h, 260, 290, 310, 340) + 40),
+          right: vM.animatedType == AnimatedType.T1
+              ? vM.s.width / 2
+              : vM.s.width / 2 + 50,
+          duration: const Duration(milliseconds: 300),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: vM.sV > vM.s.height * 3 - 280
+                      ? s(vM.w, 104, 108, 116, 126)
+                      : s(vM.w, 200, 206, 216, 226),
+                  height: s(vM.w, 126, 132, 140, 150),
+                  padding: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.all(3),
+                  decoration: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? null
+                      : const BoxDecoration(
+                          border: GradientBoxBorder(
+                            width: 2,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(0, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(255, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(0, 230, 211, 164),
+                              ],
+                              stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                              transform: GradientRotation(-0.2),
+                            ),
+                          ),
+                        ),
+                  child: const Image(
+                    image: AssetImage("assets/groom.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                if (vM.animatedType == AnimatedType.T3) ...[
+                  Positioned(
+                    top: -19,
+                    left: -13,
+                    child: Image.asset(
+                      "assets/frame_top_left.png",
+                      width: s(vM.w, 52, 54, 58, 64),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -19,
+                    right: -13,
+                    child: Image.asset(
+                      "assets/frame_bottom_right.png",
+                      width: s(vM.w, 52, 54, 58, 64),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+        AnimatedPositioned(
+          bottom: vM.animatedType == AnimatedType.T1 ||
+                  vM.animatedType == AnimatedType.T2
+              ? s(vM.h, 240, 270, 310, 340)
+              : s(vM.h, 350, 380, 420, 450),
+          left: vM.animatedType == AnimatedType.T1
+              ? vM.s.width / 2
+              : vM.s.width / 2 + 50,
+          duration: const Duration(milliseconds: 300),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: vM.sV > vM.s.height * 3 - 280 ? 1 : 0,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  width: vM.sV > vM.s.height * 3 - 280
+                      ? s(vM.w, 104, 108, 116, 126)
+                      : s(vM.w, 200, 206, 216, 226),
+                  height: s(vM.w, 126, 132, 140, 150),
+                  padding: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? const EdgeInsets.all(0)
+                      : const EdgeInsets.all(3),
+                  decoration: vM.animatedType == AnimatedType.T1 ||
+                          vM.animatedType == AnimatedType.T2
+                      ? null
+                      : const BoxDecoration(
+                          border: GradientBoxBorder(
+                            width: 2,
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Color.fromARGB(0, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(255, 230, 211, 164),
+                                Color.fromARGB(255, 255, 198, 192),
+                                Color.fromARGB(0, 230, 211, 164),
+                              ],
+                              stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                              transform: GradientRotation(-0.2),
+                            ),
+                          ),
+                        ),
+                  child: const Image(
+                    image: AssetImage("assets/bride.png"),
+                    fit: BoxFit.fitWidth,
+                  ),
+                ),
+                if (vM.animatedType == AnimatedType.T3) ...[
+                  Positioned(
+                    top: -19,
+                    left: -13,
+                    child: Image.asset(
+                      "assets/frame_top_left.png",
+                      width: s(vM.w, 52, 54, 58, 64),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: -19,
+                    right: -13,
+                    child: Image.asset(
+                      "assets/frame_bottom_right.png",
+                      width: s(vM.w, 52, 54, 58, 64),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
         AnimatedPositioned(
           bottom: s(vM.h, 348, 378, 418, 448),
           right: vM.animatedType == AnimatedType.T3
