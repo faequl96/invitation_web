@@ -34,7 +34,7 @@ class AppView extends StatelessWidget {
             ),
             FrontView(),
             const Text(
-              "tes2",
+              "tes3",
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,

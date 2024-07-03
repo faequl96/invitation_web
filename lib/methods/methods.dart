@@ -85,7 +85,7 @@ void _initCountdownPosition(ViewModel vM) {
 }
 
 void superLogic(ViewModel vM) {
-  vM.sV = vM.pageController.offset.round().toDouble();
+  vM.sV = vM.pageController.offset;
 
   final double divideds = vM.s.height / vM.s.width;
   vM.bgPositionX = (vM.sV / divideds) / 2;
