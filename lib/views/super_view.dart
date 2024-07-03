@@ -43,7 +43,19 @@ class _SuperViewState extends State<SuperView> {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) Page3(),
+        if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3)
+          Page3()
+        else
+          const Center(
+            child: Text(
+              "tes2",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 230, 211, 164),
+              ),
+            ),
+          ),
         if (vM.cdPositionY1 > 0) ...[
           Positioned(
             left: (s(vM.w, 68, 72, 76, 80) +
