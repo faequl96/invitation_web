@@ -33,6 +33,14 @@ class AppView extends StatelessWidget {
               ),
             ),
             FrontView(),
+            const Text(
+              "tes1",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 230, 211, 164),
+              ),
+            ),
           ],
         ),
       ],
