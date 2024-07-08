@@ -84,6 +84,7 @@ class ViewModel extends ChangeNotifier {
   double cdPositionY22 = 0;
   double cdPositionY23 = 0;
   double cdPositionY24 = 0;
+  double cdPositionY3 = 0;
 
   // for refresh UI SwipeUp widget only in FrontView widget
   int _swipeUpViewState = 0;

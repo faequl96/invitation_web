@@ -243,7 +243,7 @@ class Page4 extends StatelessWidget {
                             TextSpan(
                               text: "09.00",
                               style: TextStyle(
-                                color: Color.fromARGB(255, 230, 211, 164),
+                                color: Color.fromARGB(240, 255, 204, 192),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -271,7 +271,7 @@ class Page4 extends StatelessWidget {
                             TextSpan(
                               text: "13.00",
                               style: TextStyle(
-                                color: Color.fromARGB(240, 255, 204, 192),
+                                color: Color.fromARGB(255, 230, 211, 164),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

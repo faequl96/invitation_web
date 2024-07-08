@@ -63,10 +63,10 @@ void initViewModel(BuildContext context, ViewModel vM) {
   vM.fract = vM.s.height / 20;
 
   vM.shakeTimer = Timer.periodic(const Duration(milliseconds: 150), (_) {
-    if (vM.shakeTurns == -0.03) {
-      vM.shakeTurns = 0.03;
+    if (vM.shakeTurns == -0.02) {
+      vM.shakeTurns = 0.02;
     } else {
-      vM.shakeTurns = -0.03;
+      vM.shakeTurns = -0.02;
     }
   });
 
@@ -283,6 +283,11 @@ void superLogic(ViewModel vM) {
     vM.page4Marked = 1;
     if (vM.sV <= vM.s.height * 3 + 10) vM.countdownViewState += 1;
     if (vM.sV > vM.s.height * 4 - 10) vM.countdownViewState += 1;
+  }
+
+  if (vM.sV > vM.s.height * 4 && vM.sV <= vM.s.height * 5) {
+    vM.cdPositionY3 = vM.sV - vM.s.height * 4;
+    vM.countdownViewState += 1;
   }
 
   // if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {

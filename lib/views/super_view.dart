@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/views/page_3/page_3.dart';
+import 'package:invitation_web/views/page_5/page_5.dart';
 import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/left_bg.dart';
 import 'package:invitation_web/views/cover_page/light_effect.dart';
@@ -43,12 +44,13 @@ class _SuperViewState extends State<SuperView> {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
+        if (vM.sV > vM.s.height * 4 && vM.sV <= vM.s.height * 6) const Page5(),
         if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 4)
           Positioned(
             bottom: vM.sV < vM.s.height * 3 ? 0 : vM.sV - vM.s.height * 3,
             child: Page3(),
           ),
-        if (vM.cdPositionY1 > 0) ...[
+        if (vM.cdPositionY1 > 0 && vM.sV <= vM.s.height * 4) ...[
           Positioned(
             left: (s(vM.w, 68, 72, 76, 80) +
                 ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4)),

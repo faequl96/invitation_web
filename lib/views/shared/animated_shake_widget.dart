@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/view_model.dart';
 
-class ShakeWidget extends StatelessWidget {
-  const ShakeWidget({super.key, required this.child});
+class AnimatedShakeWidget extends StatelessWidget {
+  const AnimatedShakeWidget({super.key, required this.child});
 
   final Widget child;
 
