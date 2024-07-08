@@ -163,8 +163,58 @@ class Page4 extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 2),
-                        Text(
-                          "Pukul 08.00 WIB - Pukul 09.00 WIB",
+                        Text.rich(
+                          const TextSpan(children: [
+                            TextSpan(
+                              text: "Pukul ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "08.00",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 230, 211, 164),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " WIB",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " - ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "Pukul ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "09.00",
+                              style: TextStyle(
+                                color: Color.fromARGB(240, 255, 204, 192),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " WIB",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: s(vM.w, 14.8, 15.2, 15.8, 16.6),
@@ -181,8 +231,58 @@ class Page4 extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 2),
-                        Text(
-                          "Pukul 09.00 WIB - Pukul 13.00 WIB",
+                        Text.rich(
+                          const TextSpan(children: [
+                            TextSpan(
+                              text: "Pukul ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "09.00",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 230, 211, 164),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " WIB",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " - ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "Pukul ",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "13.00",
+                              style: TextStyle(
+                                color: Color.fromARGB(240, 255, 204, 192),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " WIB",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: s(vM.w, 14.8, 15.2, 15.8, 16.6),
@@ -212,7 +312,7 @@ class Page4 extends StatelessWidget {
                     ),
                     onPressed: () async {
                       const String address =
-                          "https://www.google.com/maps/place/Masjid+Raya+Bani+Umar/@-6.2702437,106.6897302,19z/data=!4m6!3m5!1s0x2e69fb17bad5c7e7:0xda43ece1f84522db!8m2!3d-6.2703244!4d106.6892406!16s%2Fg%2F11sk6wyd2l?entry=ttu";
+                          "https://maps.app.goo.gl/HxrVUUvVMiV7Kva79";
                       await launchUrl(Uri.parse(address));
                     },
                     child: const Text(
