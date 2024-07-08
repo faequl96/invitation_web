@@ -8,6 +8,7 @@ import 'package:invitation_web/views/cover_page/invitation_seal.dart';
 import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/swipe_up.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:invitation_web/views/shared/shake_widget.dart';
 
 class FrontView extends StatelessWidget with GetItMixin {
   FrontView({super.key});
@@ -96,6 +97,50 @@ class FrontView extends StatelessWidget with GetItMixin {
             child: const CountDown(
               unitTimeType: UnitTimeType.Day,
               sizeType: CountdownSizeType.Lg,
+            ),
+          ),
+        ],
+        if (vM.sV > vM.s.height * 3 && vM.sV <= vM.s.height * 4) ...[
+          Positioned(
+            left: (s(vM.w, 62, 66, 70, 74) +
+                ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
+            bottom: 50,
+            child: const ShakeWidget(
+              child: CountDown(
+                unitTimeType: UnitTimeType.Hour,
+                sizeType: CountdownSizeType.Lg,
+              ),
+            ),
+          ),
+          Positioned(
+            right: (s(vM.w, 62, 66, 70, 74) +
+                ((vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4)),
+            bottom: 50,
+            child: const ShakeWidget(
+              child: CountDown(
+                unitTimeType: UnitTimeType.Minute,
+                sizeType: CountdownSizeType.Lg,
+              ),
+            ),
+          ),
+          Positioned(
+            right: s(vM.w, 46, 50, 54, 58),
+            bottom: 50,
+            child: const ShakeWidget(
+              child: CountDown(
+                unitTimeType: UnitTimeType.Second,
+                sizeType: CountdownSizeType.Lg,
+              ),
+            ),
+          ),
+          Positioned(
+            left: s(vM.w, 46, 50, 54, 58),
+            bottom: 50,
+            child: const ShakeWidget(
+              child: CountDown(
+                unitTimeType: UnitTimeType.Day,
+                sizeType: CountdownSizeType.Lg,
+              ),
             ),
           ),
         ],

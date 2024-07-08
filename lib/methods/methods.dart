@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/models/position_value.dart';
@@ -60,6 +62,14 @@ void initViewModel(BuildContext context, ViewModel vM) {
 
   vM.fract = vM.s.height / 20;
 
+  vM.shakeTimer = Timer.periodic(const Duration(milliseconds: 150), (_) {
+    if (vM.shakeTurns == -0.03) {
+      vM.shakeTurns = 0.03;
+    } else {
+      vM.shakeTurns = -0.03;
+    }
+  });
+
   _initCountdownPosition(vM);
   _setupAudioPlayer(vM);
   precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
@@ -93,6 +103,13 @@ void _initCountdownPosition(ViewModel vM) {
   );
 
   vM.cdPositionY2 = 50 + 140 * 2;
+}
+
+void setAnimated(ViewModel vM) async {
+  vM.animatedType = AnimatedType.T2;
+  await Future.delayed(const Duration(milliseconds: 300));
+  vM.animatedType = AnimatedType.T3;
+  await Future.delayed(const Duration(milliseconds: 300));
 }
 
 void superLogic(ViewModel vM) {
@@ -253,12 +270,19 @@ void superLogic(ViewModel vM) {
             ((vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4 + 50));
 
     if (vM.sV == vM.s.height * 3) {
-      setAnimated(vM);
+      if (vM.page4Marked == 0) setAnimated(vM);
     } else if (vM.sV < vM.s.height * 3) {
+      vM.page4Marked = 0;
       vM.animatedType = AnimatedType.T1;
     }
 
     vM.countdownViewState += 1;
+  }
+
+  if (vM.sV > vM.s.height * 3 && vM.sV <= vM.s.height * 4) {
+    vM.page4Marked = 1;
+    if (vM.sV <= vM.s.height * 3 + 10) vM.countdownViewState += 1;
+    if (vM.sV > vM.s.height * 4 - 10) vM.countdownViewState += 1;
   }
 
   // if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
@@ -337,11 +361,4 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
-}
-
-void setAnimated(ViewModel vM) async {
-  vM.animatedType = AnimatedType.T2;
-  await Future.delayed(const Duration(milliseconds: 300));
-  vM.animatedType = AnimatedType.T3;
-  await Future.delayed(const Duration(milliseconds: 300));
 }

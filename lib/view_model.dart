@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:invitation_web/enum/enums.dart';
@@ -105,4 +107,15 @@ class ViewModel extends ChangeNotifier {
     _animatedType = value;
     notifyListeners();
   }
+
+  int page4Marked = 0;
+
+  double _shakeTurns = -0.04;
+  double get shakeTurns => _shakeTurns;
+  set shakeTurns(double value) {
+    _shakeTurns = value;
+    notifyListeners();
+  }
+
+  late final Timer? shakeTimer;
 }
