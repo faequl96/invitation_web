@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Page4 extends StatelessWidget {
   const Page4({super.key});
@@ -9,6 +11,10 @@ class Page4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
+
+    final DateTime dateTime = DateTime(2024, 8, 10, 9);
+    final DateFormat dayDateFormater = DateFormat("EEEE", "id_ID");
+    final DateFormat dateFormater = DateFormat("dd MMMM yyyy", "id_ID");
 
     return Container(
       height: vM.s.height,
@@ -106,41 +112,118 @@ class Page4 extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: s(vM.h, 72, 88, 104, 120)),
-                  // Image.asset(
-                  //   "assets/bismillah.png",
-                  //   width: s(vM.w, 120, 132, 144, 156),
-                  // ),
-                  // const SizedBox(height: 24),
-                  // const Text(
-                  //   '"Dan di antara tanda-tanda (kebesaran)-Nya adalah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya".',
-                  //   style: TextStyle(color: Colors.white),
-                  //   textAlign: TextAlign.center,
-                  // ),
-                  // const SizedBox(height: 4),
-                  // const Text(
-                  //   '(Ar-Ruum Ayat 21)',
-                  //   style: TextStyle(
-                  //     color: Color.fromARGB(255, 230, 211, 164),
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  //   textAlign: TextAlign.center,
-                  // ),
-                  // const SizedBox(height: 28),
-                  // const Text(
-                  //   "Assalamu'alaikum Wr. Wb.",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     fontSize: 20,
-                  //     color: Color.fromARGB(255, 230, 211, 164),
-                  //   ),
-                  // ),
-                  // const SizedBox(height: 12),
-                  // const Text(
-                  //   "Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala. Kami mengundang Bapak/Ibu/Saudara/I, untuk menghadiri resepsi pernikahan kami.",
-                  //   style: TextStyle(color: Colors.white),
-                  //   textAlign: TextAlign.center,
-                  // ),
+                  SizedBox(height: s(vM.h, 82, 98, 114, 130)),
+                  Text(
+                    "Acara Pernikahan",
+                    style: TextStyle(
+                      fontFamily: "BrushScriptMT",
+                      fontSize: s(vM.w, 36, 38, 40, 42),
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 230, 211, 164),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.date_range,
+                          size: 32,
+                          color: Color.fromARGB(255, 230, 211, 164),
+                        ),
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: dayDateFormater.format(dateTime),
+                              style: const TextStyle(
+                                color: Color.fromARGB(255, 230, 211, 164),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ", ${dateFormater.format(dateTime)}",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                          style: TextStyle(
+                            fontSize: s(vM.w, 20, 21, 22, 23),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        const Text(
+                          "Akad Nikah",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 230, 211, 164),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          "Pukul 08.00 WIB - Pukul 09.00 WIB",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: s(vM.w, 14.8, 15.2, 15.8, 16.6),
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          "Resepsi",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 230, 211, 164),
+                          ),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          "Pukul 09.00 WIB - Pukul 13.00 WIB",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: s(vM.w, 14.8, 15.2, 15.8, 16.6),
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Icon(
+                    Icons.location_pin,
+                    size: 32,
+                    color: Color.fromARGB(255, 230, 211, 164),
+                  ),
+                  const Text(
+                    "Jl. Graha Raya Bintaro Kav. GK 4 No. 2-4, Pondok Aren, Tangerang Selatan",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 230, 211, 164),
+                    ),
+                    onPressed: () async {
+                      const String address =
+                          "https://www.google.com/maps/place/Masjid+Raya+Bani+Umar/@-6.2702437,106.6897302,19z/data=!4m6!3m5!1s0x2e69fb17bad5c7e7:0xda43ece1f84522db!8m2!3d-6.2703244!4d106.6892406!16s%2Fg%2F11sk6wyd2l?entry=ttu";
+                      await launchUrl(Uri.parse(address));
+                    },
+                    child: const Text(
+                      "Buka Petunjuk Arah",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 140),
                 ],
               ),
             ),
