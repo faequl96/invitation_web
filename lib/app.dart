@@ -16,6 +16,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: ScreenTypeLayout.builder(
           watch: (_) => const AppView(),
           mobile: (_) => const AppView(),
