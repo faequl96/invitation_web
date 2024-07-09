@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
+import 'package:invitation_web/firestore.dart';
+import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
@@ -290,6 +292,8 @@ void superLogic(ViewModel vM) {
     vM.countdownViewState += 1;
   }
 
+  if (vM.sV > vM.s.height * 5 && vM.sV <= vM.s.height * 6) {}
+
   // if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
   //   if (vM.sV - (vM.s.height * 2) <= vM.fract) {
   //     vM.opacity = 1;
@@ -366,4 +370,15 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
+}
+
+void saveToDB(RSVP rsvp) async {
+  final docRef = rsvps
+      .withConverter(
+        fromFirestore: RSVP.fromFirestore,
+        toFirestore: (RSVP city, options) => city.toFirestore(),
+      )
+      .doc("${rsvp.name}-${rsvp.dateTime}");
+
+  await docRef.set(rsvp);
 }

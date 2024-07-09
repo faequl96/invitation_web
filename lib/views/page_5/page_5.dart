@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class Page5 extends StatelessWidget {
-  const Page5({super.key});
+class Page5 extends StatelessWidget with GetItMixin {
+  Page5({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +21,43 @@ class Page5 extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: s(vM.h, 72, 88, 104, 120)),
-          Image.asset(
-            "assets/gift.png",
-            width: vM.s.width / 3,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Kado Pernikahan",
-            style: TextStyle(
-              fontFamily: "BrushScriptMT",
-              fontSize: s(vM.w, 36, 38, 40, 42),
-              fontWeight: FontWeight.bold,
-              color: const Color.fromARGB(255, 230, 211, 164),
+          if (vM.sV < vM.s.height * 6 - s(vM.h, 262, 278, 294, 310)) ...[
+            SizedBox(height: s(vM.h, 42, 58, 74, 90)),
+            Image.asset("assets/gift.png", width: vM.s.width / 3),
+            const SizedBox(height: 8),
+            Text(
+              "Kado Pernikahan",
+              style: TextStyle(
+                fontFamily: "BrushScriptMT",
+                fontSize: s(vM.w, 36, 38, 40, 42),
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 230, 211, 164),
+              ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                "Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.",
+                style: TextStyle(
+                  fontSize: s(vM.w, 12.8, 13.2, 13.8, 14.6),
+                  color: const Color.fromARGB(255, 230, 211, 164),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+          if (vM.sV > vM.s.height * 6 - s(vM.h, 262, 278, 294, 310)) ...[
+            SizedBox(height: s(vM.h, 22, 28, 34, 40)),
+            Text(
+              "RSVP dan Ucapan",
+              style: TextStyle(
+                fontFamily: "BrushScriptMT",
+                fontSize: s(vM.w, 36, 38, 40, 42),
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 230, 211, 164),
+              ),
+            ),
+          ],
         ],
       ),
     );

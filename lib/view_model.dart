@@ -119,4 +119,9 @@ class ViewModel extends ChangeNotifier {
   }
 
   late final Timer? shakeTimer;
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController remarkController = TextEditingController();
+  final TextEditingController attendanceController = TextEditingController();
+  final bool attendance = true;
 }

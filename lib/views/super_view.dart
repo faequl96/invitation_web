@@ -44,7 +44,7 @@ class _SuperViewState extends State<SuperView> {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        if (vM.sV > vM.s.height * 4 && vM.sV <= vM.s.height * 6) const Page5(),
+        if (vM.sV > vM.s.height * 4 && vM.sV <= vM.s.height * 6) Page5(),
         if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 4)
           Positioned(
             bottom: vM.sV < vM.s.height * 3 ? 0 : vM.sV - vM.s.height * 3,

@@ -18,7 +18,7 @@ class Page5Slider extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            SizedBox(height: vM.s.width / 3 + s(vM.h, 92, 108, 124, 140) + 80),
+            SizedBox(height: vM.s.width / 3 + s(vM.h, 102, 118, 134, 150) + 80),
             Expanded(
               child: Container(
                 width: double.maxFinite,
