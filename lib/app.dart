@@ -17,6 +17,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
+        extendBody: true,
         body: ScreenTypeLayout.builder(
           watch: (_) => const AppView(),
           mobile: (_) => const AppView(),

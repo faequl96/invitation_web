@@ -52,6 +52,60 @@ class Page6Slider extends StatelessWidget {
                     labelText: "Kehadiran",
                     textEditingController: vM.attendanceController,
                   ),
+                  ElevatedButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.black54,
+                        isDismissible: false,
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom,
+                            ),
+                            child: SizedBox(
+                              height: 480,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 80,
+                                    height: 8,
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      clipBehavior: Clip.hardEdge,
+                                      child: Column(
+                                        children: [
+                                          TextFieldWidget(
+                                            labelText: "Nama",
+                                            textEditingController:
+                                                vM.nameController,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: const Text("test keyboard"),
+                  ),
                 ],
               ),
             )

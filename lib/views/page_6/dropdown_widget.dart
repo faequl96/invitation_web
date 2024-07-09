@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/view_model.dart';
 
 class DropDownWidget extends StatefulWidget {
