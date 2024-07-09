@@ -64,7 +64,7 @@ void initViewModel(BuildContext context, ViewModel vM) {
 
   vM.fract = vM.s.height / 20;
 
-  vM.shakeTimer = Timer.periodic(const Duration(milliseconds: 150), (_) {
+  vM.shakeTimer ??= Timer.periodic(const Duration(milliseconds: 150), (_) {
     if (vM.shakeTurns == -0.02) {
       vM.shakeTurns = 0.02;
     } else {
