@@ -51,9 +51,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           Color.fromARGB(255, 230, 211, 164),
         ),
         shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        fixedSize: WidgetStatePropertyAll(Size(vM.s.width - 60, 96)),
         padding: const WidgetStatePropertyAll(
           EdgeInsets.symmetric(vertical: 16),
         ),
