@@ -76,6 +76,13 @@ class SubmitButton extends StatelessWidget with GetItMixin {
     watchOnly((ViewModel x) => x.isBusy);
 
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 32,
+          vertical: 20,
+        ),
+      ),
       onPressed: () {
         int dateTime = DateTime.now().millisecondsSinceEpoch;
 
@@ -142,10 +149,21 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (vM.isBusy) ...[
-            const CircularProgressIndicator(),
-            const SizedBox(width: 8),
+            SizedBox(
+              width: s(vM.w, 24.6, 25.2, 25.8, 26.4),
+              height: s(vM.w, 24.6, 25.2, 25.8, 26.4),
+              child: const CircularProgressIndicator(),
+            ),
+            const SizedBox(width: 10),
           ],
-          const Text("Submit"),
+          Text(
+            "Submit",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontSize: s(vM.w, 14, 14.4, 15, 15.8),
+            ),
+          ),
         ],
       ),
     );
