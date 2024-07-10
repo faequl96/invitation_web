@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:invitation_web/view_model.dart';
 
 class DropDownWidget extends StatefulWidget {
@@ -26,20 +27,35 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       initialSelection: null,
       controller: widget.textEditingController,
       requestFocusOnTap: false,
-      label: Text(widget.labelText),
+      label: Text(
+        widget.labelText,
+        style: TextStyle(color: Colors.grey.shade700),
+      ),
       width: vM.s.width - 60,
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.black12, width: 1),
+          borderSide: const BorderSide(color: Colors.black26, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.black12, width: 1),
+          borderSide: const BorderSide(color: Colors.black26, width: 1),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.black12, width: 1),
+          borderSide: const BorderSide(color: Colors.black26, width: 1),
+        ),
+      ),
+      menuStyle: MenuStyle(
+        backgroundColor: const WidgetStatePropertyAll(
+          Color.fromARGB(255, 230, 211, 164),
+        ),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+        ),
+        fixedSize: WidgetStatePropertyAll(Size(vM.s.width - 60, 96)),
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 16),
         ),
       ),
       onSelected: (bool? value) {

@@ -22,7 +22,7 @@ class Page5 extends StatelessWidget with GetItMixin {
       child: Column(
         children: [
           if (vM.sV < vM.s.height * 6 - s(vM.h, 262, 278, 294, 310)) ...[
-            SizedBox(height: s(vM.h, 42, 58, 74, 90)),
+            SizedBox(height: s(vM.h, 42, 48, 54, 60)),
             Image.asset("assets/gift.png", width: vM.s.width / 3),
             const SizedBox(height: 8),
             Text(
@@ -47,7 +47,7 @@ class Page5 extends StatelessWidget with GetItMixin {
             ),
           ],
           if (vM.sV > vM.s.height * 6 - s(vM.h, 262, 278, 294, 310)) ...[
-            SizedBox(height: s(vM.h, 22, 28, 34, 40)),
+            SizedBox(height: s(vM.h, 22, 26, 30, 34)),
             Text(
               "RSVP dan Ucapan",
               style: TextStyle(

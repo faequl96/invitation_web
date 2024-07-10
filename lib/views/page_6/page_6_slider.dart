@@ -23,7 +23,7 @@ class Page6Slider extends StatelessWidget {
               height: 24,
               width: double.maxFinite,
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: Color.fromARGB(255, 230, 211, 164),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(16),
                   bottomRight: Radius.circular(16),
@@ -34,7 +34,7 @@ class Page6Slider extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color.fromARGB(255, 230, 211, 164),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(

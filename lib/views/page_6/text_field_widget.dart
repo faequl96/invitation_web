@@ -26,13 +26,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       style: TextStyle(fontSize: s(vM.w, 14, 14.4, 15, 15.8)),
       decoration: InputDecoration(
         labelText: widget.labelText,
+        labelStyle: TextStyle(color: Colors.grey.shade700),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.black12, width: 1),
+          borderSide: const BorderSide(color: Colors.black26, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Colors.black12, width: 1),
+          borderSide: const BorderSide(color: Colors.black26, width: 1),
         ),
         suffixIcon: widget.textEditingController.text.isNotEmpty
             ? MouseRegion(

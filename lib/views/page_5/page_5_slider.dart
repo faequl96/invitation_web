@@ -23,7 +23,7 @@ class Page5Slider extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 230, 211, 164),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
@@ -45,7 +45,7 @@ class Page5Slider extends StatelessWidget {
                             style: TextStyle(
                               fontSize: s(vM.w, 28, 30, 32, 34),
                               fontWeight: FontWeight.w600,
-                              color: const Color.fromARGB(255, 212, 183, 111),
+                              // color: const Color.fromARGB(255, 212, 183, 111),
                             ),
                           ),
                           const Text(
@@ -58,8 +58,7 @@ class Page5Slider extends StatelessWidget {
                     AnimatedBeatWidget(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 230, 211, 164),
+                          backgroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 32,
                             vertical: 20,
@@ -79,16 +78,21 @@ class Page5Slider extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(Icons.copy, color: Colors.black),
-                            SizedBox(width: 10),
+                            Icon(
+                              Icons.copy,
+                              size: s(vM.w, 24.6, 25.2, 25.8, 26.4),
+                              color: Colors.black,
+                            ),
+                            const SizedBox(width: 10),
                             Text(
                               "Salin Nomor Rekening",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
+                                fontSize: s(vM.w, 14, 14.4, 15, 15.8),
                               ),
                             ),
                           ],
