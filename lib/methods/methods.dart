@@ -378,6 +378,7 @@ void superLogic(ViewModel vM) {
 }
 
 void saveToDB(ViewModel vM, RSVP rsvp) async {
+  vM.isBusy = true;
   final docGuest = invitedGuests.doc(
     "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
   );
@@ -392,4 +393,5 @@ void saveToDB(ViewModel vM, RSVP rsvp) async {
       .doc("RSVPs_${rsvp.dateTime}");
 
   await docRSVPs.set(rsvp);
+  vM.isBusy = false;
 }

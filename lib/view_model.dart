@@ -124,4 +124,11 @@ class ViewModel extends ChangeNotifier {
   final TextEditingController remarkController = TextEditingController();
   final TextEditingController attendanceController = TextEditingController();
   bool attendance = true;
+
+  bool _isBusy = false;
+  bool get isBusy => _isBusy;
+  set isBusy(bool value) {
+    _isBusy = value;
+    notifyListeners();
+  }
 }

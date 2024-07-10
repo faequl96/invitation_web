@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
@@ -54,76 +55,98 @@ class Page6Slider extends StatelessWidget {
                     textEditingController: vM.attendanceController,
                   ),
                   const SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed: () {
-                      int dateTime = DateTime.now().millisecondsSinceEpoch;
-
-                      saveToDB(
-                        vM,
-                        RSVP(
-                          name: vM.nameController.text,
-                          remark: vM.remarkController.text,
-                          attendance: vM.attendance,
-                          dateTime: dateTime,
-                        ),
-                      );
-                      // showModalBottomSheet(
-                      //   backgroundColor: Colors.transparent,
-                      //   barrierColor: Colors.black54,
-                      //   isDismissible: false,
-                      //   isScrollControlled: true,
-                      //   context: context,
-                      //   builder: (context) {
-                      //     return Padding(
-                      //       padding: EdgeInsets.only(
-                      //         bottom: MediaQuery.of(context).viewInsets.bottom,
-                      //       ),
-                      //       child: SizedBox(
-                      //         height: 480,
-                      //         child: Column(
-                      //           children: [
-                      //             Container(
-                      //               width: 80,
-                      //               height: 8,
-                      //               margin:
-                      //                   const EdgeInsets.symmetric(vertical: 6),
-                      //               decoration: BoxDecoration(
-                      //                 color: Colors.white,
-                      //                 borderRadius: BorderRadius.circular(4),
-                      //               ),
-                      //             ),
-                      //             Expanded(
-                      //               child: Container(
-                      //                 decoration: BoxDecoration(
-                      //                   color: Colors.white,
-                      //                   borderRadius: BorderRadius.circular(10),
-                      //                 ),
-                      //                 clipBehavior: Clip.hardEdge,
-                      //                 child: Column(
-                      //                   children: [
-                      //                     TextFieldWidget(
-                      //                       labelText: "Nama",
-                      //                       textEditingController:
-                      //                           vM.nameController,
-                      //                     ),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     );
-                      //   },
-                      // );
-                    },
-                    child: const Text("test keyboard"),
-                  ),
+                  SubmitButton(),
                 ],
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SubmitButton extends StatelessWidget with GetItMixin {
+  SubmitButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ViewModel vM = locator<ViewModel>();
+
+    watchOnly((ViewModel x) => x.isBusy);
+
+    return ElevatedButton(
+      onPressed: () {
+        int dateTime = DateTime.now().millisecondsSinceEpoch;
+
+        saveToDB(
+          vM,
+          RSVP(
+            name: vM.nameController.text,
+            remark: vM.remarkController.text,
+            attendance: vM.attendance,
+            dateTime: dateTime,
+          ),
+        );
+        // showModalBottomSheet(
+        //   backgroundColor: Colors.transparent,
+        //   barrierColor: Colors.black54,
+        //   isDismissible: false,
+        //   isScrollControlled: true,
+        //   context: context,
+        //   builder: (context) {
+        //     return Padding(
+        //       padding: EdgeInsets.only(
+        //         bottom: MediaQuery.of(context).viewInsets.bottom,
+        //       ),
+        //       child: SizedBox(
+        //         height: 480,
+        //         child: Column(
+        //           children: [
+        //             Container(
+        //               width: 80,
+        //               height: 8,
+        //               margin:
+        //                   const EdgeInsets.symmetric(vertical: 6),
+        //               decoration: BoxDecoration(
+        //                 color: Colors.white,
+        //                 borderRadius: BorderRadius.circular(4),
+        //               ),
+        //             ),
+        //             Expanded(
+        //               child: Container(
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.white,
+        //                   borderRadius: BorderRadius.circular(10),
+        //                 ),
+        //                 clipBehavior: Clip.hardEdge,
+        //                 child: Column(
+        //                   children: [
+        //                     TextFieldWidget(
+        //                       labelText: "Nama",
+        //                       textEditingController:
+        //                           vM.nameController,
+        //                     ),
+        //                   ],
+        //                 ),
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (vM.isBusy) ...[
+            const CircularProgressIndicator(),
+            const SizedBox(width: 8),
+          ],
+          const Text("Submit"),
+        ],
       ),
     );
   }
