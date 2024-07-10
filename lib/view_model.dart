@@ -123,5 +123,5 @@ class ViewModel extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController remarkController = TextEditingController();
   final TextEditingController attendanceController = TextEditingController();
-  final bool attendance = true;
+  bool attendance = true;
 }

@@ -24,6 +24,8 @@ String toCapitalize(String value) {
   return returnValue;
 }
 
+String toUnderScore(String value) => value.replaceAll("-", "_");
+
 double s(Enum type, double sm, double md, double lg, double xl) {
   final Map<Enum, double> mapOfSize = {
     H.Sm: sm,
@@ -39,6 +41,9 @@ double s(Enum type, double sm, double md, double lg, double xl) {
 }
 
 void initViewModel(BuildContext context, ViewModel vM) {
+  vM.toName = Uri.base.queryParameters["to"] ?? "";
+  vM.instance = Uri.base.queryParameters["instance"] ?? "";
+
   vM.s = MediaQuery.of(context).size;
   if (vM.s.width > 480) vM.s = const Size(400, 720);
 
@@ -372,13 +377,19 @@ void superLogic(ViewModel vM) {
   // }
 }
 
-void saveToDB(RSVP rsvp) async {
-  final docRef = rsvps
+void saveToDB(ViewModel vM, RSVP rsvp) async {
+  final docGuest = invitedGuests.doc(
+    "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+  );
+
+  final rsvps = docGuest.collection("RSVPs");
+
+  final docRSVPs = rsvps
       .withConverter(
         fromFirestore: RSVP.fromFirestore,
         toFirestore: (RSVP city, options) => city.toFirestore(),
       )
-      .doc("${rsvp.name}-${rsvp.dateTime}");
+      .doc("RSVPs_${rsvp.dateTime}");
 
-  await docRef.set(rsvp);
+  await docRSVPs.set(rsvp);
 }

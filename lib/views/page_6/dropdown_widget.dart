@@ -60,8 +60,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       onSelected: (bool? value) {
         if (value == true) {
           widget.textEditingController.text = "Hadir";
+          vM.attendance = true;
         } else {
           widget.textEditingController.text = "Tidak Hadir";
+          vM.attendance = false;
         }
       },
       dropdownMenuEntries: dropDownItems.map((bool value) {

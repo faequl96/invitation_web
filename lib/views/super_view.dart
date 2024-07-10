@@ -24,9 +24,9 @@ class _SuperViewState extends State<SuperView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final ViewModel vM = locator<ViewModel>();
 
-      vM.toName = Uri.base.queryParameters["to"] ?? "";
-      vM.instance = Uri.base.queryParameters["instance"] ?? "";
-      setState(() {});
+      // vM.toName = Uri.base.queryParameters["to"] ?? "";
+      // vM.instance = Uri.base.queryParameters["instance"] ?? "";
+      // setState(() {});
 
       vM.pageController.addListener(() {
         superLogic(vM);
