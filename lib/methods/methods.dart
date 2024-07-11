@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
-import 'package:invitation_web/models/db_models/rsvp.dart';
+import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
@@ -11,13 +13,15 @@ import 'package:just_audio/just_audio.dart';
 String toCapitalize(String value) {
   List<String> values = value.split("-");
   String returnValue = "";
-  for (int i = 0; i < values.length; i++) {
-    if (i == 0) {
-      returnValue +=
-          "${values[i].toUpperCase()[0]}${values[i].toLowerCase().replaceRange(0, 1, "")}";
-    } else {
-      returnValue +=
-          " ${values[i].toUpperCase()[0]}${values[i].toLowerCase().replaceRange(0, 1, "")}";
+  if (value.isNotEmpty) {
+    for (int i = 0; i < values.length; i++) {
+      if (i == 0) {
+        returnValue +=
+            "${values[i].toUpperCase()[0]}${values[i].toLowerCase().replaceRange(0, 1, "")}";
+      } else {
+        returnValue +=
+            " ${values[i].toUpperCase()[0]}${values[i].toLowerCase().replaceRange(0, 1, "")}";
+      }
     }
   }
 
@@ -40,7 +44,7 @@ double s(Enum type, double sm, double md, double lg, double xl) {
   return mapOfSize[type] ?? 0;
 }
 
-void initViewModel(BuildContext context, ViewModel vM) {
+void initViewModel(BuildContext context, ViewModel vM) async {
   vM.toName = Uri.base.queryParameters["to"] ?? "";
   vM.instance = Uri.base.queryParameters["instance"] ?? "";
 
@@ -90,6 +94,30 @@ void initViewModel(BuildContext context, ViewModel vM) {
   precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
   precacheImage(const AssetImage("assets/groom.png"), context);
   precacheImage(const AssetImage("assets/bride.png"), context);
+
+  await getSomeFromDB(
+    vM: vM,
+    queryRef: invitedGuests.where(
+      "nameInstance",
+      isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+    ),
+  ).then((value) {
+    if (value == null) {
+      saveToDB(
+        vM: vM,
+        request: InvitedGuest(
+          name: toCapitalize(vM.toName),
+          instance: toCapitalize(vM.instance),
+          nameInstance:
+              "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+          nickName: "",
+        ).toJson(),
+        docRef: invitedGuests.doc(),
+      );
+    } else {
+      vM.invitedGuest = InvitedGuest.fromJson(value as Map<String, dynamic>);
+    }
+  });
 }
 
 void _setupAudioPlayer(ViewModel vM) async {
@@ -377,21 +405,60 @@ void superLogic(ViewModel vM) {
   // }
 }
 
-void saveToDB(ViewModel vM, RSVP rsvp) async {
+void saveToDB<T>({
+  required ViewModel vM,
+  required T request,
+  required DocumentReference<T> docRef,
+}) {
   vM.isBusy = true;
-  final docGuest = invitedGuests.doc(
-    "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-  );
+  docRef.set(request).then((_) {
+    vM.isBusy = false;
+  });
+}
 
-  final rsvps = docGuest.collection("RSVPs");
+void getAllFromDB<T>({
+  required ViewModel vM,
+  required DocumentReference<T> docRef,
+}) async {
+  vM.isBusy = true;
+  final docSnap = await docRef.get();
+  final data = docSnap.data();
+  print(inspect(data));
+  vM.isBusy = false;
+}
 
-  final docRSVPs = rsvps
-      .withConverter(
-        fromFirestore: RSVP.fromFirestore,
-        toFirestore: (RSVP city, options) => city.toFirestore(),
-      )
-      .doc("RSVPs_${rsvp.dateTime}");
+Future<T?> getSomeFromDB<T>({
+  required ViewModel vM,
+  required Query<T> queryRef,
+}) async {
+  final Completer completer = Completer();
+  vM.isBusy = true;
+  queryRef.get().then((querySnapshot) {
+    if (querySnapshot.docs.isNotEmpty) {
+      vM.isBusy = false;
+      completer.complete({
+        "id": querySnapshot.docs[0].id,
+        "data": querySnapshot.docs[0].data()
+      });
+    } else {
+      vM.isBusy = false;
+      completer.complete();
+    }
+  }, onError: (e) {
+    vM.isBusy = false;
+    completer.complete();
+  });
 
-  await docRSVPs.set(rsvp);
+  return await completer.future;
+}
+
+void getOneFromDB<T>({
+  required ViewModel vM,
+  required DocumentReference<T> docRef,
+}) async {
+  vM.isBusy = true;
+  final docSnap = await docRef.get();
+  final data = docSnap.data();
+  print(inspect(data));
   vM.isBusy = false;
 }

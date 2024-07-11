@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
@@ -55,7 +56,7 @@ class Page6Slider extends StatelessWidget {
                     textEditingController: vM.attendanceController,
                   ),
                   const SizedBox(height: 12),
-                  SubmitButton(),
+                  SizedBox(height: 46, child: SubmitButton()),
                 ],
               ),
             )
@@ -78,23 +79,41 @@ class SubmitButton extends StatelessWidget with GetItMixin {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 32,
-          vertical: 20,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
       onPressed: () {
+        if (vM.invitedGuest != null) {
+          saveToDB(
+            vM: vM,
+            request: vM.invitedGuest!
+                .copyWith(
+                  nickName: vM.invitedGuest!.nameInstance == "__"
+                      ? "Guest"
+                      : vM.nameController.text.isEmpty
+                          ? toCapitalize(vM.toName)
+                          : vM.nameController.text,
+                )
+                .toJson(),
+            docRef: invitedGuests.doc(vM.invitedGuest!.id),
+          );
+        }
+
         int dateTime = DateTime.now().millisecondsSinceEpoch;
 
         saveToDB(
-          vM,
-          RSVP(
-            name: vM.nameController.text,
-            remark: vM.remarkController.text,
+          vM: vM,
+          request: RSVP(
+            invitedGuestsId: vM.invitedGuest?.id ?? "",
+            remark: vM.remarkController.text.isEmpty
+                ? "Selamat Yaa"
+                : vM.remarkController.text,
             attendance: vM.attendance,
             dateTime: dateTime,
-          ),
+            guestName: "Guest_${vM.nameController.text}",
+          ).toJson(),
+          docRef: rsvps.doc(),
         );
+        // getFromDB(vM);
         // showModalBottomSheet(
         //   backgroundColor: Colors.transparent,
         //   barrierColor: Colors.black54,

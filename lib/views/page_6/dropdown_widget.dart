@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
 class DropDownWidget extends StatefulWidget {
@@ -27,9 +28,13 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       initialSelection: null,
       controller: widget.textEditingController,
       requestFocusOnTap: false,
+      textStyle: TextStyle(fontSize: s(vM.w, 14, 14.4, 15, 15.8)),
       label: Text(
         widget.labelText,
-        style: TextStyle(color: Colors.grey.shade700),
+        style: TextStyle(
+          fontSize: s(vM.w, 14, 14.4, 15, 15.8),
+          color: Colors.grey.shade700,
+        ),
       ),
       width: vM.s.width - 60,
       inputDecorationTheme: InputDecorationTheme(

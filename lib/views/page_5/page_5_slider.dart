@@ -56,46 +56,46 @@ class Page5Slider extends StatelessWidget {
                       ),
                     ),
                     AnimatedBeatWidget(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
-                            vertical: 20,
+                      child: SizedBox(
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
                           ),
-                        ),
-                        onPressed: () {
-                          Clipboard.setData(
-                            const ClipboardData(text: "151101011130505"),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                "Berhasil menyalin nomor rekening",
-                                textAlign: TextAlign.center,
+                          onPressed: () {
+                            Clipboard.setData(
+                              const ClipboardData(text: "151101011130505"),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Berhasil menyalin nomor rekening",
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: Duration(milliseconds: 1000),
                               ),
-                              duration: Duration(milliseconds: 1000),
-                            ),
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.copy,
-                              size: s(vM.w, 24.6, 25.2, 25.8, 26.4),
-                              color: Colors.black,
-                            ),
-                            const SizedBox(width: 10),
-                            Text(
-                              "Salin Nomor Rekening",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.copy,
+                                size: s(vM.w, 24.6, 25.2, 25.8, 26.4),
                                 color: Colors.black,
-                                fontSize: s(vM.w, 14, 14.4, 15, 15.8),
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 10),
+                              Text(
+                                "Salin Nomor Rekening",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: s(vM.w, 14, 14.4, 15, 15.8),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
