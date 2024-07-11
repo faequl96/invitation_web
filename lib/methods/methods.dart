@@ -122,13 +122,17 @@ void initViewModel(BuildContext context, ViewModel vM) async {
           ).then((value) {
             if (value != null) {
               vM.invitedGuest = InvitedGuest.fromJson(value);
-              vM.nameController.text = vM.invitedGuest?.nickName ?? "";
+              vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
+                  ? ""
+                  : vM.invitedGuest!.nickName;
             }
           });
         });
       } else {
         vM.invitedGuest = InvitedGuest.fromJson(value);
-        vM.nameController.text = vM.invitedGuest?.nickName ?? "";
+        vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
+            ? ""
+            : vM.invitedGuest!.nickName;
       }
     });
   }
