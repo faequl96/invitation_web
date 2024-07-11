@@ -120,9 +120,10 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           remark: vM.remarkController.text.isEmpty
               ? "Selamat Yaa"
               : vM.remarkController.text,
+          invited: vM.invitedGuest!.nameInstance == "__" ? false : true,
+          attendance: vM.attendance,
           dateTime: DateTime.now().millisecondsSinceEpoch,
-          guestName:
-              "${vM.invitedGuest!.nameInstance == "__" ? "Guest" : "Invited"}_${vM.nameController.text}",
+          guestName: vM.nameController.text,
         );
 
         await DBRepository.create(
