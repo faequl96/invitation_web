@@ -43,6 +43,7 @@ class Page6Slider extends StatelessWidget {
                 children: [
                   TextFieldWidget(
                     labelText: "Nama",
+                    hintText: "Guest",
                     textEditingController: vM.nameController,
                   ),
                   const SizedBox(height: 12),

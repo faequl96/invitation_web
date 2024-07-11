@@ -32,6 +32,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           fontSize: s(vM.w, 14, 14.4, 15, 15.8),
           color: Colors.grey.shade700,
         ),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: s(vM.w, 14, 14.4, 15, 15.8),
