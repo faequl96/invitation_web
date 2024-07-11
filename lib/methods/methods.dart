@@ -103,7 +103,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
       ),
     ).then((value) {
       if (value == null) {
-        DBRepository.save(
+        DBRepository.create(
           request: InvitedGuest(
             name: toCapitalize(vM.toName),
             instance: toCapitalize(vM.instance),
@@ -111,7 +111,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                 "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
             nickName: "",
           ).toJson(),
-          docRef: DBCollection.invitedGuests.doc(),
+          collectionRef: DBCollection.invitedGuests,
         ).then((_) {
           DBRepository.getSome(
             queryRef: DBCollection.invitedGuests.where(
@@ -120,11 +120,15 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                   "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
             ),
           ).then((value) {
-            if (value != null) vM.invitedGuest = InvitedGuest.fromJson(value);
+            if (value != null) {
+              vM.invitedGuest = InvitedGuest.fromJson(value);
+              vM.nameController.text = vM.invitedGuest?.nickName ?? "";
+            }
           });
         });
       } else {
         vM.invitedGuest = InvitedGuest.fromJson(value);
+        vM.nameController.text = vM.invitedGuest?.nickName ?? "";
       }
     });
   }

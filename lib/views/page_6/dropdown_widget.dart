@@ -25,7 +25,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     final ViewModel vM = locator<ViewModel>();
 
     return DropdownMenu<bool>(
-      initialSelection: null,
+      initialSelection: true,
       controller: widget.textEditingController,
       requestFocusOnTap: false,
       textStyle: TextStyle(fontSize: s(vM.w, 14, 14.4, 15, 15.8)),

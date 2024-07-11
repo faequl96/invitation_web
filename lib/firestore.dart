@@ -11,12 +11,26 @@ class DBCollection {
 }
 
 class DBRepository {
-  static Future<void> save({
+  static Future<void> create({
     required Map<String, dynamic> request,
-    required DocumentReference<Map<String, dynamic>> docRef,
+    required CollectionReference<Map<String, dynamic>> collectionRef,
   }) async {
     final Completer<void> completer = Completer();
-    docRef.set(request).then((_) => completer.complete());
+    collectionRef.doc().set(request).then((_) => completer.complete());
+
+    return await completer.future;
+  }
+
+  static Future<void> update({
+    required Map<String, dynamic> request,
+    required CollectionReference<Map<String, dynamic>> collectionRef,
+    required String documentId,
+  }) async {
+    final Completer<void> completer = Completer();
+    collectionRef
+        .doc(documentId)
+        .set(request)
+        .then((_) => completer.complete());
 
     return await completer.future;
   }

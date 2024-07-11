@@ -6,10 +6,12 @@ class TextFieldWidget extends StatefulWidget {
   const TextFieldWidget({
     super.key,
     required this.labelText,
+    this.hintText,
     required this.textEditingController,
   });
 
   final String labelText;
+  final String? hintText;
   final TextEditingController textEditingController;
 
   @override
@@ -27,6 +29,11 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       decoration: InputDecoration(
         labelText: widget.labelText,
         labelStyle: TextStyle(
+          fontSize: s(vM.w, 14, 14.4, 15, 15.8),
+          color: Colors.grey.shade700,
+        ),
+        hintText: widget.hintText,
+        hintStyle: TextStyle(
           fontSize: s(vM.w, 14, 14.4, 15, 15.8),
           color: Colors.grey.shade700,
         ),

@@ -48,6 +48,7 @@ class Page6Slider extends StatelessWidget {
                   const SizedBox(height: 12),
                   TextFieldWidget(
                     labelText: "Ucapan",
+                    hintText: "Selamat Yaa",
                     textEditingController: vM.remarkController,
                   ),
                   const SizedBox(height: 12),
@@ -85,32 +86,34 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         vM.isBusy = true;
 
         if (vM.invitedGuest != null) {
-          DBRepository.save(
-            request: vM.invitedGuest!
-                .copyWith(
-                  nickName: vM.invitedGuest!.nameInstance == "__"
-                      ? "Guest"
-                      : vM.nameController.text.isEmpty
-                          ? toCapitalize(vM.toName)
-                          : vM.nameController.text,
-                )
-                .toJson(),
-            docRef: DBCollection.invitedGuests.doc(vM.invitedGuest!.id),
+          final nickName = vM.invitedGuest!.nameInstance == "__"
+              ? "Guest"
+              : vM.nameController.text.isEmpty
+                  ? toCapitalize(vM.toName)
+                  : vM.nameController.text;
+          final invitedGuest = vM.invitedGuest!.copyWith(nickName: nickName);
+
+          DBRepository.update(
+            request: invitedGuest.toJson(),
+            collectionRef: DBCollection.invitedGuests,
+            documentId: vM.invitedGuest!.id,
           );
         }
 
-        DBRepository.save(
-          request: RSVP(
-            invitedGuestsId: vM.invitedGuest?.id ?? "",
-            remark: vM.remarkController.text.isEmpty
-                ? "Selamat Yaa"
-                : vM.remarkController.text,
-            attendance: vM.attendance,
-            dateTime: DateTime.now().millisecondsSinceEpoch,
-            guestName:
-                "${vM.invitedGuest!.nameInstance == "__" ? "Guest" : "Invited"}_${vM.nameController.text}",
-          ).toJson(),
-          docRef: DBCollection.rsvps.doc(),
+        final rsvp = RSVP.message(
+          invitedGuestsId: vM.invitedGuest?.id ?? "",
+          remark: vM.remarkController.text.isEmpty
+              ? "Selamat Yaa"
+              : vM.remarkController.text,
+          attendance: vM.attendance,
+          dateTime: DateTime.now().millisecondsSinceEpoch,
+          guestName:
+              "${vM.invitedGuest!.nameInstance == "__" ? "Guest" : "Invited"}_${vM.nameController.text}",
+        );
+
+        DBRepository.create(
+          request: rsvp.toJson(),
+          collectionRef: DBCollection.rsvps,
         );
 
         vM.isBusy = false;
