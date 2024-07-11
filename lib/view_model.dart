@@ -155,4 +155,25 @@ class ViewModel extends ChangeNotifier {
   }
 
   InvitedGuest? invitedGuest;
+
+  double _page6SliderHeight = 0;
+  double get page6SliderHeight => _page6SliderHeight;
+  set page6SliderHeight(double value) {
+    _page6SliderHeight = value;
+    notifyListeners();
+  }
+
+  double _page6Height = 0;
+  double get page6Height => _page6Height;
+  set page6Height(double value) {
+    _page6Height = value;
+    notifyListeners();
+  }
+
+  int _additionalPage = 0;
+  int get additionalPage => _additionalPage;
+  set additionalPage(int value) {
+    _additionalPage = value;
+    notifyListeners();
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/views/front_view.dart';
 import 'package:invitation_web/views/page_2/page_2.dart';
 import 'package:invitation_web/views/page_4/page_4.dart';
@@ -12,8 +13,6 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
-
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
@@ -21,35 +20,52 @@ class AppView extends StatelessWidget {
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            SizedBox(
-              height: vM.s.height,
-              width: vM.s.width,
-              child: PageView(
-                controller: vM.pageController,
-                scrollDirection: Axis.vertical,
-                children: [
-                  SizedBox(height: vM.s.height, width: double.maxFinite),
-                  SizedBox(height: vM.s.height, width: double.maxFinite),
-                  const Page2(),
-                  SizedBox(height: vM.s.height, width: double.maxFinite),
-                  const Page4(),
-                  SizedBox(
-                    height: vM.s.height,
-                    width: double.maxFinite,
-                    child: const Page5Slider(),
-                  ),
-                  SizedBox(
-                    height: vM.s.height,
-                    width: double.maxFinite,
-                    child: const Page6Slider(),
-                  ),
-                ],
-              ),
-            ),
+            SliderView(),
             FrontView(),
           ],
         ),
       ],
+    );
+  }
+}
+
+class SliderView extends StatelessWidget with GetItMixin {
+  SliderView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ViewModel vM = locator<ViewModel>();
+
+    watchOnly((ViewModel x) => x.additionalPage);
+
+    return SizedBox(
+      height: vM.s.height,
+      width: vM.s.width,
+      child: PageView(
+        controller: vM.pageController,
+        scrollDirection: Axis.vertical,
+        children: [
+          SizedBox(height: vM.s.height, width: double.maxFinite),
+          SizedBox(height: vM.s.height, width: double.maxFinite),
+          const Page2(),
+          SizedBox(height: vM.s.height, width: double.maxFinite),
+          const Page4(),
+          SizedBox(
+            height: vM.s.height,
+            width: double.maxFinite,
+            child: const Page5Slider(),
+          ),
+          SizedBox(
+            height: vM.s.height,
+            width: double.maxFinite,
+            child: const Page6Slider(),
+          ),
+          ...List.generate(
+            vM.additionalPage,
+            (_) => SizedBox(height: vM.s.height, width: double.maxFinite),
+          ),
+        ],
+      ),
     );
   }
 }

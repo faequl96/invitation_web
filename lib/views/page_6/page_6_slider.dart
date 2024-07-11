@@ -7,6 +7,7 @@ import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/page_6/dropdown_attendance_widget.dart';
 import 'package:invitation_web/views/page_6/dropdown_avatar_widget.dart';
 import 'package:invitation_web/views/page_6/text_field_widget.dart';
+import 'package:invitation_web/views/shared/get_size_render_box.dart';
 
 class Page6Slider extends StatelessWidget {
   const Page6Slider({super.key});
@@ -22,53 +23,62 @@ class Page6Slider extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            Container(
-              height: 24,
-              width: double.maxFinite,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 230, 211, 164),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-              ),
-            ),
-            SizedBox(height: s(vM.h, 62, 68, 74, 80)),
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 230, 211, 164),
-                borderRadius: BorderRadius.circular(16),
-              ),
+            GetSizeRenderBox(
+              onChange: (size) {
+                vM.page6SliderHeight = size.height;
+              },
               child: Column(
                 children: [
-                  TextFieldWidget(
-                    labelText: "Nama",
-                    hintText: "Guest",
-                    textEditingController: vM.nameController,
+                  Container(
+                    height: 24,
+                    width: double.maxFinite,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 230, 211, 164),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  TextFieldWidget(
-                    labelText: "Ucapan",
-                    hintText: "Selamat Yaa",
-                    textEditingController: vM.remarkController,
+                  SizedBox(height: s(vM.h, 62, 68, 74, 80)),
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 230, 211, 164),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      children: [
+                        TextFieldWidget(
+                          labelText: "Nama",
+                          hintText: "Guest",
+                          textEditingController: vM.nameController,
+                        ),
+                        const SizedBox(height: 12),
+                        TextFieldWidget(
+                          labelText: "Ucapan",
+                          hintText: "Selamat Yaa",
+                          textEditingController: vM.remarkController,
+                        ),
+                        const SizedBox(height: 12),
+                        DropDownAttendanceWidget(
+                          labelText: "Kehadiran",
+                          textEditingController: vM.attendanceController,
+                        ),
+                        const SizedBox(height: 12),
+                        DropDownAvatarWidget(
+                          labelText: "Avatar",
+                          hintText: "Pilih Avatar",
+                          textEditingController: vM.avatarController,
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(height: 46, child: SubmitButton()),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  DropDownAttendanceWidget(
-                    labelText: "Kehadiran",
-                    textEditingController: vM.attendanceController,
-                  ),
-                  const SizedBox(height: 12),
-                  DropDownAvatarWidget(
-                    labelText: "Avatar",
-                    hintText: "Pilih Avatar",
-                    textEditingController: vM.avatarController,
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(height: 46, child: SubmitButton()),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
