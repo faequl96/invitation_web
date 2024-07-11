@@ -82,9 +82,10 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
       onPressed: () {
+        vM.isBusy = true;
+
         if (vM.invitedGuest != null) {
-          saveToDB(
-            vM: vM,
+          DBRepository.save(
             request: vM.invitedGuest!
                 .copyWith(
                   nickName: vM.invitedGuest!.nameInstance == "__"
@@ -94,25 +95,25 @@ class SubmitButton extends StatelessWidget with GetItMixin {
                           : vM.nameController.text,
                 )
                 .toJson(),
-            docRef: invitedGuests.doc(vM.invitedGuest!.id),
+            docRef: DBCollection.invitedGuests.doc(vM.invitedGuest!.id),
           );
         }
 
-        int dateTime = DateTime.now().millisecondsSinceEpoch;
-
-        saveToDB(
-          vM: vM,
+        DBRepository.save(
           request: RSVP(
             invitedGuestsId: vM.invitedGuest?.id ?? "",
             remark: vM.remarkController.text.isEmpty
                 ? "Selamat Yaa"
                 : vM.remarkController.text,
             attendance: vM.attendance,
-            dateTime: dateTime,
-            guestName: "Guest_${vM.nameController.text}",
+            dateTime: DateTime.now().millisecondsSinceEpoch,
+            guestName:
+                "${vM.invitedGuest!.nameInstance == "__" ? "Guest" : "Invited"}_${vM.nameController.text}",
           ).toJson(),
-          docRef: rsvps.doc(),
+          docRef: DBCollection.rsvps.doc(),
         );
+
+        vM.isBusy = false;
         // getFromDB(vM);
         // showModalBottomSheet(
         //   backgroundColor: Colors.transparent,

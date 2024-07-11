@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
@@ -94,36 +92,47 @@ void initViewModel(BuildContext context, ViewModel vM) async {
   precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
   precacheImage(const AssetImage("assets/groom.png"), context);
   precacheImage(const AssetImage("assets/bride.png"), context);
+  precacheImage(const AssetImage("assets/gift.png"), context);
+  precacheImage(const AssetImage("assets/bank_bri.png"), context);
 
-  await getSomeFromDB(
-    vM: vM,
-    queryRef: invitedGuests.where(
-      "nameInstance",
-      isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-    ),
-  ).then((value) {
-    if (value == null) {
-      saveToDB(
-        vM: vM,
-        request: InvitedGuest(
-          name: toCapitalize(vM.toName),
-          instance: toCapitalize(vM.instance),
-          nameInstance:
-              "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-          nickName: "",
-        ).toJson(),
-        docRef: invitedGuests.doc(),
-      );
-    } else {
-      vM.invitedGuest = InvitedGuest.fromJson(value as Map<String, dynamic>);
-    }
-  });
+  if (vM.invitedGuest == null) {
+    await DBRepository.getSome(
+      queryRef: DBCollection.invitedGuests.where(
+        "nameInstance",
+        isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+      ),
+    ).then((value) {
+      if (value == null) {
+        DBRepository.save(
+          request: InvitedGuest(
+            name: toCapitalize(vM.toName),
+            instance: toCapitalize(vM.instance),
+            nameInstance:
+                "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+            nickName: "",
+          ).toJson(),
+          docRef: DBCollection.invitedGuests.doc(),
+        ).then((_) {
+          DBRepository.getSome(
+            queryRef: DBCollection.invitedGuests.where(
+              "nameInstance",
+              isEqualTo:
+                  "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+            ),
+          ).then((value) {
+            if (value != null) vM.invitedGuest = InvitedGuest.fromJson(value);
+          });
+        });
+      } else {
+        vM.invitedGuest = InvitedGuest.fromJson(value);
+      }
+    });
+  }
 }
 
 void _setupAudioPlayer(ViewModel vM) async {
   vM.player = AudioPlayer();
   await vM.player.setAudioSource(AudioSource.asset("assets/its_you.mp3"));
-  // vM.player.play();
 }
 
 void _initCountdownPosition(ViewModel vM) {
@@ -403,62 +412,4 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
-}
-
-void saveToDB<T>({
-  required ViewModel vM,
-  required T request,
-  required DocumentReference<T> docRef,
-}) {
-  vM.isBusy = true;
-  docRef.set(request).then((_) {
-    vM.isBusy = false;
-  });
-}
-
-void getAllFromDB<T>({
-  required ViewModel vM,
-  required DocumentReference<T> docRef,
-}) async {
-  vM.isBusy = true;
-  final docSnap = await docRef.get();
-  final data = docSnap.data();
-  print(inspect(data));
-  vM.isBusy = false;
-}
-
-Future<T?> getSomeFromDB<T>({
-  required ViewModel vM,
-  required Query<T> queryRef,
-}) async {
-  final Completer completer = Completer();
-  vM.isBusy = true;
-  queryRef.get().then((querySnapshot) {
-    if (querySnapshot.docs.isNotEmpty) {
-      vM.isBusy = false;
-      completer.complete({
-        "id": querySnapshot.docs[0].id,
-        "data": querySnapshot.docs[0].data()
-      });
-    } else {
-      vM.isBusy = false;
-      completer.complete();
-    }
-  }, onError: (e) {
-    vM.isBusy = false;
-    completer.complete();
-  });
-
-  return await completer.future;
-}
-
-void getOneFromDB<T>({
-  required ViewModel vM,
-  required DocumentReference<T> docRef,
-}) async {
-  vM.isBusy = true;
-  final docSnap = await docRef.get();
-  final data = docSnap.data();
-  print(inspect(data));
-  vM.isBusy = false;
 }
