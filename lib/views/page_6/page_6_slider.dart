@@ -4,7 +4,8 @@ import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
-import 'package:invitation_web/views/page_6/dropdown_widget.dart';
+import 'package:invitation_web/views/page_6/dropdown_attendance_widget.dart';
+import 'package:invitation_web/views/page_6/dropdown_avatar_widget.dart';
 import 'package:invitation_web/views/page_6/text_field_widget.dart';
 
 class Page6Slider extends StatelessWidget {
@@ -53,9 +54,15 @@ class Page6Slider extends StatelessWidget {
                     textEditingController: vM.remarkController,
                   ),
                   const SizedBox(height: 12),
-                  DropDownWidget(
+                  DropDownAttendanceWidget(
                     labelText: "Kehadiran",
                     textEditingController: vM.attendanceController,
+                  ),
+                  const SizedBox(height: 12),
+                  DropDownAvatarWidget(
+                    labelText: "Avatar",
+                    hintText: "Pilih Avatar",
+                    textEditingController: vM.avatarController,
                   ),
                   const SizedBox(height: 12),
                   SizedBox(height: 46, child: SubmitButton()),
@@ -83,7 +90,7 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         backgroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
-      onPressed: () {
+      onPressed: () async {
         vM.isBusy = true;
 
         if (vM.invitedGuest != null) {
@@ -92,9 +99,16 @@ class SubmitButton extends StatelessWidget with GetItMixin {
               : vM.nameController.text.isEmpty
                   ? toCapitalize(vM.toName)
                   : vM.nameController.text;
-          final invitedGuest = vM.invitedGuest!.copyWith(nickName: nickName);
+          final avatar = vM.avatarController.text.isEmpty
+              ? null
+              : vM.avatarController.text;
+          final invitedGuest = vM.invitedGuest!.copyWith(
+            nickName: nickName,
+            attendance: vM.attendance,
+            avatar: avatar,
+          );
 
-          DBRepository.update(
+          await DBRepository.update(
             request: invitedGuest.toJson(),
             collectionRef: DBCollection.invitedGuests,
             documentId: vM.invitedGuest!.id,
@@ -106,13 +120,12 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           remark: vM.remarkController.text.isEmpty
               ? "Selamat Yaa"
               : vM.remarkController.text,
-          attendance: vM.attendance,
           dateTime: DateTime.now().millisecondsSinceEpoch,
           guestName:
               "${vM.invitedGuest!.nameInstance == "__" ? "Guest" : "Invited"}_${vM.nameController.text}",
         );
 
-        DBRepository.create(
+        await DBRepository.create(
           request: rsvp.toJson(),
           collectionRef: DBCollection.rsvps,
         );

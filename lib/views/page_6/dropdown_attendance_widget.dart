@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 
-class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({
+class DropDownAttendanceWidget extends StatefulWidget {
+  const DropDownAttendanceWidget({
     super.key,
     required this.labelText,
+    this.leadingIconMenuItem,
     required this.textEditingController,
   });
 
   final String labelText;
+  final Widget? leadingIconMenuItem;
   final TextEditingController textEditingController;
 
   @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
+  State<DropDownAttendanceWidget> createState() =>
+      _DropDownAttendanceWidgetState();
 }
 
-class _DropDownWidgetState extends State<DropDownWidget> {
-  final dropDownItems = [true, false];
-
+class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
   @override
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
@@ -71,7 +71,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           vM.attendance = false;
         }
       },
-      dropdownMenuEntries: dropDownItems.map((bool value) {
+      dropdownMenuEntries: vM.dropDownAttendanceItems.map((bool value) {
         return DropdownMenuEntry<bool>(
           value: value,
           label: value ? "Hadir" : "Tidak Hadir",

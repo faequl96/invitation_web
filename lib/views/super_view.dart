@@ -272,11 +272,14 @@ class _SuperViewState extends State<SuperView> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image(
-                    image: AssetImage("assets/${vM.instance}.png"),
-                    height: s(vM.w, 20, 22, 24, 26),
-                    fit: BoxFit.fitHeight,
-                  ),
+                  if (vM.isInstanceAvailable)
+                    Image(
+                      image: AssetImage(
+                        "assets/${toUnderScore(vM.instance)}.png",
+                      ),
+                      height: s(vM.w, 20, 22, 24, 26),
+                      fit: BoxFit.fitHeight,
+                    ),
                   const SizedBox(width: 10),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,

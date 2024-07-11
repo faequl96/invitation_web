@@ -46,6 +46,10 @@ void initViewModel(BuildContext context, ViewModel vM) async {
   vM.toName = Uri.base.queryParameters["to"] ?? "";
   vM.instance = Uri.base.queryParameters["instance"] ?? "";
 
+  if (vM.availableInstances.contains(toUnderScore(vM.instance))) {
+    vM.isInstanceAvailable = true;
+  }
+
   vM.s = MediaQuery.of(context).size;
   if (vM.s.width > 480) vM.s = const Size(400, 720);
 
@@ -81,19 +85,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
 
   _initCountdownPosition(vM);
   _setupAudioPlayer(vM);
-  precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
-  precacheImage(const AssetImage("assets/kelir_jawa_rose_gold.png"), context);
-  precacheImage(const AssetImage("assets/landing_bg_right.png"), context);
-  precacheImage(const AssetImage("assets/kelir_jawa_gold.png"), context);
-  precacheImage(const AssetImage("assets/default_bg.png"), context);
-  precacheImage(const AssetImage("assets/unifying_frame.png"), context);
-  precacheImage(const AssetImage("assets/bismillah.png"), context);
-  precacheImage(const AssetImage("assets/frame_top_left.png"), context);
-  precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
-  precacheImage(const AssetImage("assets/groom.png"), context);
-  precacheImage(const AssetImage("assets/bride.png"), context);
-  precacheImage(const AssetImage("assets/gift.png"), context);
-  precacheImage(const AssetImage("assets/bank_bri.png"), context);
+  _getImageCache(context);
 
   if (vM.invitedGuest == null) {
     await DBRepository.getSome(
@@ -109,7 +101,6 @@ void initViewModel(BuildContext context, ViewModel vM) async {
             instance: toCapitalize(vM.instance),
             nameInstance:
                 "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-            nickName: "",
           ).toJson(),
           collectionRef: DBCollection.invitedGuests,
         ).then((_) {
@@ -420,4 +411,32 @@ void superLogic(ViewModel vM) {
   //     vM.opacity = 0;
   //   }
   // }
+}
+
+void _getImageCache(BuildContext context) {
+  precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_rose_gold.png"), context);
+  precacheImage(const AssetImage("assets/landing_bg_right.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_gold.png"), context);
+  precacheImage(const AssetImage("assets/default_bg.png"), context);
+  precacheImage(const AssetImage("assets/unifying_frame.png"), context);
+  precacheImage(const AssetImage("assets/bismillah.png"), context);
+  precacheImage(const AssetImage("assets/frame_top_left.png"), context);
+  precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
+  precacheImage(const AssetImage("assets/groom.png"), context);
+  precacheImage(const AssetImage("assets/bride.png"), context);
+  precacheImage(const AssetImage("assets/gift.png"), context);
+  precacheImage(const AssetImage("assets/bank_bri.png"), context);
+
+  precacheImage(const AssetImage("assets/avatars/angry.png"), context);
+  precacheImage(const AssetImage("assets/avatars/avatars.png"), context);
+  precacheImage(const AssetImage("assets/avatars/calm.png"), context);
+  precacheImage(const AssetImage("assets/avatars/cry.png"), context);
+  precacheImage(const AssetImage("assets/avatars/happy.png"), context);
+  precacheImage(const AssetImage("assets/avatars/laughing.png"), context);
+  precacheImage(const AssetImage("assets/avatars/love.png"), context);
+  precacheImage(const AssetImage("assets/avatars/pensive.png"), context);
+  precacheImage(const AssetImage("assets/avatars/shock.png"), context);
+  precacheImage(const AssetImage("assets/avatars/unpleasant.png"), context);
+  precacheImage(const AssetImage("assets/avatars/worry.png"), context);
 }

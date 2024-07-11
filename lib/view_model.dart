@@ -50,6 +50,13 @@ class ViewModel extends ChangeNotifier {
   // instance of the person invited
   String instance = "";
 
+  List<String> availableInstances = [
+    "bootcamp_dumbways",
+    "voltras_international",
+  ];
+
+  bool isInstanceAvailable = false;
+
   // hType
   H h = H.Sm;
 
@@ -124,7 +131,21 @@ class ViewModel extends ChangeNotifier {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController remarkController = TextEditingController();
   final TextEditingController attendanceController = TextEditingController();
+  final TextEditingController avatarController = TextEditingController();
   bool attendance = true;
+  final dropDownAttendanceItems = [true, false];
+  final dropDownAvatarItems = [
+    "love",
+    "calm",
+    "unpleasant",
+    "worry",
+    "cry",
+    "happy",
+    "laughing",
+    "shock",
+    "pensive",
+    "angry",
+  ];
 
   bool _isBusy = false;
   bool get isBusy => _isBusy;
