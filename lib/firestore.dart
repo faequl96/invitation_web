@@ -15,7 +15,11 @@ class DBRepository {
     required CollectionReference<Map<String, dynamic>> collectionRef,
   }) async {
     final Completer<void> completer = Completer();
-    collectionRef.doc().set(request).then((_) => completer.complete());
+    collectionRef.doc().set(request).then((_) {
+      completer.complete();
+    }, onError: (e) {
+      completer.complete();
+    });
 
     return await completer.future;
   }
@@ -26,10 +30,32 @@ class DBRepository {
     required String documentId,
   }) async {
     final Completer<void> completer = Completer();
-    collectionRef
-        .doc(documentId)
-        .set(request)
-        .then((_) => completer.complete());
+    collectionRef.doc(documentId).set(request).then((_) {
+      completer.complete();
+    }, onError: (e) {
+      completer.complete();
+    });
+
+    return await completer.future;
+  }
+
+  static Future<List<Map<String, dynamic>>?> getAll({
+    required CollectionReference<Map<String, dynamic>> collectionRef,
+  }) async {
+    final Completer<List<Map<String, dynamic>>?> completer = Completer();
+    collectionRef.get().then((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        List<Map<String, dynamic>> docs = [];
+        for (var docSnapshot in querySnapshot.docs) {
+          docs.add({"id": docSnapshot.id, "data": docSnapshot.data()});
+        }
+        completer.complete(docs);
+      } else {
+        completer.complete();
+      }
+    }, onError: (e) {
+      completer.complete();
+    });
 
     return await completer.future;
   }
@@ -39,10 +65,10 @@ class DBRepository {
     required String documentId,
   }) async {
     final Completer<Map<String, dynamic>?> completer = Completer();
-    collectionRef.doc(documentId).get().then((documentSnapshot) {
+    collectionRef.doc(documentId).get().then((docSnapshot) {
       completer.complete({
-        "id": documentSnapshot.id,
-        "data": documentSnapshot.data(),
+        "id": docSnapshot.id,
+        "data": docSnapshot.data(),
       });
     }, onError: (e) {
       completer.complete();

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
+import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/get_size_render_box.dart';
 
@@ -33,21 +35,39 @@ class Page6 extends StatelessWidget with GetItMixin {
             borderRadius: BorderRadius.circular(16),
           ),
           child: StreamBuilder(
-            stream: DBCollection.rsvps.orderBy("dateTime").snapshots(),
+            stream: DBCollection.rsvps
+                .orderBy("dateTime", descending: true)
+                .snapshots(),
             builder: (_, snapshot) {
               if (snapshot.hasData) {
+                List<RSVP> rsvps = [];
+                for (var item in snapshot.data!.docs) {
+                  rsvps.add(
+                    RSVP.fromJson(
+                      RSVPType.Message,
+                      {"id": item.id, "data": item.data()},
+                    ),
+                  );
+                }
+                vM.rsvps = rsvps;
+
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 8),
-                    ...snapshot.data!.docs.map((e) {
-                      return RSVPsItem(vM: vM, rsvpData: e.data());
-                    }),
+                    ...rsvps.map((e) => RSVPItem(vM: vM, rsvp: e)),
                     const SizedBox(height: 8),
                   ],
                 );
               } else {
-                return const SizedBox.shrink();
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(height: 8),
+                    ...vM.rsvps.map((e) => RSVPItem(vM: vM, rsvp: e)),
+                    const SizedBox(height: 8),
+                  ],
+                );
               }
             },
           ),
@@ -57,27 +77,23 @@ class Page6 extends StatelessWidget with GetItMixin {
   }
 }
 
-class RSVPsItem extends StatefulWidget {
-  const RSVPsItem({
-    super.key,
-    required this.vM,
-    required this.rsvpData,
-  });
+class RSVPItem extends StatefulWidget {
+  const RSVPItem({super.key, required this.vM, required this.rsvp});
 
   final ViewModel vM;
-  final Map<String, dynamic> rsvpData;
+  final RSVP rsvp;
 
   @override
-  State<RSVPsItem> createState() => _RSVPsItemState();
+  State<RSVPItem> createState() => _RSVPItemState();
 }
 
-class _RSVPsItemState extends State<RSVPsItem> {
+class _RSVPItemState extends State<RSVPItem> {
   InvitedGuest? invitedGuest;
 
   _getInvitedGuestData() async {
     DBRepository.getOne(
       collectionRef: DBCollection.invitedGuests,
-      documentId: widget.rsvpData["invitedGuestsId"],
+      documentId: widget.rsvp.invitedGuestId,
     ).then((value) {
       if (value != null) {
         invitedGuest = InvitedGuest.fromJson(value);
@@ -98,13 +114,13 @@ class _RSVPsItemState extends State<RSVPsItem> {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
         children: [
-          if (widget.rsvpData["invited"] == false)
+          if (widget.rsvp.invited == false)
             SizedBox(
               height: 32,
               width: 32,
               child: Image(
                 image: AssetImage(
-                  "assets/avatars/${widget.rsvpData["avatar"]}.png",
+                  "assets/avatars/${widget.rsvp.avatar}.png",
                 ),
                 fit: BoxFit.fitWidth,
               ),
@@ -126,12 +142,12 @@ class _RSVPsItemState extends State<RSVPsItem> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.rsvpData["invited"] == false
-                      ? widget.rsvpData["guestName"]
+                  widget.rsvp.invited == false
+                      ? widget.rsvp.guestName
                       : invitedGuest?.nickName ?? "",
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(widget.rsvpData["remark"]),
+                Text(widget.rsvp.remark),
               ],
             ),
           ),

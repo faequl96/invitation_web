@@ -24,8 +24,8 @@ class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
 
-    return DropdownMenu<bool>(
-      initialSelection: true,
+    return DropdownMenu<String>(
+      initialSelection: "Hadir",
       controller: widget.textEditingController,
       requestFocusOnTap: false,
       textStyle: TextStyle(fontSize: s(vM.w, 14, 14.4, 15, 15.8)),
@@ -62,20 +62,9 @@ class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
           EdgeInsets.symmetric(vertical: 16),
         ),
       ),
-      onSelected: (bool? value) {
-        if (value == true) {
-          widget.textEditingController.text = "Hadir";
-          vM.attendance = true;
-        } else {
-          widget.textEditingController.text = "Tidak Hadir";
-          vM.attendance = false;
-        }
-      },
-      dropdownMenuEntries: vM.dropDownAttendanceItems.map((bool value) {
-        return DropdownMenuEntry<bool>(
-          value: value,
-          label: value ? "Hadir" : "Tidak Hadir",
-        );
+      onSelected: (String? value) {},
+      dropdownMenuEntries: vM.dropDownAttendanceItems.map((String value) {
+        return DropdownMenuEntry<String>(value: value, label: value);
       }).toList(),
     );
   }

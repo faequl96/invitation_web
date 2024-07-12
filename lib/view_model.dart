@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
+import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -132,8 +133,12 @@ class ViewModel extends ChangeNotifier {
   final TextEditingController remarkController = TextEditingController();
   final TextEditingController attendanceController = TextEditingController();
   final TextEditingController avatarController = TextEditingController();
-  bool attendance = true;
-  final dropDownAttendanceItems = [true, false];
+  final dropDownAttendanceItems = [
+    "Hadir",
+    "Tidak Hadir",
+    "InsyaAllah Iya",
+    "InsyaAllah Enggak"
+  ];
   final dropDownAvatarItems = [
     "love",
     "calm",
@@ -155,6 +160,7 @@ class ViewModel extends ChangeNotifier {
   }
 
   InvitedGuest? invitedGuest;
+  List<RSVP> rsvps = [];
 
   double _page6SliderHeight = 0;
   double get page6SliderHeight => _page6SliderHeight;

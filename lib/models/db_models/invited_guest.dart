@@ -6,7 +6,7 @@ class InvitedGuest {
     required this.instance,
     this.nickName = "",
     this.avatar = "",
-    this.attendance = true,
+    this.attendance = "",
   });
 
   final String id;
@@ -15,7 +15,7 @@ class InvitedGuest {
   final String instance;
   final String nickName;
   final String avatar;
-  final bool attendance;
+  final String attendance;
 
   factory InvitedGuest.fromJson(Map<String, dynamic> json) {
     return _$InvitedGuestFromJson(json);
@@ -29,7 +29,7 @@ class InvitedGuest {
     String? instance,
     String? nickName,
     String? avatar,
-    bool? attendance,
+    String? attendance,
   }) {
     return _$InvitedGuestCopyWith(
       this,
@@ -51,18 +51,18 @@ InvitedGuest _$InvitedGuestFromJson(Map<String, dynamic> json) {
     instance: json['data']['instance'] as String,
     nickName: json['data']['nickName'] as String,
     avatar: json['data']['avatar'] as String,
-    attendance: json['data']['attendance'] as bool,
+    attendance: json['data']['attendance'] as String,
   );
 }
 
-Map<String, dynamic> _$InvitedGuestToJson(InvitedGuest invitedGuests) {
+Map<String, dynamic> _$InvitedGuestToJson(InvitedGuest invitedGuest) {
   return <String, dynamic>{
-    "nameInstance": invitedGuests.nameInstance,
-    "name": invitedGuests.name,
-    "instance": invitedGuests.instance,
-    "nickName": invitedGuests.nickName,
-    "avatar": invitedGuests.avatar,
-    "attendance": invitedGuests.attendance,
+    "nameInstance": invitedGuest.nameInstance,
+    "name": invitedGuest.name,
+    "instance": invitedGuest.instance,
+    "nickName": invitedGuest.nickName,
+    "avatar": invitedGuest.avatar,
+    "attendance": invitedGuest.attendance,
   };
 }
 
@@ -73,7 +73,7 @@ InvitedGuest _$InvitedGuestCopyWith(
   String? instance,
   String? nickName,
   String? avatar,
-  bool? attendance,
+  String? attendance,
 }) {
   return InvitedGuest(
     nameInstance: nameInstance ?? invitedGuests.nameInstance,

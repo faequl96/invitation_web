@@ -112,10 +112,13 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           final avatar = vM.avatarController.text.isEmpty
               ? "avatars"
               : vM.avatarController.text;
+          final attendance = vM.attendanceController.text.isEmpty
+              ? "Hadir"
+              : vM.attendanceController.text;
           final invitedGuest = vM.invitedGuest!.copyWith(
             nickName: nickName,
-            attendance: vM.attendance,
             avatar: avatar,
+            attendance: attendance,
           );
 
           await DBRepository.update(
@@ -126,17 +129,19 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         }
 
         final rsvp = RSVP.message(
-          invitedGuestsId: vM.invitedGuest?.id ?? "",
-          remark: vM.remarkController.text.isEmpty
-              ? "Selamat Yaa"
-              : vM.remarkController.text,
-          invited: vM.invitedGuest!.nameInstance == "__" ? false : true,
-          attendance: vM.attendance,
+          invitedGuestId: vM.invitedGuest?.id ?? "",
+          guestName: vM.nameController.text,
           avatar: vM.avatarController.text.isEmpty
               ? "avatars"
               : vM.avatarController.text,
+          invited: vM.invitedGuest!.nameInstance == "__" ? false : true,
+          attendance: vM.attendanceController.text.isEmpty
+              ? "Hadir"
+              : vM.attendanceController.text,
+          remark: vM.remarkController.text.isEmpty
+              ? "Selamat Yaa"
+              : vM.remarkController.text,
           dateTime: DateTime.now().millisecondsSinceEpoch,
-          guestName: vM.nameController.text,
         );
 
         await DBRepository.create(
