@@ -29,6 +29,23 @@ String toCapitalize(String value) {
 
 String toUnderScore(String value) => value.replaceAll("-", "_");
 
+int diffOfMillisecondsSinceEpoch(int value) {
+  late int returnValue;
+  final int nowMillisecondsSinceEpoch = DateTime.now().millisecondsSinceEpoch;
+  returnValue = nowMillisecondsSinceEpoch - value;
+
+  return returnValue;
+}
+
+String getTime(int value) {
+  final Duration duration = Duration(milliseconds: value);
+
+  if (duration.inDays != 0) return "${duration.inDays} hari";
+  if (duration.inHours != 0) return "${duration.inHours} jam";
+  if (duration.inMinutes != 0) return "${duration.inMinutes} menit";
+  return "${duration.inSeconds} detik";
+}
+
 double s(Enum type, double sm, double md, double lg, double xl) {
   final Map<Enum, double> mapOfSize = {
     H.Sm: sm,
