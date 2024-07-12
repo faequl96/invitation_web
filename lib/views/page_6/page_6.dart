@@ -143,7 +143,7 @@ class _RSVPItemState extends State<RSVPItem> {
               children: [
                 Text(
                   widget.rsvp.invited == false
-                      ? widget.rsvp.guestName
+                      ? "Guest_${widget.rsvp.guestName}"
                       : invitedGuest?.nickName ?? "",
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),

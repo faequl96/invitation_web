@@ -66,10 +66,14 @@ class DBRepository {
   }) async {
     final Completer<Map<String, dynamic>?> completer = Completer();
     collectionRef.doc(documentId).get().then((docSnapshot) {
-      completer.complete({
-        "id": docSnapshot.id,
-        "data": docSnapshot.data(),
-      });
+      if (docSnapshot.data() != null) {
+        completer.complete({
+          "id": docSnapshot.id,
+          "data": docSnapshot.data(),
+        });
+      } else {
+        completer.complete();
+      }
     }, onError: (e) {
       completer.complete();
     });
