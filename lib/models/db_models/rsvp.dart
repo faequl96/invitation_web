@@ -7,6 +7,7 @@ class RSVP {
     required this.remark,
     required this.invited,
     required this.attendance,
+    required this.avatar,
     required this.dateTime,
     this.guestName = "",
   }) : type = RSVPType.Message;
@@ -25,6 +26,7 @@ class RSVP {
   final String remark;
   late final bool invited;
   late final bool attendance;
+  late final String avatar;
   final int dateTime;
   final String guestName;
 
@@ -39,6 +41,7 @@ class RSVP {
     String? remark,
     bool? invited,
     bool? attendance,
+    String? avatar,
     int? dateTime,
     String? guestName,
   }) {
@@ -49,6 +52,7 @@ class RSVP {
       remark: remark,
       invited: invited,
       attendance: attendance,
+      avatar: avatar,
       dateTime: dateTime,
       guestName: guestName,
     );
@@ -63,6 +67,7 @@ RSVP _$RSVPFromJson(RSVPType type, Map<String, dynamic> json) {
       remark: json['data']['remark'] as String,
       invited: json['data']['invited'] as bool,
       attendance: json['data']['attendance'] as bool,
+      avatar: json['data']['avatar'] as String,
       dateTime: json['data']['dateTime'] as int,
       guestName: json['data']['guestName'] as String,
     ),
@@ -84,6 +89,7 @@ Map<String, dynamic> _$RSVPToJson(RSVPType type, RSVP rsvp) {
       "remark": rsvp.remark,
       "invited": rsvp.invited,
       "attendance": rsvp.attendance,
+      "avatar": rsvp.avatar,
       "dateTime": rsvp.dateTime,
       "guestName": rsvp.guestName,
     },
@@ -105,6 +111,7 @@ RSVP _$RSVPCopyWith(
   String? remark,
   bool? attendance,
   bool? invited,
+  String? avatar,
   int? dateTime,
   String? guestName,
 }) {
@@ -114,6 +121,7 @@ RSVP _$RSVPCopyWith(
       remark: remark ?? rsvp.remark,
       invited: invited ?? rsvp.invited,
       attendance: attendance ?? rsvp.attendance,
+      avatar: avatar ?? rsvp.avatar,
       dateTime: dateTime ?? rsvp.dateTime,
       guestName: guestName ?? rsvp.guestName,
     ),

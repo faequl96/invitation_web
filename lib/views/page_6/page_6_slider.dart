@@ -110,7 +110,7 @@ class SubmitButton extends StatelessWidget with GetItMixin {
                   ? toCapitalize(vM.toName)
                   : vM.nameController.text;
           final avatar = vM.avatarController.text.isEmpty
-              ? null
+              ? "avatars"
               : vM.avatarController.text;
           final invitedGuest = vM.invitedGuest!.copyWith(
             nickName: nickName,
@@ -132,6 +132,9 @@ class SubmitButton extends StatelessWidget with GetItMixin {
               : vM.remarkController.text,
           invited: vM.invitedGuest!.nameInstance == "__" ? false : true,
           attendance: vM.attendance,
+          avatar: vM.avatarController.text.isEmpty
+              ? "avatars"
+              : vM.avatarController.text,
           dateTime: DateTime.now().millisecondsSinceEpoch,
           guestName: vM.nameController.text,
         );

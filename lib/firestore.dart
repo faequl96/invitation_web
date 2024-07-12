@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -35,12 +34,21 @@ class DBRepository {
     return await completer.future;
   }
 
-  static void get({
-    required DocumentReference<Map<String, dynamic>> docRef,
+  static Future<Map<String, dynamic>?> getOne({
+    required CollectionReference<Map<String, dynamic>> collectionRef,
+    required String documentId,
   }) async {
-    final docSnap = await docRef.get();
-    final data = docSnap.data();
-    print(inspect(data));
+    final Completer<Map<String, dynamic>?> completer = Completer();
+    collectionRef.doc(documentId).get().then((documentSnapshot) {
+      completer.complete({
+        "id": documentSnapshot.id,
+        "data": documentSnapshot.data(),
+      });
+    }, onError: (e) {
+      completer.complete();
+    });
+
+    return await completer.future;
   }
 
   static Future<Map<String, dynamic>?> getSome({

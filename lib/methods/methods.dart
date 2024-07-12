@@ -115,7 +115,9 @@ void initViewModel(BuildContext context, ViewModel vM) async {
               vM.invitedGuest = InvitedGuest.fromJson(value);
               vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
                   ? ""
-                  : vM.invitedGuest!.nickName;
+                  : vM.invitedGuest!.nickName.isEmpty
+                      ? vM.invitedGuest!.name
+                      : vM.invitedGuest!.nickName;
             }
           });
         });
@@ -123,7 +125,9 @@ void initViewModel(BuildContext context, ViewModel vM) async {
         vM.invitedGuest = InvitedGuest.fromJson(value);
         vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
             ? ""
-            : vM.invitedGuest!.nickName;
+            : vM.invitedGuest!.nickName.isEmpty
+                ? vM.invitedGuest!.name
+                : vM.invitedGuest!.nickName;
       }
     });
   }
