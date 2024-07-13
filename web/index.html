@@ -33,6 +33,26 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      vertical-align: baseline;
+    }
+
+    body {
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #root, #__next {
+      isolation: isolate;
+    }
+
     .bodyload {
       display: flex;
       flex-direction: column;
