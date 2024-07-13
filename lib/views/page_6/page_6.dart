@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:card_loading/card_loading.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
@@ -84,12 +87,11 @@ class Page6 extends StatelessWidget with GetItMixin {
                   children: [
                     const SizedBox(height: 8),
                     ...vM.rsvps.mapIndexed((i, e) {
-                      if (i == vM.rsvps.length - 1) {
-                        return RSVPItem(vM: vM, rsvp: e);
-                      }
+                      if (i == vM.rsvps.length - 1) const RSVPSkeleton();
                       return Column(
                         children: [
-                          RSVPItem(vM: vM, rsvp: e),
+                          const RSVPSkeleton(),
+                          const SizedBox(height: 4),
                           Container(
                             height: 1,
                             width: double.maxFinite,
@@ -172,6 +174,12 @@ class _RSVPItemState extends State<RSVPItem> {
                 ),
                 fit: BoxFit.fitWidth,
               ),
+            )
+          else
+            CardLoading(
+              height: 32,
+              width: 32,
+              borderRadius: BorderRadius.circular(10),
             ),
           const SizedBox(width: 10),
           Expanded(
@@ -180,16 +188,32 @@ class _RSVPItemState extends State<RSVPItem> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      widget.rsvp.invited == false
-                          ? "Guest_${widget.rsvp.guestName}"
-                          : invitedGuest?.nickName ?? "",
-                      style: TextStyle(
-                        fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
-                        fontWeight: FontWeight.bold,
-                        height: 1.2,
+                    if (widget.rsvp.invited == false)
+                      Text(
+                        "Guest_${widget.rsvp.guestName}",
+                        style: TextStyle(
+                          fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
+                          fontWeight: FontWeight.bold,
+                          height: 1.16,
+                        ),
+                      )
+                    else if (invitedGuest != null)
+                      Text(
+                        invitedGuest?.nickName ?? "",
+                        style: TextStyle(
+                          fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
+                          fontWeight: FontWeight.bold,
+                          height: 1.16,
+                        ),
+                      )
+                    else
+                      CardLoading(
+                        height: 12,
+                        width: 50 + Random().nextInt(20).toDouble(),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
-                    ),
                     const SizedBox(width: 8),
                     Text(
                       getTime(
@@ -198,19 +222,37 @@ class _RSVPItemState extends State<RSVPItem> {
                       style: TextStyle(
                         color: Colors.grey.shade600,
                         fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
-                        height: 1.2,
+                        height: 1.16,
                       ),
                     ),
                   ],
                 ),
-                Text(
-                  "@${invitedGuest?.nameInstance ?? ""}${invitedGuest?.nameInstance == "__" ? "Guest" : ""}",
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: s(widget.vM.w, 10.8, 11.2, 11.8, 12.6),
-                    height: 1.2,
-                  ),
-                ),
+                if (widget.rsvp.invited == false)
+                  Text(
+                    "@__Guest",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: s(widget.vM.w, 10.8, 11.2, 11.8, 12.6),
+                      height: 1.16,
+                    ),
+                  )
+                else if (invitedGuest != null)
+                  Text(
+                    "@${invitedGuest!.nameInstance}",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: s(widget.vM.w, 10.8, 11.2, 11.8, 12.6),
+                      height: 1.16,
+                    ),
+                  )
+                else ...[
+                  const SizedBox(height: 4),
+                  CardLoading(
+                    height: 9,
+                    width: 100 + Random().nextInt(60).toDouble(),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  )
+                ],
                 const SizedBox(height: 4),
                 Text(
                   widget.rsvp.attendance,
@@ -231,6 +273,69 @@ class _RSVPItemState extends State<RSVPItem> {
                   style: TextStyle(
                     fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
                   ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class RSVPSkeleton extends StatelessWidget {
+  const RSVPSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CardLoading(
+            height: 32,
+            width: 32,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 1),
+                Row(
+                  children: [
+                    CardLoading(
+                      height: 12,
+                      width: 50 + Random().nextInt(20).toDouble(),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    const SizedBox(width: 8),
+                    const CardLoading(
+                      height: 12,
+                      width: 32,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                CardLoading(
+                  height: 9,
+                  width: 100 + Random().nextInt(60).toDouble(),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                const SizedBox(height: 7),
+                CardLoading(
+                  height: 10,
+                  width: 40 + Random().nextInt(20).toDouble(),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                const SizedBox(height: 7),
+                CardLoading(
+                  height: 12,
+                  width: 140 + Random().nextInt(120).toDouble(),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
               ],
             ),

@@ -139,6 +139,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
 
               DBRepository.getAll(
                 collectionRef: DBCollection.rsvps,
+                orderBy: DBOrderBy(field: "dateTime", descending: true),
               ).then((values) {
                 if (values != null) {
                   List<RSVP> rsvps = [];
