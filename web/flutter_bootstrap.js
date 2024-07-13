@@ -15,16 +15,14 @@ loadingContainer.innerHTML = `
 
 document.body.appendChild(loadingContainer);
 let loadText = document.getElementById("loadText");
-// loadText.textContent = "mengunduh konten";
+loadText.textContent = "mengunduh konten";
 
-// loading.textContent = "mengunduh konten";
-// loading.setAttribute("align", "center");
 _flutter.loader.load({
   onEntrypointLoaded: async function(engineInitializer) {
-    // loadText.textContent = "menyiapkan";
+    loadText.textContent = "menyiapkan";
     const appRunner = await engineInitializer.initializeEngine();
 
-    // loadText.textContent = "menjalankan aplikasi web";
+    loadText.textContent = "menjalankan aplikasi web";
     await appRunner.runApp();
   }
 });
