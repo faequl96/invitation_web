@@ -21,11 +21,24 @@ dependencies:
   cloud_firestore: ^5.1.0
   collection: ^1.18.0
   card_loading: ^0.3.2
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/splash.png
+  # image: assets/logo-development.png
+  # branding: assets/branding-development.png
+  # color_dark: "#121212"
+  # image_dark: assets/logo-development.png
+  # branding_dark: assets/branding-development.png
+  android: false
+  ios: false
+  web: true
   
 flutter:
   uses-material-design: true
