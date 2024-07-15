@@ -28,10 +28,10 @@ class Page6 extends StatelessWidget with GetItMixin {
         onChange: (size) async {
           await Future.delayed(const Duration(microseconds: 100));
           vM.page6Height = size.height;
-          final remainingHeight = vM.s.height - vM.page6SliderHeight;
+          // final remainingHeight = vM.s.height - vM.page6SliderHeight;
 
           vM.additionalPage =
-              ((vM.page6Height - remainingHeight) / vM.s.height).ceil();
+              ((vM.page6Height - vM.page6SliderHeight) / vM.s.height).ceil();
         },
         child: Container(
           width: vM.s.width - 32,
@@ -87,7 +87,11 @@ class Page6 extends StatelessWidget with GetItMixin {
                   children: [
                     const SizedBox(height: 8),
                     ...vM.rsvps.mapIndexed((i, e) {
-                      if (i == vM.rsvps.length - 1) const RSVPSkeleton();
+                      if (i == vM.rsvps.length - 1) {
+                        return const Column(
+                          children: [RSVPSkeleton(), SizedBox(height: 4)],
+                        );
+                      }
                       return Column(
                         children: [
                           const RSVPSkeleton(),
@@ -208,7 +212,7 @@ class _RSVPItemState extends State<RSVPItem> {
                       )
                     else
                       CardLoading(
-                        height: s(widget.vM.w, 11.2, 12, 13, 14.2),
+                        height: s(widget.vM.w, 11, 12, 13, 14),
                         width: 50 + Random().nextInt(20).toDouble(),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
@@ -248,7 +252,7 @@ class _RSVPItemState extends State<RSVPItem> {
                 else ...[
                   const SizedBox(height: 4),
                   CardLoading(
-                    height: s(widget.vM.w, 8.2, 9, 10, 11.2),
+                    height: s(widget.vM.w, 8, 9, 10, 11),
                     width: 100 + Random().nextInt(60).toDouble(),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   )
@@ -309,13 +313,13 @@ class RSVPSkeleton extends StatelessWidget {
                 Row(
                   children: [
                     CardLoading(
-                      height: s(vM.w, 11.2, 12, 13, 14.2),
+                      height: s(vM.w, 11, 12, 13, 14),
                       width: 50 + Random().nextInt(20).toDouble(),
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                     const SizedBox(width: 8),
                     CardLoading(
-                      height: s(vM.w, 11.2, 12, 13, 14.2),
+                      height: s(vM.w, 11, 12, 13, 14),
                       width: 32,
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
@@ -323,19 +327,19 @@ class RSVPSkeleton extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 CardLoading(
-                  height: s(vM.w, 8.2, 9, 10, 11.2),
+                  height: s(vM.w, 8, 9, 10, 11),
                   width: 100 + Random().nextInt(60).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 const SizedBox(height: 7),
                 CardLoading(
-                  height: s(vM.w, 9.2, 10, 11, 12.2),
+                  height: s(vM.w, 9, 10, 11, 12),
                   width: 40 + Random().nextInt(20).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 const SizedBox(height: 7),
                 CardLoading(
-                  height: s(vM.w, 11.2, 12, 13, 14.2),
+                  height: s(vM.w, 11, 12, 13, 14),
                   width: 140 + Random().nextInt(120).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
