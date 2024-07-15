@@ -8,8 +8,6 @@ class Page7Slider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final ViewModel vM = locator<ViewModel>();
-
     return SizedBox(
       height: double.maxFinite,
       width: double.maxFinite,
@@ -57,11 +55,10 @@ class ShowRSVPDetailButton extends StatelessWidget {
         backgroundColor: Colors.white,
         padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
-      onPressed: () async {
+      onPressed: () {
         showModalBottomSheet(
           backgroundColor: Colors.transparent,
           barrierColor: Colors.black54,
-          // isDismissible: false,
           isScrollControlled: true,
           context: context,
           builder: (context) {
@@ -69,34 +66,23 @@ class ShowRSVPDetailButton extends StatelessWidget {
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              child: SizedBox(
+              child: Container(
                 height: 560,
-                child: Column(
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 8,
-                      margin: const EdgeInsets.symmetric(vertical: 6),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 230, 211, 164),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/default_bg.png"),
+                    colorFilter: ColorFilter.mode(
+                      Color.fromARGB(255, 230, 211, 164),
+                      BlendMode.overlay,
                     ),
-                    Expanded(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 230, 211, 164),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        child: RSVPsWidget(vM: vM),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
+                child: RSVPsModalContent(vM: vM),
               ),
             );
           },
@@ -110,6 +96,76 @@ class ShowRSVPDetailButton extends StatelessWidget {
           fontSize: s(vM.w, 14, 14.4, 15, 15.8),
         ),
       ),
+    );
+  }
+}
+
+class RSVPsModalContent extends StatelessWidget {
+  const RSVPsModalContent({super.key, required this.vM});
+
+  final ViewModel vM;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            const SizedBox(width: 16),
+            const Expanded(
+              child: Text(
+                "RSVP & Ucapan",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 230, 211, 164),
+                ),
+              ),
+            ),
+            Container(
+              width: 50,
+              height: 8,
+              margin: const EdgeInsets.symmetric(vertical: 6),
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 230, 211, 164),
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 230, 211, 164),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(Icons.close_rounded),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(width: 16),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 230, 211, 164),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: RSVPsWidget(vM: vM),
+          ),
+        ),
+      ],
     );
   }
 }
