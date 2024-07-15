@@ -10,7 +10,6 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
-import 'package:invitation_web/views/shared/get_size_render_box.dart';
 
 class Page6 extends StatelessWidget with GetItMixin {
   Page6({super.key});
@@ -24,96 +23,101 @@ class Page6 extends StatelessWidget with GetItMixin {
           ? vM.s.height -
               (vM.sV - (vM.s.height * 5 + (vM.page6SliderHeight + 20)))
           : vM.s.height,
-      child: GetSizeRenderBox(
-        onChange: (size) async {
-          await Future.delayed(const Duration(microseconds: 100));
-          vM.page6Height = size.height;
-          // final remainingHeight = vM.s.height - vM.page6SliderHeight;
-
-          vM.additionalPage =
-              ((vM.page6Height - vM.page6SliderHeight) / vM.s.height).ceil();
-        },
-        child: Container(
-          width: vM.s.width - 32,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 230, 211, 164),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: StreamBuilder(
-            stream: DBCollection.rsvps
-                .orderBy("dateTime", descending: true)
-                .snapshots(),
-            builder: (_, snapshot) {
-              if (snapshot.hasData) {
-                List<RSVP> rsvps = [];
-                for (var item in snapshot.data!.docs) {
-                  rsvps.add(
-                    RSVP.fromJson(
-                      RSVPType.Message,
-                      {"id": item.id, "data": item.data()},
-                    ),
-                  );
-                }
-                vM.rsvps = rsvps;
-
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 8),
-                    ...rsvps.mapIndexed((i, e) {
-                      if (i == rsvps.length - 1) {
-                        return RSVPItem(vM: vM, rsvp: e);
-                      }
-                      return Column(
-                        children: [
-                          RSVPItem(vM: vM, rsvp: e),
-                          Container(
-                            height: 1,
-                            width: double.maxFinite,
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            color: Colors.black26,
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      );
-                    }),
-                    const SizedBox(height: 8),
-                  ],
-                );
-              }
-              if (vM.rsvps.isNotEmpty) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const SizedBox(height: 8),
-                    ...vM.rsvps.mapIndexed((i, e) {
-                      if (i == vM.rsvps.length - 1) {
-                        return const Column(
-                          children: [RSVPSkeleton(), SizedBox(height: 4)],
-                        );
-                      }
-                      return Column(
-                        children: [
-                          const RSVPSkeleton(),
-                          const SizedBox(height: 4),
-                          Container(
-                            height: 1,
-                            width: double.maxFinite,
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            color: Colors.black26,
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      );
-                    }),
-                    const SizedBox(height: 8),
-                  ],
-                );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
+      child: Container(
+        width: vM.s.width - 32,
+        height: (vM.s.height - 36) + (vM.s.height - vM.page6SliderHeight),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 230, 211, 164),
+          borderRadius: BorderRadius.circular(16),
         ),
+        child: RSVPsWidget(vM: vM),
+      ),
+    );
+  }
+}
+
+class RSVPsWidget extends StatelessWidget {
+  const RSVPsWidget({super.key, required this.vM});
+
+  final ViewModel vM;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: StreamBuilder(
+        stream: DBCollection.rsvps
+            .orderBy("dateTime", descending: true)
+            .limit(13)
+            .snapshots(),
+        builder: (_, snapshot) {
+          if (snapshot.hasData) {
+            List<RSVP> rsvps = [];
+            for (var item in snapshot.data!.docs) {
+              rsvps.add(
+                RSVP.fromJson(
+                  RSVPType.Message,
+                  {"id": item.id, "data": item.data()},
+                ),
+              );
+            }
+            vM.rsvps = rsvps;
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 8),
+                ...rsvps.mapIndexed((i, e) {
+                  if (i == rsvps.length - 1) {
+                    return RSVPItem(vM: vM, rsvp: e);
+                  }
+                  return Column(
+                    children: [
+                      RSVPItem(vM: vM, rsvp: e),
+                      Container(
+                        height: 1,
+                        width: double.maxFinite,
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
+                        color: Colors.black26,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  );
+                }),
+                const SizedBox(height: 8),
+              ],
+            );
+          }
+          if (vM.rsvps.isNotEmpty) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 8),
+                ...vM.rsvps.mapIndexed((i, e) {
+                  if (i == vM.rsvps.length - 1) {
+                    return const Column(
+                      children: [RSVPSkeleton(), SizedBox(height: 4)],
+                    );
+                  }
+                  return Column(
+                    children: [
+                      const RSVPSkeleton(),
+                      const SizedBox(height: 4),
+                      Container(
+                        height: 1,
+                        width: double.maxFinite,
+                        margin: const EdgeInsets.symmetric(horizontal: 16),
+                        color: Colors.black26,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  );
+                }),
+                const SizedBox(height: 8),
+              ],
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
