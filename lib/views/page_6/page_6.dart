@@ -208,7 +208,7 @@ class _RSVPItemState extends State<RSVPItem> {
                       )
                     else
                       CardLoading(
-                        height: 12,
+                        height: s(widget.vM.w, 11.6, 12, 12.6, 13.4),
                         width: 50 + Random().nextInt(20).toDouble(),
                         borderRadius: const BorderRadius.all(
                           Radius.circular(10),
@@ -248,7 +248,7 @@ class _RSVPItemState extends State<RSVPItem> {
                 else ...[
                   const SizedBox(height: 4),
                   CardLoading(
-                    height: 9,
+                    height: s(widget.vM.w, 8.6, 9, 9.6, 10.4),
                     width: 100 + Random().nextInt(60).toDouble(),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                   )
@@ -288,6 +288,8 @@ class RSVPSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ViewModel vM = locator<ViewModel>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
@@ -307,33 +309,33 @@ class RSVPSkeleton extends StatelessWidget {
                 Row(
                   children: [
                     CardLoading(
-                      height: 12,
+                      height: s(vM.w, 11.6, 12, 12.6, 13.4),
                       width: 50 + Random().nextInt(20).toDouble(),
                       borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                     const SizedBox(width: 8),
-                    const CardLoading(
-                      height: 12,
+                    CardLoading(
+                      height: s(vM.w, 11.6, 12, 12.6, 13.4),
                       width: 32,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 5),
                 CardLoading(
-                  height: 9,
+                  height: s(vM.w, 8.6, 9, 9.6, 10.4),
                   width: 100 + Random().nextInt(60).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 const SizedBox(height: 7),
                 CardLoading(
-                  height: 10,
+                  height: s(vM.w, 9.6, 10, 10.6, 11.4),
                   width: 40 + Random().nextInt(20).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
                 const SizedBox(height: 7),
                 CardLoading(
-                  height: 12,
+                  height: s(vM.w, 11.6, 12, 12.6, 13.4),
                   width: 140 + Random().nextInt(120).toDouble(),
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                 ),
