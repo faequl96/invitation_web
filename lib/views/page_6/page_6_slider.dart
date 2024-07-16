@@ -3,6 +3,7 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
+import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/page_6/dropdown_attendance_widget.dart';
@@ -73,7 +74,7 @@ class Page6Slider extends StatelessWidget {
                           textEditingController: vM.avatarController,
                         ),
                         const SizedBox(height: 12),
-                        SizedBox(height: 46, child: SubmitButton()),
+                        const SizedBox(height: 46, child: SubmitButton()),
                       ],
                     ),
                   ),
@@ -87,14 +88,12 @@ class Page6Slider extends StatelessWidget {
   }
 }
 
-class SubmitButton extends StatelessWidget with GetItMixin {
-  SubmitButton({super.key});
+class SubmitButton extends StatelessWidget {
+  const SubmitButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
-
-    watchOnly((ViewModel x) => x.isBusy);
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -102,7 +101,7 @@ class SubmitButton extends StatelessWidget with GetItMixin {
         padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
       onPressed: () async {
-        vM.isBusy = true;
+        vM.isLoadingSubmit = true;
 
         if (vM.invitedGuest != null) {
           final nickName = vM.invitedGuest!.nameInstance == "__"
@@ -150,6 +149,9 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           collectionRef: DBCollection.rsvps,
         );
 
+        vM.isLoadingSubmit = false;
+        vM.isLoadingSkeleton = true;
+
         await DBRepository.getAll(
           collectionRef: DBCollection.rsvps,
           orderBy: DBOrderBy(field: "dateTime", descending: true),
@@ -163,79 +165,55 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           }
         });
 
-        vM.isBusy = false;
-        // getFromDB(vM);
-        // showModalBottomSheet(
-        //   backgroundColor: Colors.transparent,
-        //   barrierColor: Colors.black54,
-        //   isDismissible: false,
-        //   isScrollControlled: true,
-        //   context: context,
-        //   builder: (context) {
-        //     return Padding(
-        //       padding: EdgeInsets.only(
-        //         bottom: MediaQuery.of(context).viewInsets.bottom,
-        //       ),
-        //       child: SizedBox(
-        //         height: 480,
-        //         child: Column(
-        //           children: [
-        //             Container(
-        //               width: 80,
-        //               height: 8,
-        //               margin:
-        //                   const EdgeInsets.symmetric(vertical: 6),
-        //               decoration: BoxDecoration(
-        //                 color: Colors.white,
-        //                 borderRadius: BorderRadius.circular(4),
-        //               ),
-        //             ),
-        //             Expanded(
-        //               child: Container(
-        //                 decoration: BoxDecoration(
-        //                   color: Colors.white,
-        //                   borderRadius: BorderRadius.circular(10),
-        //                 ),
-        //                 clipBehavior: Clip.hardEdge,
-        //                 child: Column(
-        //                   children: [
-        //                     TextFieldWidget(
-        //                       labelText: "Nama",
-        //                       textEditingController:
-        //                           vM.nameController,
-        //                     ),
-        //                   ],
-        //                 ),
-        //               ),
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // );
+        await DBRepository.getAll(
+          collectionRef: DBCollection.invitedGuests,
+          orderBy: DBOrderBy(field: "dateTime", descending: true),
+        ).then((values) {
+          if (values != null) {
+            List<InvitedGuest> invitedGuests = [];
+            for (var item in values) {
+              invitedGuests.add(InvitedGuest.fromJson(item));
+            }
+            vM.invitedGuests = invitedGuests;
+          }
+        });
+
+        vM.isLoadingSkeleton = false;
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (vM.isBusy) ...[
-            SizedBox(
-              width: s(vM.w, 24.6, 25.2, 25.8, 26.4),
-              height: s(vM.w, 24.6, 25.2, 25.8, 26.4),
-              child: const CircularProgressIndicator(),
-            ),
-            const SizedBox(width: 10),
-          ],
-          Text(
-            "Submit",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: s(vM.w, 14, 14.4, 15, 15.8),
-            ),
+      child: SubmitButtonDesign(),
+    );
+  }
+}
+
+class SubmitButtonDesign extends StatelessWidget with GetItMixin {
+  SubmitButtonDesign({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final ViewModel vM = get<ViewModel>();
+
+    watchOnly((ViewModel x) => x.isLoadingSubmit);
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (vM.isLoadingSubmit) ...[
+          SizedBox(
+            width: s(vM.w, 24.6, 25.2, 25.8, 26.4),
+            height: s(vM.w, 24.6, 25.2, 25.8, 26.4),
+            child: const CircularProgressIndicator(),
           ),
+          const SizedBox(width: 10),
         ],
-      ),
+        Text(
+          "Submit",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: s(vM.w, 14, 14.4, 15, 15.8),
+          ),
+        ),
+      ],
     );
   }
 }

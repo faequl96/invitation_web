@@ -152,10 +152,17 @@ class ViewModel extends ChangeNotifier {
     "angry",
   ];
 
-  bool _isBusy = false;
-  bool get isBusy => _isBusy;
-  set isBusy(bool value) {
-    _isBusy = value;
+  bool _isLoadingSubmit = false;
+  bool get isLoadingSubmit => _isLoadingSubmit;
+  set isLoadingSubmit(bool value) {
+    _isLoadingSubmit = value;
+    notifyListeners();
+  }
+
+  bool _isLoadingSkeleton = false;
+  bool get isLoadingSkeleton => _isLoadingSkeleton;
+  set isLoadingSkeleton(bool value) {
+    _isLoadingSkeleton = value;
     notifyListeners();
   }
 
@@ -165,6 +172,13 @@ class ViewModel extends ChangeNotifier {
   List<RSVP> get rsvps => _rsvps;
   set rsvps(List<RSVP> value) {
     _rsvps = value;
+    notifyListeners();
+  }
+
+  List<InvitedGuest> _invitedGuests = [];
+  List<InvitedGuest> get invitedGuests => _invitedGuests;
+  set invitedGuests(List<InvitedGuest> value) {
+    _invitedGuests = value;
     notifyListeners();
   }
 

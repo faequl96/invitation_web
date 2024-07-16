@@ -22,7 +22,7 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
   _getRSVPsData() async {
     final ViewModel vM = locator<ViewModel>();
 
-    vM.isBusy = true;
+    vM.isLoadingSkeleton = true;
 
     await DBRepository.getAll(
       collectionRef: DBCollection.rsvps,
@@ -37,7 +37,20 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
       }
     });
 
-    vM.isBusy = false;
+    await DBRepository.getAll(
+      collectionRef: DBCollection.invitedGuests,
+      orderBy: DBOrderBy(field: "dateTime", descending: true),
+    ).then((values) {
+      if (values != null) {
+        List<InvitedGuest> invitedGuests = [];
+        for (var item in values) {
+          invitedGuests.add(InvitedGuest.fromJson(item));
+        }
+        vM.invitedGuests = invitedGuests;
+      }
+    });
+
+    vM.isLoadingSkeleton = false;
   }
 
   @override
@@ -59,11 +72,11 @@ class RSVPsWidget extends StatelessWidget with GetItMixin {
   Widget build(BuildContext context) {
     final ViewModel vM = get<ViewModel>();
 
-    watchOnly((ViewModel x) => x.isBusy);
+    watchOnly((ViewModel x) => x.isLoadingSkeleton);
 
     return ListView(
       children: [
-        if (vM.isBusy == true) ...[
+        if (vM.isLoadingSkeleton == true) ...[
           const SizedBox(height: 8),
           ...List.generate(6, (index) => index).mapIndexed((i, e) {
             if (i == 5) {
@@ -123,21 +136,20 @@ class RSVPItem extends StatefulWidget {
 class _RSVPItemState extends State<RSVPItem> {
   InvitedGuest? invitedGuest;
 
-  _getInvitedGuestData() async {
-    DBRepository.getOne(
-      collectionRef: DBCollection.invitedGuests,
-      documentId: widget.rsvp.invitedGuestId,
-    ).then((value) {
-      if (value != null) {
-        invitedGuest = InvitedGuest.fromJson(value);
-        setState(() {});
+  _setInvitedGuest() async {
+    final ViewModel vM = locator<ViewModel>();
+
+    for (var item in vM.invitedGuests) {
+      if (item.id == widget.rsvp.invitedGuestId) {
+        invitedGuest = item;
+        break;
       }
-    });
+    }
   }
 
   @override
   void initState() {
-    _getInvitedGuestData();
+    _setInvitedGuest();
     super.initState();
   }
 
