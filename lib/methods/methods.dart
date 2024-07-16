@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
-import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
@@ -137,21 +136,21 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                       ? vM.invitedGuest!.name
                       : vM.invitedGuest!.nickName;
 
-              DBRepository.getSome(
-                collectionRef: DBCollection.rsvps,
-                queryFilter: DBQueryFilter(
-                  orderBy: DBOrderBy(field: "dateTime", descending: true),
-                  limit: 5,
-                ),
-              ).then((values) {
-                if (values != null) {
-                  List<RSVP> rsvps = [];
-                  for (var item in values) {
-                    rsvps.add(RSVP.fromJson(RSVPType.Message, item));
-                  }
-                  vM.rsvps = rsvps;
-                }
-              });
+              // DBRepository.getSome(
+              //   collectionRef: DBCollection.rsvps,
+              //   queryFilter: DBQueryFilter(
+              //     orderBy: DBOrderBy(field: "dateTime", descending: true),
+              //     limit: 5,
+              //   ),
+              // ).then((values) {
+              //   if (values != null) {
+              //     List<RSVP> rsvps = [];
+              //     for (var item in values) {
+              //       rsvps.add(RSVP.fromJson(RSVPType.Message, item));
+              //     }
+              //     vM.rsvps = rsvps;
+              //   }
+              // });
             }
           });
         });
@@ -163,21 +162,21 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                 ? vM.invitedGuest!.name
                 : vM.invitedGuest!.nickName;
 
-        DBRepository.getSome(
-          collectionRef: DBCollection.rsvps,
-          queryFilter: DBQueryFilter(
-            orderBy: DBOrderBy(field: "dateTime", descending: true),
-            limit: 5,
-          ),
-        ).then((values) {
-          if (values != null) {
-            List<RSVP> rsvps = [];
-            for (var item in values) {
-              rsvps.add(RSVP.fromJson(RSVPType.Message, item));
-            }
-            vM.rsvps = rsvps;
-          }
-        });
+        // DBRepository.getSome(
+        //   collectionRef: DBCollection.rsvps,
+        //   queryFilter: DBQueryFilter(
+        //     orderBy: DBOrderBy(field: "dateTime", descending: true),
+        //     limit: 5,
+        //   ),
+        // ).then((values) {
+        //   if (values != null) {
+        //     List<RSVP> rsvps = [];
+        //     for (var item in values) {
+        //       rsvps.add(RSVP.fromJson(RSVPType.Message, item));
+        //     }
+        //     vM.rsvps = rsvps;
+        //   }
+        // });
       }
     });
   }

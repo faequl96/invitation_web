@@ -160,7 +160,13 @@ class ViewModel extends ChangeNotifier {
   }
 
   InvitedGuest? invitedGuest;
-  List<RSVP> rsvps = [];
+
+  List<RSVP> _rsvps = [];
+  List<RSVP> get rsvps => _rsvps;
+  set rsvps(List<RSVP> value) {
+    _rsvps = value;
+    notifyListeners();
+  }
 
   double _page6SliderHeight = 0;
   double get page6SliderHeight => _page6SliderHeight;

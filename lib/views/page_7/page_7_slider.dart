@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
-import 'package:invitation_web/views/page_6/page_6.dart';
+import 'package:invitation_web/views/shared/rsvps.dart';
 
 class Page7Slider extends StatelessWidget {
   const Page7Slider({super.key});
@@ -162,7 +162,7 @@ class RSVPsModalContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             clipBehavior: Clip.hardEdge,
-            child: RSVPsWidget(vM: vM),
+            child: const GetRSVPsWidget(),
           ),
         ),
       ],

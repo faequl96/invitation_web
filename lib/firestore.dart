@@ -12,9 +12,9 @@ class DBCollection {
       db.collection("RSVPs");
 
   static CollectionReference<Map<String, dynamic>> comments({
-    required String documentId,
+    required String rsvpDocumentId,
   }) {
-    return rsvps.doc(documentId).collection("COMMENTs");
+    return rsvps.doc(rsvpDocumentId).collection("COMMENTs");
   }
 }
 

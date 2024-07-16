@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
@@ -148,6 +149,19 @@ class SubmitButton extends StatelessWidget with GetItMixin {
           request: rsvp.toJson(),
           collectionRef: DBCollection.rsvps,
         );
+
+        await DBRepository.getAll(
+          collectionRef: DBCollection.rsvps,
+          orderBy: DBOrderBy(field: "dateTime", descending: true),
+        ).then((values) {
+          if (values != null) {
+            List<RSVP> rsvps = [];
+            for (var item in values) {
+              rsvps.add(RSVP.fromJson(RSVPType.Message, item));
+            }
+            vM.rsvps = rsvps;
+          }
+        });
 
         vM.isBusy = false;
         // getFromDB(vM);
