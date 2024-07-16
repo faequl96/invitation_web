@@ -135,22 +135,6 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                   : vM.invitedGuest!.nickName.isEmpty
                       ? vM.invitedGuest!.name
                       : vM.invitedGuest!.nickName;
-
-              // DBRepository.getSome(
-              //   collectionRef: DBCollection.rsvps,
-              //   queryFilter: DBQueryFilter(
-              //     orderBy: DBOrderBy(field: "dateTime", descending: true),
-              //     limit: 5,
-              //   ),
-              // ).then((values) {
-              //   if (values != null) {
-              //     List<RSVP> rsvps = [];
-              //     for (var item in values) {
-              //       rsvps.add(RSVP.fromJson(RSVPType.Message, item));
-              //     }
-              //     vM.rsvps = rsvps;
-              //   }
-              // });
             }
           });
         });
@@ -161,22 +145,6 @@ void initViewModel(BuildContext context, ViewModel vM) async {
             : vM.invitedGuest!.nickName.isEmpty
                 ? vM.invitedGuest!.name
                 : vM.invitedGuest!.nickName;
-
-        // DBRepository.getSome(
-        //   collectionRef: DBCollection.rsvps,
-        //   queryFilter: DBQueryFilter(
-        //     orderBy: DBOrderBy(field: "dateTime", descending: true),
-        //     limit: 5,
-        //   ),
-        // ).then((values) {
-        //   if (values != null) {
-        //     List<RSVP> rsvps = [];
-        //     for (var item in values) {
-        //       rsvps.add(RSVP.fromJson(RSVPType.Message, item));
-        //     }
-        //     vM.rsvps = rsvps;
-        //   }
-        // });
       }
     });
   }

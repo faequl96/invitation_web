@@ -66,6 +66,7 @@ class SliderView extends StatelessWidget with GetItMixin {
             width: double.maxFinite,
             child: const Page7Slider(),
           ),
+          SizedBox(height: vM.s.height, width: double.maxFinite),
         ],
       ),
     );

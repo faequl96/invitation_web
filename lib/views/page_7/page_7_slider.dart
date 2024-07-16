@@ -162,7 +162,7 @@ class RSVPsModalContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             clipBehavior: Clip.hardEdge,
-            child: const GetRSVPsWidget(),
+            child: const GetRSVPsWidget(isModalContent: true),
           ),
         ),
       ],

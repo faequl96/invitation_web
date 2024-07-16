@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:card_loading/card_loading.dart';
@@ -12,7 +13,9 @@ import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
 
 class GetRSVPsWidget extends StatefulWidget {
-  const GetRSVPsWidget({super.key});
+  const GetRSVPsWidget({super.key, this.isModalContent = false});
+
+  final bool isModalContent;
 
   @override
   State<GetRSVPsWidget> createState() => _GetRSVPsWidgetState();
@@ -55,7 +58,10 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
 
   @override
   void initState() {
-    _getRSVPsData();
+    if (widget.isModalContent == false) {
+      _getRSVPsData();
+    }
+
     super.initState();
   }
 
@@ -222,16 +228,7 @@ class _RSVPItemState extends State<RSVPItem> {
                         ),
                       ),
                     const SizedBox(width: 8),
-                    Text(
-                      getTime(
-                        diffOfMillisecondsSinceEpoch(widget.rsvp.dateTime),
-                      ),
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: s(widget.vM.w, 12.8, 13.2, 13.8, 14.6),
-                        height: 1.16,
-                      ),
-                    ),
+                    TimeLapse(dateTimeEpoch: widget.rsvp.dateTime),
                   ],
                 ),
                 if (widget.rsvp.invited == false)
@@ -285,6 +282,50 @@ class _RSVPItemState extends State<RSVPItem> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class TimeLapse extends StatefulWidget {
+  const TimeLapse({super.key, required this.dateTimeEpoch});
+
+  final int dateTimeEpoch;
+
+  @override
+  State<TimeLapse> createState() => _TimeLapseState();
+}
+
+class _TimeLapseState extends State<TimeLapse> {
+  late final Timer _timer;
+
+  @override
+  void initState() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      setState(() {});
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ViewModel vM = locator<ViewModel>();
+
+    return Text(
+      getTime(
+        diffOfMillisecondsSinceEpoch(widget.dateTimeEpoch),
+      ),
+      style: TextStyle(
+        color: Colors.grey.shade600,
+        fontSize: s(vM.w, 12.8, 13.2, 13.8, 14.6),
+        height: 1.16,
       ),
     );
   }
