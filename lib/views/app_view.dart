@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/views/front_view.dart';
+import 'package:invitation_web/views/last_page/last_page.dart';
 import 'package:invitation_web/views/page_2/page_2.dart';
 import 'package:invitation_web/views/page_4/page_4.dart';
 import 'package:invitation_web/views/page_5/page_5_slider.dart';
@@ -66,7 +67,11 @@ class SliderView extends StatelessWidget with GetItMixin {
             width: double.maxFinite,
             child: const Page7Slider(),
           ),
-          SizedBox(height: vM.s.height, width: double.maxFinite),
+          SizedBox(
+            height: vM.s.height,
+            width: double.maxFinite,
+            child: const LastPage(),
+          ),
         ],
       ),
     );
