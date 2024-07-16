@@ -106,7 +106,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
   _getImageCache(context);
 
   if (vM.invitedGuest == null) {
-    await DBRepository.getSome(
+    await DBRepository.getOneByQuery(
       queryRef: DBCollection.invitedGuests.where(
         "nameInstance",
         isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
@@ -122,7 +122,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
           ).toJson(),
           collectionRef: DBCollection.invitedGuests,
         ).then((_) {
-          DBRepository.getSome(
+          DBRepository.getOneByQuery(
             queryRef: DBCollection.invitedGuests.where(
               "nameInstance",
               isEqualTo:
@@ -137,9 +137,12 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                       ? vM.invitedGuest!.name
                       : vM.invitedGuest!.nickName;
 
-              DBRepository.getAll(
+              DBRepository.getSome(
                 collectionRef: DBCollection.rsvps,
-                orderBy: DBOrderBy(field: "dateTime", descending: true),
+                queryFilter: DBQueryFilter(
+                  orderBy: DBOrderBy(field: "dateTime", descending: true),
+                  limit: 5,
+                ),
               ).then((values) {
                 if (values != null) {
                   List<RSVP> rsvps = [];
@@ -160,7 +163,13 @@ void initViewModel(BuildContext context, ViewModel vM) async {
                 ? vM.invitedGuest!.name
                 : vM.invitedGuest!.nickName;
 
-        DBRepository.getAll(collectionRef: DBCollection.rsvps).then((values) {
+        DBRepository.getSome(
+          collectionRef: DBCollection.rsvps,
+          queryFilter: DBQueryFilter(
+            orderBy: DBOrderBy(field: "dateTime", descending: true),
+            limit: 5,
+          ),
+        ).then((values) {
           if (values != null) {
             List<RSVP> rsvps = [];
             for (var item in values) {
