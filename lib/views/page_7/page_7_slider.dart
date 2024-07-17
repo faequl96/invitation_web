@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
-import 'package:invitation_web/views/shared/rsvps.dart';
+import 'package:invitation_web/views/shared/rsvps_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Page7Slider extends StatelessWidget {

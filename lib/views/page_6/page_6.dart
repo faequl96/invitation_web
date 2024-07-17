@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/view_model.dart';
-import 'package:invitation_web/views/shared/rsvps.dart';
+import 'package:invitation_web/views/shared/rsvps_widget.dart';
 
 class Page6 extends StatelessWidget with GetItMixin {
   Page6({super.key});
