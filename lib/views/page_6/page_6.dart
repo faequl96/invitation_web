@@ -17,7 +17,7 @@ class Page6 extends StatelessWidget with GetItMixin {
           : vM.s.height,
       child: Container(
         width: vM.s.width - 32,
-        height: (vM.s.height - 36) + (vM.s.height - vM.page6SliderHeight),
+        height: (vM.s.height - 436) + (vM.s.height - vM.page6SliderHeight),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 230, 211, 164),
           borderRadius: BorderRadius.circular(16),
