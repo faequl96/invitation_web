@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/animated_beat_widget.dart';
@@ -23,10 +24,25 @@ class Page5Slider extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 230, 211, 164),
+                  color: Color.fromARGB(255, 255, 250, 230),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
+                  ),
+                  border: GradientBoxBorder(
+                    width: 4,
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(255, 230, 211, 164),
+                        Color.fromARGB(255, 255, 198, 192),
+                        Color.fromARGB(255, 230, 211, 164),
+                        Color.fromARGB(255, 255, 198, 192),
+                        Color.fromARGB(255, 230, 211, 164),
+                      ],
+                      stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                    ),
                   ),
                 ),
                 child: Column(

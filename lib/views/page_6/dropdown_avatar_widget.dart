@@ -55,7 +55,7 @@ class _DropDownAvatarWidgetState extends State<DropDownAvatarWidget> {
           fit: BoxFit.fitWidth,
         ),
       ),
-      width: vM.s.width - 60,
+      width: vM.s.width - 68,
       inputDecorationTheme: InputDecorationTheme(
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintStyle: TextStyle(

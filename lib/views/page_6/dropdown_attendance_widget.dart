@@ -36,7 +36,7 @@ class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
           color: Colors.grey.shade700,
         ),
       ),
-      width: vM.s.width - 60,
+      width: vM.s.width - 68,
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),

@@ -16,7 +16,7 @@ class Page7Slider extends StatelessWidget {
       height: double.maxFinite,
       width: double.maxFinite,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
         child: Column(
           children: [
             const Spacer(),
@@ -32,8 +32,8 @@ class Page7Slider extends StatelessWidget {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [
-                    Color.fromARGB(255, 230, 211, 164),
-                    Color.fromARGB(125, 230, 211, 164),
+                    Color.fromARGB(255, 255, 250, 230),
+                    Color.fromARGB(75, 255, 250, 230),
                   ],
                   stops: [0.5, 1],
                 ),
@@ -46,12 +46,15 @@ class Page7Slider extends StatelessWidget {
               children: [
                 Container(
                   width: vM.s.width - 32,
-                  height: 376 - (70 + s(vM.w, 28, 30, 32, 34)),
-                  padding: const EdgeInsets.all(24),
+                  height: 396 - (70 + s(vM.w, 28, 30, 32, 34)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 46,
+                    vertical: 16,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: const GradientBoxBorder(
-                      width: 2,
+                      width: 4,
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -69,15 +72,16 @@ class Page7Slider extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 12),
                       Text(
-                        "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.",
+                        "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu untuk pernikahan kami. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.",
                         style: TextStyle(
-                          fontSize: s(vM.w, 14, 15, 16, 17),
+                          fontSize: s(vM.w, 14.2, 14.4, 14.8, 15.4),
                           color: const Color.fromARGB(255, 230, 211, 164),
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 16),
                       Text(
                         "Rahma & Faiq",
                         style: TextStyle(
@@ -161,7 +165,7 @@ class ShowRSVPDetailButton extends StatelessWidget {
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 230, 211, 164),
         padding: const EdgeInsets.symmetric(horizontal: 32),
       ),
       onPressed: () {
