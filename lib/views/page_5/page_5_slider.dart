@@ -76,7 +76,8 @@ class Page5Slider extends StatelessWidget {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                const Color.fromARGB(255, 230, 211, 164),
                             padding: const EdgeInsets.symmetric(horizontal: 32),
                           ),
                           onPressed: () {

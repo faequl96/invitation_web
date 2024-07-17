@@ -1,4 +1,5 @@
 import 'package:get_it_mixin/get_it_mixin.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
@@ -42,10 +43,21 @@ class AudioPlayerWidget extends StatelessWidget with GetItMixin {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: const Color.fromARGB(255, 230, 211, 164),
-                    border: Border.all(
+                    color: const Color.fromARGB(255, 255, 250, 230),
+                    border: const GradientBoxBorder(
                       width: 4,
-                      color: const Color.fromARGB(240, 255, 204, 192),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                        ],
+                        stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                      ),
                     ),
                   ),
                   child: Icon(Icons.play_arrow, size: s(vM.w, 24, 26, 28, 30)),
@@ -58,10 +70,21 @@ class AudioPlayerWidget extends StatelessWidget with GetItMixin {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: const Color.fromARGB(255, 230, 211, 164),
-                    border: Border.all(
+                    color: const Color.fromARGB(255, 255, 250, 230),
+                    border: const GradientBoxBorder(
                       width: 4,
-                      color: const Color.fromARGB(240, 255, 204, 192),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                        ],
+                        stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                      ),
                     ),
                   ),
                   child: Icon(Icons.pause, size: s(vM.w, 24, 26, 28, 30)),
@@ -78,10 +101,21 @@ class AudioPlayerWidget extends StatelessWidget with GetItMixin {
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    color: const Color.fromARGB(255, 230, 211, 164),
-                    border: Border.all(
+                    color: const Color.fromARGB(255, 255, 250, 230),
+                    border: const GradientBoxBorder(
                       width: 4,
-                      color: const Color.fromARGB(240, 255, 204, 192),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                          Color.fromARGB(255, 255, 198, 192),
+                          Color.fromARGB(255, 230, 211, 164),
+                        ],
+                        stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                      ),
                     ),
                   ),
                   child: Icon(Icons.replay, size: s(vM.w, 24, 26, 28, 30)),

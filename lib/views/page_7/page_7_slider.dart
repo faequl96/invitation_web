@@ -16,7 +16,7 @@ class Page7Slider extends StatelessWidget {
       height: double.maxFinite,
       width: double.maxFinite,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
         child: Column(
           children: [
             const Spacer(),
@@ -72,7 +72,7 @@ class Page7Slider extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
                       Text(
                         "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu untuk pernikahan kami. Atas kehadiran dan doa restunya, kami mengucapkan terima kasih.",
                         style: TextStyle(
@@ -271,8 +271,23 @@ class RSVPsModalContent extends StatelessWidget {
           child: Container(
             margin: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
             decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 230, 211, 164),
+              color: const Color.fromARGB(255, 255, 250, 230),
               borderRadius: BorderRadius.circular(10),
+              border: const GradientBoxBorder(
+                width: 4,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                    Color.fromARGB(255, 255, 198, 192),
+                    Color.fromARGB(255, 230, 211, 164),
+                  ],
+                  stops: [0.1, 0.3, 0.5, 0.7, 0.9],
+                ),
+              ),
             ),
             clipBehavior: Clip.hardEdge,
             child: const GetRSVPsWidget(isModalContent: true),
