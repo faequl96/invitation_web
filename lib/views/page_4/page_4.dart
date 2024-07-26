@@ -298,10 +298,19 @@ class Page4 extends StatelessWidget {
                     size: 32,
                     color: Color.fromARGB(255, 230, 211, 164),
                   ),
-                  const Text(
+                  Text(
+                    "Masjid Raya Bani Umar",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: s(vM.w, 15, 15.4, 16, 16.8),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
                     "Jl. Graha Raya Bintaro Kav. GK 4 No. 2-4, Pondok Aren, Tangerang Selatan",
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: s(vM.w, 10, 10.2, 10.6, 11.2),
                     ),
                     textAlign: TextAlign.center,
                   ),

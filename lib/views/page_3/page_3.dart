@@ -126,6 +126,21 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       width: s(vM.w, 52, 54, 58, 64),
                     ),
                   ),
+                  Positioned(
+                    bottom: 7,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black38,
+                      ),
+                      child: Image.asset(
+                        "assets/instagram.png",
+                        width: s(vM.w, 23, 24, 25, 26),
+                      ),
+                    ),
+                  ),
                 ],
               ],
             ),
@@ -197,6 +212,21 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                     child: Image.asset(
                       "assets/frame_bottom_right.png",
                       width: s(vM.w, 52, 54, 58, 64),
+                    ),
+                  ),
+                  Positioned(
+                    top: 7,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.black38,
+                      ),
+                      child: Image.asset(
+                        "assets/instagram.png",
+                        width: s(vM.w, 23, 24, 25, 26),
+                      ),
                     ),
                   ),
                 ],

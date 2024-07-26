@@ -5,15 +5,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final FirebaseFirestore db = FirebaseFirestore.instance;
 
 class DBCollection {
-  static final CollectionReference<Map<String, dynamic>> invitedGuests =
-      db.collection("INVITED_GUESTs");
+  static CollectionReference<Map<String, dynamic>> get invitedGuests {
+    return db.collection("INVITED_GUESTs");
+  }
 
-  static final CollectionReference<Map<String, dynamic>> rsvps =
-      db.collection("RSVPs");
+  static CollectionReference<Map<String, dynamic>> get rsvps {
+    return db.collection("RSVPs");
+  }
 
-  static CollectionReference<Map<String, dynamic>> comments({
-    required String rsvpDocumentId,
-  }) {
+  CollectionReference<Map<String, dynamic>> comments(String rsvpDocumentId) {
     return rsvps.doc(rsvpDocumentId).collection("COMMENTs");
   }
 }

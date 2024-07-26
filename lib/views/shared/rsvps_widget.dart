@@ -42,7 +42,6 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
 
     await DBRepository.getAll(
       collectionRef: DBCollection.invitedGuests,
-      orderBy: DBOrderBy(field: "dateTime", descending: true),
     ).then((values) {
       if (values != null) {
         List<InvitedGuest> invitedGuests = [];
