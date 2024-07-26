@@ -19,6 +19,18 @@ class DropDownAvatarWidget extends StatefulWidget {
 }
 
 class _DropDownAvatarWidgetState extends State<DropDownAvatarWidget> {
+  bool isHoldComplete = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
+      isHoldComplete = true;
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
@@ -90,18 +102,20 @@ class _DropDownAvatarWidgetState extends State<DropDownAvatarWidget> {
       onSelected: (String? value) {
         setState(() {});
       },
-      dropdownMenuEntries: vM.dropDownAvatarItems.map((String value) {
-        return DropdownMenuEntry<String>(
-          value: value,
-          label: value,
-          leadingIcon: Image(
-            image: AssetImage("assets/avatars/$value.png"),
-            height: 28,
-            width: 28,
-            fit: BoxFit.fitHeight,
-          ),
-        );
-      }).toList(),
+      dropdownMenuEntries: isHoldComplete
+          ? vM.dropDownAvatarItems.map((String value) {
+              return DropdownMenuEntry<String>(
+                value: value,
+                label: value,
+                leadingIcon: Image(
+                  image: AssetImage("assets/avatars/$value.png"),
+                  height: 28,
+                  width: 28,
+                  fit: BoxFit.fitHeight,
+                ),
+              );
+            }).toList()
+          : [],
     );
   }
 }
