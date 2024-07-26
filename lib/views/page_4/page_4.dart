@@ -303,6 +303,7 @@ class Page4 extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: s(vM.w, 15, 15.4, 16, 16.8),
+                      fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
                   ),

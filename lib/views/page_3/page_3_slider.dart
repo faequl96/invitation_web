@@ -17,7 +17,7 @@ class Page3Slider extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               const String address =
-                  "https://www.instagram.com/rahmaistiqomah/";
+                  "https://www.instagram.com/rahmaistiqomah?igsh=N3cyd3ZzN2VmbG94";
               await launchUrl(Uri.parse(address));
             },
             child: Container(
@@ -30,7 +30,8 @@ class Page3Slider extends StatelessWidget {
         Expanded(
           child: GestureDetector(
             onTap: () async {
-              const String address = "https://www.instagram.com/faequl77/";
+              const String address =
+                  "https://www.instagram.com/faequl77?igsh=cm12ZzZxOWNpZGRr";
               await launchUrl(Uri.parse(address));
             },
             child: Container(

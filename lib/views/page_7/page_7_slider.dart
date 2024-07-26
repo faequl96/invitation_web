@@ -139,7 +139,8 @@ class Page7Slider extends StatelessWidget {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () async {
-                const String address = "https://www.instagram.com/faequl77/";
+                const String address =
+                    "https://www.instagram.com/faequl77?igsh=cm12ZzZxOWNpZGRr";
                 await launchUrl(Uri.parse(address));
               },
               child: Image.asset(
