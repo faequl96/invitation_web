@@ -52,8 +52,9 @@ class ViewModel extends ChangeNotifier {
   String instance = "";
 
   List<String> availableInstances = [
-    "bootcamp_dumbways",
-    "voltras_international",
+    "Bootcamp_Dumbways",
+    "Voltras_International",
+    "UIN_Jakarta",
   ];
 
   bool isInstanceAvailable = false;
