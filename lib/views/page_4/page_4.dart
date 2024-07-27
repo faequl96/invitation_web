@@ -301,7 +301,7 @@ class Page4 extends StatelessWidget {
                   Text(
                     "Masjid Raya Bani Umar",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: const Color.fromARGB(255, 230, 211, 164),
                       fontSize: s(vM.w, 15, 15.4, 16, 16.8),
                       fontWeight: FontWeight.bold,
                     ),

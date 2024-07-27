@@ -66,12 +66,14 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return RSVPsWidget();
+    return RSVPsWidget(isModalContent: widget.isModalContent);
   }
 }
 
 class RSVPsWidget extends StatelessWidget with GetItMixin {
-  RSVPsWidget({super.key});
+  RSVPsWidget({super.key, required this.isModalContent});
+
+  final bool isModalContent;
 
   @override
   Widget build(BuildContext context) {
@@ -83,8 +85,8 @@ class RSVPsWidget extends StatelessWidget with GetItMixin {
       children: [
         if (vM.isLoadingSkeleton == true) ...[
           const SizedBox(height: 8),
-          ...List.generate(6, (index) => index).mapIndexed((i, e) {
-            if (i == 5) {
+          ...List.generate(4, (index) => index).map((i) {
+            if (i == 3) {
               return const Column(
                 children: [RSVPSkeleton(), SizedBox(height: 4)],
               );
@@ -106,21 +108,38 @@ class RSVPsWidget extends StatelessWidget with GetItMixin {
           const SizedBox(height: 8),
         ] else if (vM.rsvps.isNotEmpty) ...[
           const SizedBox(height: 8),
-          ...vM.rsvps.mapIndexed((i, e) {
-            if (i == vM.rsvps.length - 1) return RSVPItem(vM: vM, rsvp: e);
-            return Column(
-              children: [
-                RSVPItem(vM: vM, rsvp: e),
-                Container(
-                  height: 1,
-                  width: double.maxFinite,
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
-                  color: Colors.black26,
-                ),
-                const SizedBox(height: 10),
-              ],
-            );
-          }),
+          if (vM.rsvps.length > 6 && isModalContent == false)
+            ...List.generate(6, (index) => index).map((i) {
+              if (i == 6 - 1) return RSVPItem(vM: vM, rsvp: vM.rsvps[i]);
+              return Column(
+                children: [
+                  RSVPItem(vM: vM, rsvp: vM.rsvps[i]),
+                  Container(
+                    height: 1,
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    color: Colors.black26,
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              );
+            })
+          else
+            ...vM.rsvps.mapIndexed((i, e) {
+              if (i == vM.rsvps.length - 1) return RSVPItem(vM: vM, rsvp: e);
+              return Column(
+                children: [
+                  RSVPItem(vM: vM, rsvp: e),
+                  Container(
+                    height: 1,
+                    width: double.maxFinite,
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    color: Colors.black26,
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              );
+            }),
           const SizedBox(height: 8),
         ],
       ],

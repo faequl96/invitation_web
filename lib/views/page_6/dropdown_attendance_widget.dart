@@ -20,6 +20,18 @@ class DropDownAttendanceWidget extends StatefulWidget {
 }
 
 class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
+  bool isHoldComplete = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await Future.delayed(const Duration(seconds: 1));
+      isHoldComplete = true;
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ViewModel vM = locator<ViewModel>();
@@ -63,9 +75,11 @@ class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
         ),
       ),
       onSelected: (String? value) {},
-      dropdownMenuEntries: vM.dropDownAttendanceItems.map((String value) {
-        return DropdownMenuEntry<String>(value: value, label: value);
-      }).toList(),
+      dropdownMenuEntries: isHoldComplete
+          ? vM.dropDownAttendanceItems.map((String value) {
+              return DropdownMenuEntry<String>(value: value, label: value);
+            }).toList()
+          : [],
     );
   }
 }

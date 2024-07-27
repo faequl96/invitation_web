@@ -133,7 +133,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       padding: const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.black38,
+                        color: Colors.black45,
                       ),
                       child: Image.asset(
                         "assets/instagram.png",
@@ -221,7 +221,7 @@ class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
                       padding: const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Colors.black38,
+                        color: Colors.black45,
                       ),
                       child: Image.asset(
                         "assets/instagram.png",

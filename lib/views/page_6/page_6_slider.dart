@@ -73,10 +73,10 @@ class Page6Slider extends StatelessWidget {
                           textEditingController: vM.nameController,
                         ),
                         const SizedBox(height: 12),
-                        TextFieldWidget(
-                          labelText: "Ucapan",
-                          hintText: "Selamat Yaa",
-                          textEditingController: vM.remarkController,
+                        DropDownAvatarWidget(
+                          labelText: "Avatar",
+                          hintText: "Pilih Avatar",
+                          textEditingController: vM.avatarController,
                         ),
                         const SizedBox(height: 12),
                         DropDownAttendanceWidget(
@@ -84,10 +84,10 @@ class Page6Slider extends StatelessWidget {
                           textEditingController: vM.attendanceController,
                         ),
                         const SizedBox(height: 12),
-                        DropDownAvatarWidget(
-                          labelText: "Avatar",
-                          hintText: "Pilih Avatar",
-                          textEditingController: vM.avatarController,
+                        TextFieldWidget(
+                          labelText: "Ucapan",
+                          hintText: "Selamat Yaa",
+                          textEditingController: vM.remarkController,
                         ),
                         const SizedBox(height: 12),
                         const SizedBox(height: 46, child: SubmitButton()),
