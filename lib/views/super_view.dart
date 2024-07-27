@@ -283,7 +283,7 @@ class _SuperViewState extends State<SuperView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        toCapitalize(vM.instance),
+                        toRemoveStrip(vM.instance),
                         style: TextStyle(
                           fontSize: s(vM.w, 15, 16, 17, 18),
                           fontWeight: FontWeight.w400,

@@ -26,6 +26,22 @@ String toCapitalize(String value) {
   return returnValue;
 }
 
+String toRemoveStrip(String value) {
+  List<String> values = value.split("-");
+  String returnValue = "";
+  if (value.isNotEmpty) {
+    for (int i = 0; i < values.length; i++) {
+      if (i == 0) {
+        returnValue += values[i];
+      } else {
+        returnValue += " ${values[i]}";
+      }
+    }
+  }
+
+  return returnValue;
+}
+
 String toUnderScore(String value) => value.replaceAll("-", "_");
 
 int diffOfMillisecondsSinceEpoch(int value) {
@@ -115,7 +131,7 @@ void initViewModel(BuildContext context, ViewModel vM) async {
         DBRepository.create(
           request: InvitedGuest(
             name: toCapitalize(vM.toName),
-            instance: toCapitalize(vM.instance),
+            instance: toRemoveStrip(vM.instance),
             nameInstance:
                 "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
           ).toJson(),
