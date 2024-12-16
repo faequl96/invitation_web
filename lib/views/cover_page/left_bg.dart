@@ -73,7 +73,7 @@ class LeftBackground extends StatelessWidget with GetItMixin {
                         begin: Alignment.centerRight,
                         end: Alignment.centerLeft,
                         colors: [
-                          Colors.white.withOpacity(vM.flash),
+                          Colors.white.withValues(alpha: vM.flash),
                           Colors.transparent,
                         ],
                       ),

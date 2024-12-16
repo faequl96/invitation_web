@@ -23,7 +23,7 @@ class LightEffect extends StatelessWidget with GetItMixin {
             child: Container(
               height: vM.s.height,
               width: vM.s.width / 2,
-              color: Colors.white.withOpacity(vM.opacity),
+              color: Colors.white.withValues(alpha: vM.opacity),
             ),
           ),
         ],

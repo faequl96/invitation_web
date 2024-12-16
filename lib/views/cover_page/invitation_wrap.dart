@@ -25,7 +25,7 @@ class InvitationWrap extends StatelessWidget with GetItMixin {
                 child: Container(
                   height: vM.s.height,
                   width: vM.s.width / 2,
-                  color: Colors.grey.shade800.withOpacity(0.3),
+                  color: Colors.grey.shade800.withValues(alpha: 0.3),
                 ),
               ),
             ),

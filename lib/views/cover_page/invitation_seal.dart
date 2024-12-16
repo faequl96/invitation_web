@@ -20,9 +20,9 @@ class InvitationSeal extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.white.withOpacity(0.15),
-                Colors.grey.shade200.withOpacity(0.1),
-                Colors.white.withOpacity(0.15),
+                Colors.white.withValues(alpha: 0.15),
+                Colors.grey.shade200.withValues(alpha: 0.1),
+                Colors.white.withValues(alpha: 0.15),
               ],
               stops: const [0.4, 0.6, 1],
             ),
@@ -40,14 +40,14 @@ class InvitationSeal extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: isSealOpened
                       ? [
-                          Colors.grey.withOpacity(0.2),
-                          Colors.white.withOpacity(0.4),
-                          Colors.grey.withOpacity(0.2),
+                          Colors.grey.withValues(alpha: 0.2),
+                          Colors.white.withValues(alpha: 0.4),
+                          Colors.grey.withValues(alpha: 0.2),
                         ]
                       : [
-                          Colors.white.withOpacity(0.1),
-                          Colors.white.withOpacity(0.1),
-                          Colors.white.withOpacity(0.1),
+                          Colors.white.withValues(alpha: 0.1),
+                          Colors.white.withValues(alpha: 0.1),
+                          Colors.white.withValues(alpha: 0.1),
                         ],
                 ),
               ),

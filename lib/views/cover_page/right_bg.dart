@@ -79,7 +79,7 @@ class RightBackground extends StatelessWidget with GetItMixin {
                         ? BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.white.withOpacity(vM.flash),
+                                Colors.white.withValues(alpha: vM.flash),
                                 Colors.transparent,
                               ],
                             ),
