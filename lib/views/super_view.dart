@@ -92,7 +92,7 @@ class _SuperViewState extends State<SuperView> {
           Container(
             height: vM.s.height,
             width: vM.s.width,
-            color: Colors.white.withOpacity(vM.opacity),
+            color: Colors.white.withValues(alpha: vM.opacity),
           ),
         if (vM.sV < vM.s.height + 110) ...[
           Positioned(right: -vM.bgPositionX, child: LightEffect(isRight: true)),
