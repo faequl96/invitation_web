@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class CountDown extends StatefulWidget {
   const CountDown({
@@ -80,7 +81,7 @@ class _CountDownState extends State<CountDown> {
 
   @override
   void initState() {
-    vM = locator<ViewModel>();
+    vM = di<ViewModel>();
     smSize = (vM.s.width - s(vM.w, 156, 164, 172, 180)) / 4;
     lgSize = (vM.s.width - s(vM.w, 140, 148, 156, 164)) / 4;
 

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class SwipeUp extends StatefulWidget {
   const SwipeUp({super.key});
@@ -38,7 +39,7 @@ class _SwipeUpState extends State<SwipeUp> {
 
   @override
   void initState() {
-    vM = locator<ViewModel>();
+    vM = di<ViewModel>();
 
     arrow1 = s(vM.w, 17, 20, 23, 26);
     arrow2 = s(vM.w, 28, 32, 36, 40);

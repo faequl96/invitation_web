@@ -4,13 +4,14 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/rsvps_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:watch_it/watch_it.dart';
 
 class Page7Slider extends StatelessWidget {
   const Page7Slider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return SizedBox(
       height: double.maxFinite,
@@ -162,7 +163,7 @@ class ShowRSVPDetailButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(

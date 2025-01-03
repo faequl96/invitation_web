@@ -212,26 +212,18 @@ packages:
     dependency: transitive
     description:
       name: functional_listener
-      sha256: "026d1bd4f66367f11d9ec9f1f1ddb42b89e4484b356972c76d983266cf82f33f"
+      sha256: c096db771b4ce7ba0f886cc4a761044b11e8276a7bc24cfc812dc4b2bc6f5b16
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "4.1.0"
   get_it:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: get_it
-      sha256: d85128a5dae4ea777324730dc65edd9c9f43155c109d5cc0a69cab74139fbac1
+      sha256: f126a3e286b7f5b578bf436d5592968706c4c1de28a228b870ce375d9f743103
       url: "https://pub.dev"
     source: hosted
-    version: "7.7.0"
-  get_it_mixin:
-    dependency: "direct main"
-    description:
-      name: get_it_mixin
-      sha256: "0ab5c9f3cdaab813ec396de5d43ee3833c418424b3a99bec0071fcbf693c0bad"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.2"
+    version: "8.0.3"
   gradient_borders:
     dependency: "direct main"
     description:
@@ -621,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.3.0"
+  watch_it:
+    dependency: "direct main"
+    description:
+      name: watch_it
+      sha256: cdde70641e090d6ab8cf80476bb6346fb9b6c85791ab7f7904e28d8736fa3d44
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.1"
   web:
     dependency: transitive
     description:

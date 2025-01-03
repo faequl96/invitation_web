@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class LeftBackground extends StatelessWidget with GetItMixin {
+class LeftBackground extends StatelessWidget with WatchItMixin {
   LeftBackground({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return SizedBox(
       height: vM.s.height,

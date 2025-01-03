@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class DropDownAttendanceWidget extends StatefulWidget {
   const DropDownAttendanceWidget({
@@ -34,7 +35,7 @@ class _DropDownAttendanceWidgetState extends State<DropDownAttendanceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return DropdownMenu<String>(
       initialSelection: "Hadir",

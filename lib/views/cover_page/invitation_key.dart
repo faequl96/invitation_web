@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:watch_it/watch_it.dart';
 
 class InvitationKey extends StatelessWidget {
   const InvitationKey({super.key, required this.onOpened});
@@ -12,7 +13,7 @@ class InvitationKey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<PlayerState>(
-      stream: locator<ViewModel>().player.playerStateStream,
+      stream: di<ViewModel>().player.playerStateStream,
       builder: (context, snapshot) {
         final playerState = snapshot.data;
         final processingState = playerState?.processingState;
@@ -27,7 +28,7 @@ class InvitationKey extends StatelessWidget {
             onTap: () async {
               onOpened();
               await Future.delayed(const Duration(seconds: 2));
-              locator<ViewModel>().player.play();
+              di<ViewModel>().player.play();
             },
             child: ClipRRect(
               child: BackdropFilter(

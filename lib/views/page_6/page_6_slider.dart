@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
@@ -11,13 +10,14 @@ import 'package:invitation_web/views/page_6/dropdown_attendance_widget.dart';
 import 'package:invitation_web/views/page_6/dropdown_avatar_widget.dart';
 import 'package:invitation_web/views/page_6/text_field_widget.dart';
 import 'package:invitation_web/views/shared/get_size_render_box.dart';
+import 'package:watch_it/watch_it.dart';
 
 class Page6Slider extends StatelessWidget {
   const Page6Slider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return SizedBox(
       height: double.maxFinite,
@@ -109,7 +109,7 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -196,19 +196,17 @@ class SubmitButton extends StatelessWidget {
 
         vM.isLoadingSkeleton = false;
       },
-      child: SubmitButtonDesign(),
+      child: _SubmitButtonDesign(),
     );
   }
 }
 
-class SubmitButtonDesign extends StatelessWidget with GetItMixin {
-  SubmitButtonDesign({super.key});
-
+class _SubmitButtonDesign extends StatelessWidget with WatchItMixin {
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
-    watchOnly((ViewModel x) => x.isLoadingSubmit);
+    watchPropertyValue((ViewModel x) => x.isLoadingSubmit);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

@@ -11,6 +11,7 @@ import 'package:invitation_web/views/cover_page/right_bg.dart';
 import 'package:invitation_web/views/cover_page/invitation_title.dart';
 import 'package:invitation_web/views/page_1/page_1.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class SuperView extends StatefulWidget {
   const SuperView({super.key});
@@ -23,7 +24,7 @@ class _SuperViewState extends State<SuperView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final ViewModel vM = locator<ViewModel>();
+      final ViewModel vM = di<ViewModel>();
       vM.pageController.addListener(() {
         superLogic(vM);
         setState(() {});
@@ -35,7 +36,7 @@ class _SuperViewState extends State<SuperView> {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,

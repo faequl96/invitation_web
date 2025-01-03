@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/views/front_view.dart';
 import 'package:invitation_web/views/page_2/page_2.dart';
 import 'package:invitation_web/views/page_3/page_3_slider.dart';
@@ -9,6 +8,7 @@ import 'package:invitation_web/views/page_6/page_6_slider.dart';
 import 'package:invitation_web/views/page_7/page_7_slider.dart';
 import 'package:invitation_web/views/super_view.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class AppView extends StatelessWidget {
   const AppView({super.key});
@@ -31,14 +31,14 @@ class AppView extends StatelessWidget {
   }
 }
 
-class SliderView extends StatelessWidget with GetItMixin {
-  SliderView({super.key});
+class SliderView extends WatchingWidget {
+  const SliderView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
-    watchOnly((ViewModel x) => x.additionalPage);
+    watchPropertyValue((ViewModel x) => x.additionalPage);
 
     return SizedBox(
       height: vM.s.height,

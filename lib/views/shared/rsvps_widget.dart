@@ -4,13 +4,13 @@ import 'dart:math';
 import 'package:card_loading/card_loading.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
 class GetRSVPsWidget extends StatefulWidget {
   const GetRSVPsWidget({super.key, this.isModalContent = false});
@@ -23,7 +23,7 @@ class GetRSVPsWidget extends StatefulWidget {
 
 class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
   _getRSVPsData() async {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     vM.isLoadingSkeleton = true;
 
@@ -70,16 +70,16 @@ class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
   }
 }
 
-class RSVPsWidget extends StatelessWidget with GetItMixin {
+class RSVPsWidget extends StatelessWidget with WatchItMixin {
   RSVPsWidget({super.key, required this.isModalContent});
 
   final bool isModalContent;
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
-    watchOnly((ViewModel x) => x.isLoadingSkeleton);
+    watchPropertyValue((ViewModel x) => x.isLoadingSkeleton);
 
     return ListView(
       children: [
@@ -88,12 +88,12 @@ class RSVPsWidget extends StatelessWidget with GetItMixin {
           ...List.generate(4, (index) => index).map((i) {
             if (i == 3) {
               return const Column(
-                children: [RSVPSkeleton(), SizedBox(height: 4)],
+                children: [_RSVPSkeleton(), SizedBox(height: 4)],
               );
             }
             return Column(
               children: [
-                const RSVPSkeleton(),
+                const _RSVPSkeleton(),
                 const SizedBox(height: 4),
                 Container(
                   height: 1,
@@ -161,7 +161,7 @@ class _RSVPItemState extends State<RSVPItem> {
   InvitedGuest? invitedGuest;
 
   _setInvitedGuest() async {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     for (var item in vM.invitedGuests) {
       if (item.id == widget.rsvp.invitedGuestId) {
@@ -334,7 +334,7 @@ class _TimeLapseState extends State<TimeLapse> {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Text(
       getTime(
@@ -349,12 +349,12 @@ class _TimeLapseState extends State<TimeLapse> {
   }
 }
 
-class RSVPSkeleton extends StatelessWidget {
-  const RSVPSkeleton({super.key});
+class _RSVPSkeleton extends StatelessWidget {
+  const _RSVPSkeleton();
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),

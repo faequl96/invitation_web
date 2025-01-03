@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class SharedPage extends StatelessWidget with GetItMixin {
+class SharedPage extends StatelessWidget with WatchItMixin {
   SharedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Container(
       height: vM.s.height,

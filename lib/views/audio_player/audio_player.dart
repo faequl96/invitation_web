@@ -1,18 +1,18 @@
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:flutter/material.dart';
+import 'package:watch_it/watch_it.dart';
 
-class AudioPlayerWidget extends StatelessWidget with GetItMixin {
-  AudioPlayerWidget({super.key});
+class AudioPlayerWidget extends WatchingWidget {
+  const AudioPlayerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
-    watchOnly((ViewModel x) => x.swipeUpViewState);
-    watchOnly((ViewModel x) => x.isCompleted);
+    final ViewModel vM = di<ViewModel>();
+    watchPropertyValue((ViewModel x) => x.swipeUpViewState);
+    watchPropertyValue((ViewModel x) => x.isCompleted);
 
     if (vM.isCompleted) {
       if (vM.sV < 1) {
@@ -138,7 +138,7 @@ class PlayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return GestureDetector(
       onTap: vM.player.play,

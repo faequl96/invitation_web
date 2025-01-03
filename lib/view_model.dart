@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:watch_it/watch_it.dart';
 
-final GetIt locator = GetIt.instance;
-void setupLocator() => locator.registerSingleton<ViewModel>(ViewModel());
+void setupLocator() => di.registerSingleton<ViewModel>(ViewModel());
 
 class ViewModel extends ChangeNotifier {
   // page controller for PageView widget

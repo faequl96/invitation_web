@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class InvitationTitle extends StatelessWidget with GetItMixin {
+class InvitationTitle extends StatelessWidget with WatchItMixin {
   InvitationTitle({super.key, this.isBottomTitle = false});
 
   final bool isBottomTitle;
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return isBottomTitle == true
         ? Opacity(

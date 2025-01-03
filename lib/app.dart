@@ -3,14 +3,15 @@ import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/views/app_view.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/audio_player/audio_player.dart';
+import 'package:watch_it/watch_it.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    initViewModel(context, locator<ViewModel>());
-    final ViewModel vM = locator<ViewModel>();
+    initViewModel(context, di<ViewModel>());
+    final ViewModel vM = di<ViewModel>();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/views/cover_page/invitation_wrap.dart';
@@ -9,19 +8,20 @@ import 'package:invitation_web/views/shared/countdown.dart';
 import 'package:invitation_web/views/cover_page/swipe_up.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/animated_shake_widget.dart';
+import 'package:watch_it/watch_it.dart';
 
-class FrontView extends StatelessWidget with GetItMixin {
-  FrontView({super.key});
+class FrontView extends WatchingWidget {
+  const FrontView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
-    watchOnly((ViewModel x) => x.swipeUpViewState);
-    watchOnly((ViewModel x) => x.countdownViewState);
-    watchOnly((ViewModel x) => x.isKeyOpened);
-    watchOnly((ViewModel x) => x.isSealOpened);
-    watchOnly((ViewModel x) => x.isSealOpenCompleted);
-    watchOnly((ViewModel x) => x.isCompleted);
+    final ViewModel vM = di<ViewModel>();
+    watchPropertyValue((ViewModel x) => x.swipeUpViewState);
+    watchPropertyValue((ViewModel x) => x.countdownViewState);
+    watchPropertyValue((ViewModel x) => x.isKeyOpened);
+    watchPropertyValue((ViewModel x) => x.isSealOpened);
+    watchPropertyValue((ViewModel x) => x.isSealOpenCompleted);
+    watchPropertyValue((ViewModel x) => x.isCompleted);
 
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,

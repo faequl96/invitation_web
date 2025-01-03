@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/rsvps_widget.dart';
+import 'package:watch_it/watch_it.dart';
 
-class Page6 extends StatelessWidget with GetItMixin {
+class Page6 extends StatelessWidget with WatchItMixin {
   Page6({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Positioned(
       top: vM.sV > vM.s.height * 5 + (vM.page6SliderHeight + 20)

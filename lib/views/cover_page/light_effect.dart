@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class LightEffect extends StatelessWidget with GetItMixin {
+class LightEffect extends StatelessWidget with WatchItMixin {
   LightEffect({super.key, required this.isRight});
 
   final bool isRight;
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return SizedBox(
       height: vM.s.height,

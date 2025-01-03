@@ -4,13 +4,14 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:invitation_web/views/shared/animated_beat_widget.dart';
+import 'package:watch_it/watch_it.dart';
 
 class Page5Slider extends StatelessWidget {
   const Page5Slider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return SizedBox(
       height: double.maxFinite,

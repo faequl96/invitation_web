@@ -1,10 +1,10 @@
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class Page1 extends StatelessWidget with GetItMixin {
+class Page1 extends StatelessWidget with WatchItMixin {
   Page1({super.key});
 
   final DateTime _dateTime = DateTime(2024, 8, 10, 9);
@@ -12,7 +12,7 @@ class Page1 extends StatelessWidget with GetItMixin {
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Container(
       height: vM.s.height,

@@ -1,16 +1,16 @@
-import 'package:get_it_mixin/get_it_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/view_model.dart';
+import 'package:watch_it/watch_it.dart';
 
-class Page3 extends StatelessWidget with GetItMixin {
+class Page3 extends StatelessWidget with WatchItMixin {
   Page3({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = get<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
     return Container(
       height: vM.s.height,
@@ -26,19 +26,19 @@ class Page3 extends StatelessWidget with GetItMixin {
   }
 }
 
-class Page3Content extends StatefulWidget with GetItStatefulWidgetMixin {
-  Page3Content({super.key});
+class Page3Content extends StatefulWidget with WatchItStatefulWidgetMixin {
+  const Page3Content({super.key});
 
   @override
   State<Page3Content> createState() => _Page3ContentState();
 }
 
-class _Page3ContentState extends State<Page3Content> with GetItStateMixin {
+class _Page3ContentState extends State<Page3Content> {
   @override
   Widget build(BuildContext context) {
-    final ViewModel vM = locator<ViewModel>();
+    final ViewModel vM = di<ViewModel>();
 
-    watchOnly((ViewModel x) => x.animatedType);
+    watchPropertyValue((ViewModel x) => x.animatedType);
 
     double paddingSide = vM.s.width / 2 - (s(vM.w, 104, 108, 116, 126) + 50);
 
