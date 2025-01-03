@@ -22,8 +22,8 @@ class AppView extends StatelessWidget {
         Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            SliderView(),
-            FrontView(),
+            const SliderView(),
+            const FrontView(),
           ],
         ),
       ],

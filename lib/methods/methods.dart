@@ -62,17 +62,8 @@ String getTime(int value) {
 }
 
 double s(Enum type, double sm, double md, double lg, double xl) {
-  final Map<Enum, double> mapOfSize = {
-    H.Sm: sm,
-    H.Md: md,
-    H.Lg: lg,
-    H.Xl: xl,
-    W.Sm: sm,
-    W.Md: md,
-    W.Lg: lg,
-    W.Xl: xl
-  };
-  return mapOfSize[type] ?? 0;
+  if (type is H) return {H.Sm: sm, H.Md: md, H.Lg: lg, H.Xl: xl}[type]!;
+  return {W.Sm: sm, W.Md: md, W.Lg: lg, W.Xl: xl}[type]!;
 }
 
 void initViewModel(BuildContext context, ViewModel vM) async {

@@ -26,7 +26,7 @@ class App extends StatelessWidget {
             child: const AppView(),
           ),
         ),
-        floatingActionButton: AudioPlayerWidget(),
+        floatingActionButton: const AudioPlayerWidget(),
       ),
     );
   }
