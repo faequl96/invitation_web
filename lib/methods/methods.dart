@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:invitation_web/enum/enums.dart';
 import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
+import 'package:invitation_web/models/db_models/rsvp.dart';
 import 'package:invitation_web/models/position_value.dart';
 import 'package:invitation_web/view_model.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:watch_it/watch_it.dart';
 
 String toCapitalize(String value) {
   List<String> values = value.split("-");
@@ -107,59 +109,43 @@ void initViewModel(BuildContext context, ViewModel vM) async {
     }
   });
 
-  _initCountdownPosition(vM);
   _setupAudioPlayer(vM);
   _getImageCache(context);
-
-  if (vM.invitedGuest == null) {
-    await DBRepository.getOneByQuery(
-      queryRef: DBCollection.invitedGuests.where(
-        "nameInstance",
-        isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-      ),
-    ).then((value) {
-      if (value == null) {
-        DBRepository.create(
-          request: InvitedGuest(
-            name: toCapitalize(vM.toName),
-            instance: toRemoveStrip(vM.instance),
-            nameInstance:
-                "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-          ).toJson(),
-          collectionRef: DBCollection.invitedGuests,
-        ).then((_) {
-          DBRepository.getOneByQuery(
-            queryRef: DBCollection.invitedGuests.where(
-              "nameInstance",
-              isEqualTo:
-                  "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
-            ),
-          ).then((value) {
-            if (value != null) {
-              vM.invitedGuest = InvitedGuest.fromJson(value);
-              vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
-                  ? ""
-                  : vM.invitedGuest!.nickName.isEmpty
-                      ? vM.invitedGuest!.name
-                      : vM.invitedGuest!.nickName;
-            }
-          });
-        });
-      } else {
-        vM.invitedGuest = InvitedGuest.fromJson(value);
-        vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
-            ? ""
-            : vM.invitedGuest!.nickName.isEmpty
-                ? vM.invitedGuest!.name
-                : vM.invitedGuest!.nickName;
-      }
-    });
-  }
+  _initCountdownPosition(vM);
+  _initData(vM);
 }
 
 void _setupAudioPlayer(ViewModel vM) async {
   vM.player = AudioPlayer();
   await vM.player.setAudioSource(AudioSource.asset("assets/its_you.mp3"));
+}
+
+void _getImageCache(BuildContext context) {
+  precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_rose_gold.png"), context);
+  precacheImage(const AssetImage("assets/landing_bg_right.png"), context);
+  precacheImage(const AssetImage("assets/kelir_jawa_gold.png"), context);
+  precacheImage(const AssetImage("assets/default_bg.png"), context);
+  precacheImage(const AssetImage("assets/unifying_frame.png"), context);
+  precacheImage(const AssetImage("assets/bismillah.png"), context);
+  precacheImage(const AssetImage("assets/frame_top_left.png"), context);
+  precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
+  precacheImage(const AssetImage("assets/groom.png"), context);
+  precacheImage(const AssetImage("assets/bride.png"), context);
+  precacheImage(const AssetImage("assets/gift.png"), context);
+  precacheImage(const AssetImage("assets/bank_bri.png"), context);
+
+  precacheImage(const AssetImage("assets/avatars/angry.png"), context);
+  precacheImage(const AssetImage("assets/avatars/avatars.png"), context);
+  precacheImage(const AssetImage("assets/avatars/calm.png"), context);
+  precacheImage(const AssetImage("assets/avatars/cry.png"), context);
+  precacheImage(const AssetImage("assets/avatars/happy.png"), context);
+  precacheImage(const AssetImage("assets/avatars/laughing.png"), context);
+  precacheImage(const AssetImage("assets/avatars/love.png"), context);
+  precacheImage(const AssetImage("assets/avatars/pensive.png"), context);
+  precacheImage(const AssetImage("assets/avatars/shock.png"), context);
+  precacheImage(const AssetImage("assets/avatars/unpleasant.png"), context);
+  precacheImage(const AssetImage("assets/avatars/worry.png"), context);
 }
 
 void _initCountdownPosition(ViewModel vM) {
@@ -362,109 +348,84 @@ void superLogic(ViewModel vM) {
   }
 
   if (vM.sV > vM.s.height * 5 && vM.sV <= vM.s.height * 6) {}
-
-  // if (vM.sV > vM.s.height * 2 && vM.sV <= vM.s.height * 3) {
-  //   if (vM.sV - (vM.s.height * 2) <= vM.fract) {
-  //     vM.opacity = 1;
-  //     vM.flash = 1;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 2) {
-  //     vM.opacity = 0.95;
-  //     vM.flash = 0.85;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 2 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 3) {
-  //     vM.opacity = 0.9;
-  //     vM.flash = 0.7;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 3 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 4) {
-  //     vM.opacity = 0.85;
-  //     vM.flash = 0.55;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 4 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 5) {
-  //     vM.opacity = 0.8;
-  //     vM.flash = 0.4;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 5 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 6) {
-  //     vM.opacity = 0.75;
-  //     vM.flash = 0.25;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 6 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 7) {
-  //     vM.opacity = 0.7;
-  //     vM.flash = 0.1;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 7 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 8) {
-  //     vM.opacity = 0.65;
-  //     vM.flash = 0;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 8 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 9) {
-  //     vM.opacity = 0.6;
-  //     vM.flash = 0;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 9 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 10) {
-  //     vM.opacity = 0.55;
-  //     vM.flash = 0;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 10 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 11) {
-  //     vM.opacity = 0.5;
-  //     vM.flash = 0;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 11 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 12) {
-  //     vM.opacity = 0.45;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 12 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 13) {
-  //     vM.opacity = 0.4;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 13 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 14) {
-  //     vM.opacity = 0.35;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 14 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 15) {
-  //     vM.opacity = 0.3;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 15 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 16) {
-  //     vM.opacity = 0.25;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 16 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 17) {
-  //     vM.opacity = 0.2;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 17 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 18) {
-  //     vM.opacity = 0.15;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 18 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 19) {
-  //     vM.opacity = 0.1;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 19 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 20) {
-  //     vM.opacity = 0.05;
-  //   } else if (vM.sV - (vM.s.height * 2) > vM.fract * 20 &&
-  //       vM.sV - (vM.s.height * 2) <= vM.fract * 21) {
-  //     vM.opacity = 0;
-  //   }
-  // }
 }
 
-void _getImageCache(BuildContext context) {
-  precacheImage(const AssetImage("assets/landing_bg_left.png"), context);
-  precacheImage(const AssetImage("assets/kelir_jawa_rose_gold.png"), context);
-  precacheImage(const AssetImage("assets/landing_bg_right.png"), context);
-  precacheImage(const AssetImage("assets/kelir_jawa_gold.png"), context);
-  precacheImage(const AssetImage("assets/default_bg.png"), context);
-  precacheImage(const AssetImage("assets/unifying_frame.png"), context);
-  precacheImage(const AssetImage("assets/bismillah.png"), context);
-  precacheImage(const AssetImage("assets/frame_top_left.png"), context);
-  precacheImage(const AssetImage("assets/frame_bottom_right.png"), context);
-  precacheImage(const AssetImage("assets/groom.png"), context);
-  precacheImage(const AssetImage("assets/bride.png"), context);
-  precacheImage(const AssetImage("assets/gift.png"), context);
-  precacheImage(const AssetImage("assets/bank_bri.png"), context);
+void _initData(ViewModel vM) async {
+  if (vM.invitedGuest == null) {
+    await DBRepository.getOneByQuery(
+      queryRef: DBCollection.invitedGuests.where(
+        "nameInstance",
+        isEqualTo: "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+      ),
+    ).then((value) {
+      if (value == null) {
+        DBRepository.create(
+          request: InvitedGuest(
+            name: toCapitalize(vM.toName),
+            instance: toRemoveStrip(vM.instance),
+            nameInstance:
+                "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+          ).toJson(),
+          collectionRef: DBCollection.invitedGuests,
+        ).then((_) {
+          DBRepository.getOneByQuery(
+            queryRef: DBCollection.invitedGuests.where(
+              "nameInstance",
+              isEqualTo:
+                  "${toUnderScore(vM.toName)}__${toUnderScore(vM.instance)}",
+            ),
+          ).then((value) {
+            if (value != null) {
+              vM.invitedGuest = InvitedGuest.fromJson(value);
+              vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
+                  ? ""
+                  : vM.invitedGuest!.nickName.isEmpty
+                      ? vM.invitedGuest!.name
+                      : vM.invitedGuest!.nickName;
+            }
+          });
+        });
+      } else {
+        vM.invitedGuest = InvitedGuest.fromJson(value);
+        vM.nameController.text = vM.invitedGuest!.nameInstance == "__"
+            ? ""
+            : vM.invitedGuest!.nickName.isEmpty
+                ? vM.invitedGuest!.name
+                : vM.invitedGuest!.nickName;
+      }
+    });
+  }
+}
 
-  precacheImage(const AssetImage("assets/avatars/angry.png"), context);
-  precacheImage(const AssetImage("assets/avatars/avatars.png"), context);
-  precacheImage(const AssetImage("assets/avatars/calm.png"), context);
-  precacheImage(const AssetImage("assets/avatars/cry.png"), context);
-  precacheImage(const AssetImage("assets/avatars/happy.png"), context);
-  precacheImage(const AssetImage("assets/avatars/laughing.png"), context);
-  precacheImage(const AssetImage("assets/avatars/love.png"), context);
-  precacheImage(const AssetImage("assets/avatars/pensive.png"), context);
-  precacheImage(const AssetImage("assets/avatars/shock.png"), context);
-  precacheImage(const AssetImage("assets/avatars/unpleasant.png"), context);
-  precacheImage(const AssetImage("assets/avatars/worry.png"), context);
+void getRSVPsData() async {
+  final ViewModel vM = di<ViewModel>();
+
+  vM.isLoadingSkeleton = true;
+
+  await DBRepository.getAll(
+    collectionRef: DBCollection.rsvps,
+    orderBy: DBOrderBy(field: "dateTime", descending: true),
+  ).then((values) {
+    if (values != null) {
+      List<RSVP> rsvps = [];
+      for (var item in values) {
+        rsvps.add(RSVP.fromJson(RSVPType.Message, item));
+      }
+      vM.rsvps = rsvps;
+    }
+  });
+
+  await DBRepository.getAll(
+    collectionRef: DBCollection.invitedGuests,
+  ).then((values) {
+    if (values != null) {
+      List<InvitedGuest> invitedGuests = [];
+      for (var item in values) {
+        invitedGuests.add(InvitedGuest.fromJson(item));
+      }
+      vM.invitedGuests = invitedGuests;
+    }
+  });
+
+  vM.isLoadingSkeleton = false;
 }

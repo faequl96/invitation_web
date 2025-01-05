@@ -12,7 +12,7 @@ void setupLocator() => di.registerSingleton<ViewModel>(ViewModel());
 
 class ViewModel extends ChangeNotifier {
   // page controller for PageView widget
-  final PageController pageController = PageController();
+  final pageController = PageController();
 
   late AudioPlayer player;
 
@@ -83,8 +83,8 @@ class ViewModel extends ChangeNotifier {
   double flash = 1;
 
   // countdownPositionValue
-  PositionValue cdPosition1 = PositionValue(xAxis: 0, yAxis: 0);
-  PositionValue cdPosition2 = PositionValue(xAxis: 0, yAxis: 0);
+  PositionValue cdPosition1 = const PositionValue(xAxis: 0, yAxis: 0);
+  PositionValue cdPosition2 = const PositionValue(xAxis: 0, yAxis: 0);
 
   // countdownPositionYValue
   double cdPositionY1 = 50;
@@ -129,10 +129,10 @@ class ViewModel extends ChangeNotifier {
 
   Timer? shakeTimer;
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController remarkController = TextEditingController();
-  final TextEditingController attendanceController = TextEditingController();
-  final TextEditingController avatarController = TextEditingController();
+  final nameController = TextEditingController();
+  final remarkController = TextEditingController();
+  final attendanceController = TextEditingController();
+  final avatarController = TextEditingController();
   final dropDownAttendanceItems = [
     "Hadir",
     "Tidak Hadir",

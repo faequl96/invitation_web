@@ -2,10 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:card_loading/card_loading.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:invitation_web/enum/enums.dart';
-import 'package:invitation_web/firestore.dart';
 import 'package:invitation_web/methods/methods.dart';
 import 'package:invitation_web/models/db_models/invited_guest.dart';
 import 'package:invitation_web/models/db_models/rsvp.dart';
@@ -22,56 +19,18 @@ class GetRSVPsWidget extends StatefulWidget {
 }
 
 class _GetRSVPsWidgetState extends State<GetRSVPsWidget> {
-  _getRSVPsData() async {
-    final ViewModel vM = di<ViewModel>();
-
-    vM.isLoadingSkeleton = true;
-
-    await DBRepository.getAll(
-      collectionRef: DBCollection.rsvps,
-      orderBy: DBOrderBy(field: "dateTime", descending: true),
-    ).then((values) {
-      if (values != null) {
-        List<RSVP> rsvps = [];
-        for (var item in values) {
-          rsvps.add(RSVP.fromJson(RSVPType.Message, item));
-        }
-        vM.rsvps = rsvps;
-      }
-    });
-
-    await DBRepository.getAll(
-      collectionRef: DBCollection.invitedGuests,
-    ).then((values) {
-      if (values != null) {
-        List<InvitedGuest> invitedGuests = [];
-        for (var item in values) {
-          invitedGuests.add(InvitedGuest.fromJson(item));
-        }
-        vM.invitedGuests = invitedGuests;
-      }
-    });
-
-    vM.isLoadingSkeleton = false;
-  }
-
   @override
   void initState() {
-    if (widget.isModalContent == false) {
-      _getRSVPsData();
-    }
-
+    if (widget.isModalContent == false) getRSVPsData();
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return RSVPsWidget(isModalContent: widget.isModalContent);
-  }
+  Widget build(_) => _RSVPsWidget(isModalContent: widget.isModalContent);
 }
 
-class RSVPsWidget extends StatelessWidget with WatchItMixin {
-  RSVPsWidget({super.key, required this.isModalContent});
+class _RSVPsWidget extends WatchingWidget {
+  const _RSVPsWidget({required this.isModalContent});
 
   final bool isModalContent;
 
@@ -85,7 +44,7 @@ class RSVPsWidget extends StatelessWidget with WatchItMixin {
       children: [
         if (vM.isLoadingSkeleton == true) ...[
           const SizedBox(height: 8),
-          ...List.generate(4, (index) => index).map((i) {
+          ...List.generate(4, (i) {
             if (i == 3) {
               return const Column(
                 children: [_RSVPSkeleton(), SizedBox(height: 4)],
@@ -109,11 +68,11 @@ class RSVPsWidget extends StatelessWidget with WatchItMixin {
         ] else if (vM.rsvps.isNotEmpty) ...[
           const SizedBox(height: 8),
           if (vM.rsvps.length > 6 && isModalContent == false)
-            ...List.generate(6, (index) => index).map((i) {
-              if (i == 6 - 1) return RSVPItem(vM: vM, rsvp: vM.rsvps[i]);
+            ...List.generate(6, (i) {
+              if (i == 5) return _RSVPItem(vM: vM, rsvp: vM.rsvps[i]);
               return Column(
                 children: [
-                  RSVPItem(vM: vM, rsvp: vM.rsvps[i]),
+                  _RSVPItem(vM: vM, rsvp: vM.rsvps[i]),
                   Container(
                     height: 1,
                     width: double.maxFinite,
@@ -125,11 +84,12 @@ class RSVPsWidget extends StatelessWidget with WatchItMixin {
               );
             })
           else
-            ...vM.rsvps.mapIndexed((i, e) {
-              if (i == vM.rsvps.length - 1) return RSVPItem(vM: vM, rsvp: e);
+            ...List.generate(vM.rsvps.length, (i) {
+              final length = vM.rsvps.length;
+              if (i == length - 1) return _RSVPItem(vM: vM, rsvp: vM.rsvps[i]);
               return Column(
                 children: [
-                  RSVPItem(vM: vM, rsvp: e),
+                  _RSVPItem(vM: vM, rsvp: vM.rsvps[i]),
                   Container(
                     height: 1,
                     width: double.maxFinite,
@@ -147,17 +107,17 @@ class RSVPsWidget extends StatelessWidget with WatchItMixin {
   }
 }
 
-class RSVPItem extends StatefulWidget {
-  const RSVPItem({super.key, required this.vM, required this.rsvp});
+class _RSVPItem extends StatefulWidget {
+  const _RSVPItem({required this.vM, required this.rsvp});
 
   final ViewModel vM;
   final RSVP rsvp;
 
   @override
-  State<RSVPItem> createState() => _RSVPItemState();
+  State<_RSVPItem> createState() => _RSVPItemState();
 }
 
-class _RSVPItemState extends State<RSVPItem> {
+class _RSVPItemState extends State<_RSVPItem> {
   InvitedGuest? invitedGuest;
 
   _setInvitedGuest() async {
@@ -189,9 +149,7 @@ class _RSVPItemState extends State<RSVPItem> {
               height: 32,
               width: 32,
               child: Image(
-                image: AssetImage(
-                  "assets/avatars/${widget.rsvp.avatar}.png",
-                ),
+                image: AssetImage("assets/avatars/${widget.rsvp.avatar}.png"),
                 fit: BoxFit.fitWidth,
               ),
             )
@@ -200,9 +158,7 @@ class _RSVPItemState extends State<RSVPItem> {
               height: 32,
               width: 32,
               child: Image(
-                image: AssetImage(
-                  "assets/avatars/${invitedGuest!.avatar}.png",
-                ),
+                image: AssetImage("assets/avatars/${invitedGuest!.avatar}.png"),
                 fit: BoxFit.fitWidth,
               ),
             )
@@ -246,7 +202,7 @@ class _RSVPItemState extends State<RSVPItem> {
                         ),
                       ),
                     const SizedBox(width: 8),
-                    TimeLapse(dateTimeEpoch: widget.rsvp.dateTime),
+                    _TimeLapse(dateTimeEpoch: widget.rsvp.dateTime),
                   ],
                 ),
                 if (widget.rsvp.invited == false)
@@ -305,24 +261,21 @@ class _RSVPItemState extends State<RSVPItem> {
   }
 }
 
-class TimeLapse extends StatefulWidget {
-  const TimeLapse({super.key, required this.dateTimeEpoch});
+class _TimeLapse extends StatefulWidget {
+  const _TimeLapse({required this.dateTimeEpoch});
 
   final int dateTimeEpoch;
 
   @override
-  State<TimeLapse> createState() => _TimeLapseState();
+  State<_TimeLapse> createState() => _TimeLapseState();
 }
 
-class _TimeLapseState extends State<TimeLapse> {
+class _TimeLapseState extends State<_TimeLapse> {
   late final Timer _timer;
 
   @override
   void initState() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      setState(() {});
-    });
-
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) => setState(() {}));
     super.initState();
   }
 
@@ -337,9 +290,7 @@ class _TimeLapseState extends State<TimeLapse> {
     final ViewModel vM = di<ViewModel>();
 
     return Text(
-      getTime(
-        diffOfMillisecondsSinceEpoch(widget.dateTimeEpoch),
-      ),
+      getTime(diffOfMillisecondsSinceEpoch(widget.dateTimeEpoch)),
       style: TextStyle(
         color: Colors.grey.shade600,
         fontSize: s(vM.w, 12.8, 13.2, 13.8, 14.6),
